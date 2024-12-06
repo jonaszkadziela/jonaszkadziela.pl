@@ -13,4 +13,8 @@ return [
 
     'description' => 'Strona internetowa Jonasza Kądzieli - Zobacz moje portfolio i poznaj mnie',
 
+    'titles' => [
+        'home' => 'Strona główna',
+    ],
+
 ];
