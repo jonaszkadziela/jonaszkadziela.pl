@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "fixlint": "eslint --fix resources/**/*.{js,vue}",
+        "lint": "eslint resources/**/*.{js,vue}"
     },
     "devDependencies": {
         "@eslint/js": "^9.16.0",
