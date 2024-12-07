@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
+import Components from 'unplugin-vue-components/vite'
 import laravel from 'laravel-vite-plugin'
 import vue from '@vitejs/plugin-vue'
 
@@ -12,5 +14,10 @@ export default defineConfig({
             refresh: true,
         }),
         vue(),
+        Components({
+            resolvers: [
+                PrimeVueResolver(),
+            ],
+        }),
     ],
 })
