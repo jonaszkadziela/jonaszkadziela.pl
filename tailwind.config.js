@@ -9,6 +9,11 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+    darkMode: ['variant', [
+        '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+        '&:is(.dark *)',
+    ]],
+    plugins: [],
     theme: {
         extend: {
             fontFamily: {
@@ -16,5 +21,4 @@ export default {
             },
         },
     },
-    plugins: [],
 }

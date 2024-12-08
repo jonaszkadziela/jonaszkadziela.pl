@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ App::getLocale() }}">
+<html lang="{{ App::getLocale() }}" class="light">
     <head>
         <title>
             {{ (isset($title) ? $title . ' - ' : '') . config('app.name') }}

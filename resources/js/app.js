@@ -28,6 +28,9 @@ const customPreset = definePreset(Aura, {
 app.use(PrimeVue, {
     theme: {
         preset: customPreset,
+        options: {
+            darkModeSelector: 'html.dark',
+        },
     },
 })
 
