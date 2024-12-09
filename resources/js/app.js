@@ -27,10 +27,14 @@ const customPreset = definePreset(Aura, {
 
 app.use(PrimeVue, {
     theme: {
-        preset: customPreset,
         options: {
+            cssLayer: {
+                name: 'primevue',
+                order: 'tailwind-base, primevue, tailwind-utilities',
+            },
             darkModeSelector: 'html.dark',
         },
+        preset: customPreset,
     },
 })
 
