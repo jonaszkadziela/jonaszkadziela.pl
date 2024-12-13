@@ -1,14 +1,43 @@
 <template>
     <DefaultLayout>
-        <h1 class="text-xl mb-2">
-            Jonasz Kądziela
-        </h1>
-        <p class="mb-2">
-            Odio, molestiae perferendis, sit ex voluptatibus ducimus voluptatem voluptate nemo voluptates atque assumenda temporibus quam eveniet nostrum rerum illum! Labore nesciunt repellendus reprehenderit obcaecati illum blanditiis voluptate voluptatibus ex at?
-        </p>
+        <Button aria-label="Dark mode"
+                class="fixed bottom-5 right-5 z-50"
+                :icon="darkModeIcon"
+                @click="toggleDarkMode"
+        />
     </DefaultLayout>
 </template>
 
 <script setup>
 import DefaultLayout from './layouts/DefaultLayout.vue'
+import {
+    computed,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+} from 'vue'
+
+const darkMode = ref(false)
+const html = document.body.parentNode
+
+function toggleDarkMode() {
+    return darkMode.value ? html.classList.replace('dark', 'light') : html.classList.replace('light', 'dark')
+}
+
+const mutationObserver = new MutationObserver(([ entry ]) => {
+    if (entry.attributeName === 'class') {
+        darkMode.value = entry.target.classList.contains('dark')
+    }
+})
+
+const darkModeIcon = computed(() => darkMode.value ? 'fa fa-moon' : 'fa fa-sun')
+
+onMounted(() => {
+    darkMode.value = html.classList.contains('dark')
+
+    mutationObserver.observe(html, { attributes: true })
+})
+onBeforeUnmount(() => {
+    mutationObserver.disconnect()
+})
 </script>
