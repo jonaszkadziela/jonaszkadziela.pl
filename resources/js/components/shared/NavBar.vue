@@ -46,12 +46,14 @@ import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
 import {
     computed,
+    defineProps,
     onBeforeUnmount,
     onMounted,
     ref,
 } from 'vue'
 
-const darkMode = ref(false)
+const props = defineProps(['darkMode'])
+
 const navBar = ref(null)
 const navBarSticky = ref(false)
 const items = ref([
@@ -77,26 +79,17 @@ const items = ref([
     },
 ])
 
-const logo = computed(() => darkMode.value ? LogoWhite : LogoBlack)
+const logo = computed(() => props.darkMode ? LogoWhite : LogoBlack)
 
 const intersectionObserver = new IntersectionObserver(
     ([ entry ]) => navBarSticky.value = entry.intersectionRatio < 1,
     { threshold: [1] },
 )
-const mutationObserver = new MutationObserver(([ entry ]) => {
-    if (entry.attributeName === 'class') {
-        darkMode.value = entry.target.classList.contains('dark')
-    }
-})
 
 onMounted(() => {
-    darkMode.value = document.body.parentNode.classList.contains('dark')
-
     intersectionObserver.observe(navBar.value)
-    mutationObserver.observe(document.body.parentNode, { attributes: true })
 })
 onBeforeUnmount(() => {
     intersectionObserver.disconnect()
-    mutationObserver.disconnect()
 })
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen">
-        <NavBar />
+        <NavBar :dark-mode="props.darkMode" />
         <main class="py-4">
             <slot />
         </main>
@@ -9,4 +9,7 @@
 
 <script setup>
 import NavBar from '../shared/NavBar.vue'
+import { defineProps } from 'vue'
+
+const props = defineProps(['darkMode'])
 </script>
