@@ -12,7 +12,16 @@ export default [
             globals: globals.browser,
         },
         rules: {
-            'vue/multi-word-component-names': ['error', { 'ignores': ['Footer'] }],
+            'vue/multi-word-component-names': ['error', {
+                'ignores': ['Footer'],
+            }],
+            'vue/html-indent': ['error', 4, {
+                'alignAttributesVertically': true,
+                'attribute': 1,
+                'baseIndent': 1,
+                'closeBracket': 0,
+                'ignores': [],
+            }],
         },
     },
 ]

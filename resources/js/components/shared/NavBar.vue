@@ -8,17 +8,17 @@
                      button: 'flex md:hidden ml-auto p-2',
                      itemContent: 'container md:m-0 mx-auto my-1',
                      itemLabel: ({ context }) => [{
-                        'dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
-                        'font-bold': context.index === 0,
-                        'underline': context.focused,
+                         'dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
+                         'font-bold': context.index === 0,
+                         'underline': context.focused,
                      }],
                      root: 'container delay-100 duration-300 flex gap-4 items-center mx-auto py-4',
                      rootList: ({ props }) => [{
-                        'gap-6 md:flex md:mr-2 md:py-2 ml-auto': true,
-                        'absolute border-t dark:border-gray-600 left-0 p-4 right-0 top-full': props.mobileActive,
-                        'hidden': !props.mobileActive,
-                        'bg-white/90 dark:bg-black/90': props.mobileActive && navBarSticky,
-                        'dark:bg-black bg-white': props.mobileActive && !navBarSticky,
+                         'gap-6 md:flex md:mr-2 md:py-2 ml-auto': true,
+                         'absolute border-t dark:border-gray-600 left-0 p-4 right-0 top-full': props.mobileActive,
+                         'hidden': !props.mobileActive,
+                         'bg-white/90 dark:bg-black/90': props.mobileActive && navBarSticky,
+                         'dark:bg-black bg-white': props.mobileActive && !navBarSticky,
                      }],
                  }"
                  breakpoint="768px"

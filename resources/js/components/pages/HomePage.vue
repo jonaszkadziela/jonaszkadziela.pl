@@ -64,7 +64,7 @@
                     >
                         <template #header>
                             <div :style="`background-image: url(${post.image});`"
-                                class="bg-center bg-cover min-h-64 rounded-t-xl"
+                                 class="bg-center bg-cover min-h-64 rounded-t-xl"
                             ></div>
                         </template>
                         <template #title>
@@ -212,7 +212,7 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, nesciunt molestiae! Ea eum corrupti aliquam odit rerum placeat quae, dicta sed sunt numquam similique atque recusandae. Totam modi quibusdam dolorum.
                 </p>
             </div>
-           <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
+            <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
                 <Card v-for="achievement in achievementData"
                       :key="achievement.id"
                       :pt="{
