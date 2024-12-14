@@ -4,10 +4,12 @@
         <main class="py-4">
             <slot />
         </main>
+        <Footer />
     </div>
 </template>
 
 <script setup>
+import Footer from '../shared/Footer.vue'
 import NavBar from '../shared/NavBar.vue'
 import { defineProps } from 'vue'
 
