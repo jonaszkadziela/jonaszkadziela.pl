@@ -11,7 +11,6 @@
 <script setup>
 import Footer from '../shared/Footer.vue'
 import NavBar from '../shared/NavBar.vue'
-import { defineProps } from 'vue'
 
 const props = defineProps(['darkMode'])
 </script>

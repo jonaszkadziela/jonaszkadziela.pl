@@ -46,7 +46,6 @@ import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
 import {
     computed,
-    defineProps,
     onBeforeUnmount,
     onMounted,
     ref,

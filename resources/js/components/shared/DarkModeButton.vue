@@ -7,10 +7,7 @@
 </template>
 
 <script setup>
-import {
-    computed,
-    defineProps,
-} from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps(['darkMode'])
 
