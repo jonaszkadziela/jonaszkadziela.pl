@@ -4,6 +4,7 @@ import { definePreset } from '@primevue/themes'
 import App from './components/App.vue'
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
+import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
@@ -38,4 +39,5 @@ app.use(PrimeVue, {
     },
 })
 
+app.directive('tooltip', Tooltip)
 app.mount('#app')
