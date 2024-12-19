@@ -14,14 +14,13 @@
                 </a>
             </div>
             <div class="flex flex-col gap-4 items-center justify-center mb-12 md:flex-row md:gap-8">
-                <a v-for="(item, index) in menuItems"
-                   :class="index === 0 ? 'font-bold' : ''"
-                   :href="item.url"
-                   :key="item.label"
-                   class="hover:underline underline-offset-8"
+                <router-link v-for="item in menuItems"
+                             :to="item.route"
+                             :key="item.label"
+                             class="hover:underline underline-offset-8"
                 >
                     {{ item.label }}
-                </a>
+                </router-link>
             </div>
             <div class="text-center">
                 Designed and programmed with
@@ -31,7 +30,7 @@
                    href="https://jonaszkadziela.pl"
                    target="_blank"
                 >
-                    Jonasz Kadziela
+                    Jonasz Kądziela
                 </a>
             </div>
         </div>
@@ -83,23 +82,23 @@ const socialData = [
 const menuItems = ref([
     {
         label: 'Home',
-        url: '/'
+        route: '/',
     },
     {
         label: 'Meet me',
-        url: 'meet-me'
+        route: '/meet-me',
     },
     {
         label: 'CV',
-        url: 'cv'
+        route: '/cv',
     },
     {
         label: 'Portfolio',
-        url: 'portfolio'
+        route: '/portfolio',
     },
     {
         label: 'Contact',
-        url: 'contact'
+        route: '/contact',
     },
 ])
 </script>

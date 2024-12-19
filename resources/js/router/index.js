@@ -3,6 +3,7 @@ import routes from './routes'
 
 const router = createRouter({
     history: createWebHistory(),
+    linkActiveClass: 'font-bold',
     routes,
 })
 

@@ -8,8 +8,8 @@
                      button: 'flex md:hidden ml-auto p-2',
                      itemContent: 'container md:m-0 mx-auto my-1',
                      itemLabel: ({ context }) => [{
-                         'dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
-                         'font-bold': context.index === 0,
+                         'cursor-pointer dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
+                         'font-bold': context.item.route === $route.path,
                          'underline': context.focused,
                      }],
                      root: 'container delay-100 duration-300 flex gap-4 items-center mx-auto py-4',
@@ -44,6 +44,7 @@
 <script setup>
 import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
+import { useRouter } from 'vue-router'
 import {
     computed,
     onBeforeUnmount,
@@ -52,29 +53,35 @@ import {
 } from 'vue'
 
 const props = defineProps(['darkMode'])
+const router = useRouter()
 
 const navBar = ref(null)
 const navBarSticky = ref(false)
 const items = ref([
     {
         label: 'Home',
-        url: '/'
+        route: '/',
+        command: ({ item }) => router.push(item.route),
     },
     {
         label: 'Meet me',
-        url: 'meet-me'
+        route: '/meet-me',
+        command: ({ item }) => router.push(item.route),
     },
     {
         label: 'CV',
-        url: 'cv'
+        route: '/cv',
+        command: ({ item }) => router.push(item.route),
     },
     {
         label: 'Portfolio',
-        url: 'portfolio'
+        route: '/portfolio',
+        command: ({ item }) => router.push(item.route),
     },
     {
         label: 'Contact',
-        url: 'contact'
+        route: '/contact',
+        command: ({ item }) => router.push(item.route),
     },
 ])
 
