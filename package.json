@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@primevue/themes": "^4.2.4",
-        "primevue": "^4.2.4"
+        "primevue": "^4.2.4",
+        "vue-router": "^4.5.0"
     }
 }
