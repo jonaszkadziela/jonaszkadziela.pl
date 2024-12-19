@@ -4,6 +4,7 @@ import { definePreset } from '@primevue/themes'
 import App from './components/App.vue'
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
+import Router from './router'
 import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
@@ -26,6 +27,7 @@ const customPreset = definePreset(Aura, {
     },
 })
 
+app.use(Router)
 app.use(PrimeVue, {
     theme: {
         options: {

@@ -1,7 +1,7 @@
 <template>
-    <div class="min-h-screen">
+    <div class="flex flex-col min-h-screen">
         <NavBar :dark-mode="props.darkMode" />
-        <main class="py-4">
+        <main class="flex-1 py-4">
             <slot />
         </main>
         <Footer />
