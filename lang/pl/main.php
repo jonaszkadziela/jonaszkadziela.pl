@@ -14,6 +14,8 @@ return [
     'description' => 'Strona internetowa Jonasza Kądzieli - Zobacz moje portfolio i poznaj mnie',
 
     'titles' => [
+        'cv' => 'CV',
+        'error-404' => '404',
         'home' => 'Strona główna',
     ],
 
