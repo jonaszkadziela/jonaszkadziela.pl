@@ -9,7 +9,10 @@ export default [
     {
         files: ['**/*.{js,vue}'],
         languageOptions: {
-            globals: globals.browser,
+            globals: {
+                ...globals.browser,
+                Lang: false,
+            },
         },
         rules: {
             'vue/multi-word-component-names': ['error', {
