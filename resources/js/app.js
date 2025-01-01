@@ -9,6 +9,8 @@ import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
+app.config.globalProperties.Lang = Lang
+
 const customPreset = definePreset(Aura, {
     semantic: {
         primary: {
