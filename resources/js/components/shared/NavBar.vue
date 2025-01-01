@@ -33,15 +33,21 @@
                          class="w-12 mr-2"
                     >
                     <span class="font-semibold">
-                        Jonasz Kądziela
+                        {{ Lang.get('main.navbar.header') }}
                     </span>
                 </a>
+            </template>
+            <template #end>
+                <LanguageSelector class="hidden md:flex mr-2">
+                    <i class="fa fa-earth-europe"></i>
+                </LanguageSelector>
             </template>
         </Menubar>
     </nav>
 </template>
 
 <script setup>
+import LanguageSelector from './LanguageSelector.vue'
 import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
 import { useRouter } from 'vue-router'
@@ -102,6 +108,6 @@ onBeforeUnmount(() => {
 
 <style>
 html {
-    scroll-padding-top: 70px;
+    scroll-padding-top: 65px;
 }
 </style>

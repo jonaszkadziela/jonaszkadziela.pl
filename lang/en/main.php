@@ -11,11 +11,20 @@ return [
     |
     */
 
-    'description' => 'Personal website of Jonasz Kądziela - See my portfolio and get to know me',
+    'description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
 
+    'footer' => [
+        'author' => 'Jonasz Kadziela',
+        'by' => 'by',
+        'language' => 'Language',
+        'programmed-with' => 'Designed and programmed with',
+    ],
     'languages' => [
         'en' => 'English',
         'pl' => 'Polish',
+    ],
+    'navbar' => [
+        'header' => 'Jonasz Kadziela',
     ],
     'titles' => [
         'cv' => 'CV',
