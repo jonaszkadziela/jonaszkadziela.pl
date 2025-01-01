@@ -13,6 +13,10 @@ return [
 
     'description' => 'Personal website of Jonasz Kądziela - See my portfolio and get to know me',
 
+    'languages' => [
+        'en' => 'English',
+        'pl' => 'Polish',
+    ],
     'titles' => [
         'cv' => 'CV',
         'error-404' => '404',

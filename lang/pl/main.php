@@ -13,6 +13,10 @@ return [
 
     'description' => 'Strona internetowa Jonasza Kądzieli - Zobacz moje portfolio i poznaj mnie',
 
+    'languages' => [
+        'en' => 'Angielski (English)',
+        'pl' => 'Polski (Polish)',
+    ],
     'titles' => [
         'cv' => 'CV',
         'error-404' => '404',
