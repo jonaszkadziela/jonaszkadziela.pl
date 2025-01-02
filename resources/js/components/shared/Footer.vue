@@ -14,13 +14,13 @@
                 </a>
             </div>
             <div class="flex flex-col gap-4 items-center justify-center mb-12 md:flex-row md:gap-8">
-                <router-link v-for="item in menuItems"
-                             :to="item.route"
-                             :key="item.label"
-                             class="hover:underline underline-offset-8"
+                <RouterLink v-for="item in menuItems"
+                            :key="item.label"
+                            :to="item.route"
+                            class="hover:underline underline-offset-8"
                 >
                     {{ item.label }}
-                </router-link>
+                </RouterLink>
             </div>
             <div class="flex justify-center mb-12 md:hidden">
                 <LanguageSelector>
