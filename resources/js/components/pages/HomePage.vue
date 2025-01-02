@@ -5,25 +5,25 @@
         >
             <div class="flex flex-col max-w-2xl md:order-first order-last">
                 <h1 class="text-6xl font-bold mb-1">
-                    Jonasz Kądziela
+                    {{ Lang.get('home.introduction.title') }}
                 </h1>
                 <h2 class="mb-12 text-3xl">
-                    Full-stack Web Developer
+                    {{ Lang.get('home.introduction.subtitle') }}
                 </h2>
                 <p class="dark:text-gray-300 mb-12 text-gray-600 text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium repudiandae, nemo ab vero libero dolor nobis, recusandae sit consectetur similique aperiam omnis obcaecati temporibus quisquam quod perspiciatis! Temporibus, blanditiis dolorem.
+                    {{ Lang.get('home.introduction.description') }}.
                 </p>
                 <div class="flex flex-col gap-4 justify-center md:flex-row md:justify-start">
-                    <Button as="a"
-                            href="/contact"
-                            label="Get in Touch"
-                            rounded
+                    <Button :label="Lang.get('home.buttons.get-in-touch')"
+                            as="RouterLink"
                             severity="secondary"
+                            to="/contact"
+                            rounded
                     />
-                    <Button as="a"
+                    <Button :label="Lang.get('home.buttons.view-portfolio')"
+                            as="RouterLink"
                             class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl to-blue-900 transition-all"
-                            href="/portfolio"
-                            label="View Portfolio"
+                            to="/portfolio"
                             rounded
                     />
                 </div>
@@ -32,12 +32,12 @@
                  alt="Picture"
                  class="h-64 md:h-auto"
             >
-            <Button as="a"
+            <Button :label="Lang.get('home.buttons.see-more')"
+                    as="a"
                     class="-mb-6 absolute bg-blue-50 border-blue-50 bottom-0 dark:bg-blue-950 dark:border-blue-950 dark:hover:bg-blue-900 dark:text-blue-100 hover:bg-blue-100 text-blue-900"
                     href="#featured-posts"
                     icon="fa fa-chevron-down"
                     iconPos="right"
-                    label="See More"
                     severity="secondary"
                     rounded
             />
@@ -48,10 +48,10 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mb-16 mx-auto text-center">
                     <h3 class="text-4xl font-bold mb-4">
-                        Featured Posts
+                        {{ Lang.get('home.featured-posts.title') }}
                     </h3>
                     <p class="dark:text-blue-200 text-blue-800">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate aperiam necessitatibus velit laborum, quos molestiae soluta eum quia corporis impedit laboriosam quisquam quasi officia fuga maiores temporibus. Quis, est quam.
+                        {{ Lang.get('home.featured-posts.description') }}.
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-8 justify-center">
@@ -87,9 +87,9 @@
                         </template>
                         <template #footer>
                             <div class="mt-4">
-                                <Button :href="`/blog/${post.slug}`"
-                                        as="a"
-                                        label="Read More"
+                                <Button :label="Lang.get('home.buttons.read-more')"
+                                        :to="`/blog/${post.slug}`"
+                                        as="RouterLink"
                                         severity="primary"
                                         rounded
                                 />
@@ -98,9 +98,11 @@
                     </Card>
                 </div>
                 <div class="mt-8 text-center">
-                    <a href="/blog" class="hover:underline underline-offset-8">
-                        Want to see more? You can read my blog posts here!
-                    </a>
+                    <RouterLink class="hover:underline underline-offset-8"
+                                to="/blog"
+                    >
+                        {{ Lang.get('home.featured-posts.view-all') }}
+                    </RouterLink>
                 </div>
             </div>
         </section>
@@ -109,17 +111,17 @@
         >
             <div class="max-w-2xl mb-16 mx-auto text-center">
                 <h3 class="text-4xl font-bold mb-4">
-                    My Expertise
+                    {{ Lang.get('home.my-expertise.title') }}
                 </h3>
                 <p class="dark:text-gray-300 mb-12 text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, nesciunt molestiae! Ea eum corrupti aliquam odit rerum placeat quae, dicta sed sunt numquam similique atque recusandae. Totam modi quibusdam dolorum.
+                    {{ Lang.get('home.my-expertise.description') }}.
                 </p>
             </div>
             <div class="gap-8 grid grid-cols-1 md:grid-cols-2">
-                <a v-for="expertise in expertiseData"
-                   :href="expertise.link"
-                   :key="expertise.id"
-                   class="border dark:shadow-blue-800/80 flex flex-row gap-6 group hover:shadow-xl p-6 relative rounded-xl transition-shadow"
+                <RouterLink v-for="expertise in expertiseData"
+                            :key="expertise.id"
+                            :to="expertise.link"
+                            class="border dark:shadow-blue-800/80 flex flex-row gap-6 group hover:shadow-xl p-6 relative rounded-xl transition-shadow"
                 >
                     <i :class="expertise.icon"
                        class="duration-300 group-hover:text-blue-700 text-4xl"
@@ -135,7 +137,7 @@
                     <div class="-translate-x-4 absolute duration-300 group-hover:opacity-100 group-hover:translate-x-0 opacity-0 right-5 text-2xl text-blue-700 top-5 transition-transform">
                         <i class="fa fa-arrow-right"></i>
                     </div>
-                </a>
+                </RouterLink>
             </div>
         </section>
         <section id="selected-projects"
@@ -144,10 +146,10 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mb-16 mx-auto text-center">
                     <h3 class="text-4xl font-bold mb-4">
-                        Selected Projects
+                        {{ Lang.get('home.selected-projects.title') }}
                     </h3>
                     <p class="dark:text-blue-200 text-blue-800">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.
+                        {{ Lang.get('home.selected-projects.description') }}.
                     </p>
                 </div>
                 <div class="gap-8 grid grid-cols-1">
@@ -184,9 +186,9 @@
                         </template>
                         <template #footer>
                             <div class="mt-4">
-                                <Button :href="project.link"
-                                        as="a"
-                                        label="See Details"
+                                <Button :label="Lang.get('home.buttons.see-details')"
+                                        :to="project.link"
+                                        as="RouterLink"
                                         severity="primary"
                                         rounded
                                 />
@@ -195,9 +197,11 @@
                     </Card>
                 </div>
                 <div class="mt-8 text-center">
-                    <a href="/portfolio" class="hover:underline underline-offset-8">
-                        Interested? Click here to view more projects!
-                    </a>
+                    <RouterLink class="hover:underline underline-offset-8"
+                                to="/portfolio"
+                    >
+                        {{ Lang.get('home.selected-projects.view-all') }}
+                    </RouterLink>
                 </div>
             </div>
         </section>
@@ -206,10 +210,10 @@
         >
             <div class="max-w-2xl mb-16 mx-auto text-center">
                 <h3 class="text-4xl font-bold mb-4">
-                    My Achievements
+                    {{ Lang.get('home.my-achievements.title') }}
                 </h3>
                 <p class="dark:text-gray-300 mb-12 text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, nesciunt molestiae! Ea eum corrupti aliquam odit rerum placeat quae, dicta sed sunt numquam similique atque recusandae. Totam modi quibusdam dolorum.
+                    {{ Lang.get('home.my-achievements.description') }}.
                 </p>
             </div>
             <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
@@ -232,18 +236,20 @@
                         />
                     </template>
                     <template #title>
-                        <a :href="achievement.link">
+                        <RouterLink :to="achievement.link">
                             <h4 class="font-semibold text-3xl">
                                 {{ achievement.title }}
                             </h4>
-                        </a>
+                        </RouterLink>
                     </template>
                 </Card>
             </div>
             <div class="mt-8 text-center">
-                <a href="/cv#achievements" class="hover:underline underline-offset-8">
-                    Want to learn more? View more achievements here!
-                </a>
+                <RouterLink class="hover:underline underline-offset-8"
+                            to="/cv#achievements"
+                >
+                    {{ Lang.get('home.my-achievements.view-all') }}
+                </RouterLink>
             </div>
         </section>
     </div>
@@ -327,9 +333,9 @@ const expertiseData = [
 const projectData = [
     {
         id: 1,
-        title: 'EverestServer.pl',
+        title: 'EverestServer',
         body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.</p><p>Phasellus euismod dictum elit, eu convallis elit vestibulum nec. Donec volutpat dui id iaculis viverra. Maecenas id iaculis massa, sed vestibulum justo.</p>',
-        link: '/portfolio/everestserver-pl',
+        link: '/portfolio/everestserver',
         image: 'https://picsum.photos/600/402',
         tags: [
             {
@@ -352,9 +358,9 @@ const projectData = [
     },
     {
         id: 2,
-        title: 'Kadziela.pl',
+        title: 'Kadziela Hub',
         body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.</p><p>Phasellus euismod dictum elit, eu convallis elit vestibulum nec. Donec volutpat dui id iaculis viverra. Maecenas id iaculis massa, sed vestibulum justo.</p>',
-        link: '/portfolio/kadziela-pl',
+        link: '/portfolio/kadziela-hub',
         image: 'https://picsum.photos/600/403',
         tags: [
             {
