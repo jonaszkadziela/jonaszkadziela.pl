@@ -1,5 +1,5 @@
 <template>
-    <footer class="border-t">
+    <footer class="bg-white border-t dark:bg-black dark:border-none">
         <div class="container dark:text-gray-300 mx-auto px-4 py-16 text-gray-600">
             <div class="gap-8 grid grid-cols-3 justify-items-center mb-12 md:grid-cols-6 mx-auto w-1/2">
                 <a v-for="social in socialData"

@@ -28,7 +28,7 @@ return [
     ],
     'titles' => [
         'cv' => 'CV',
-        'error-404' => '404',
+        'error-404' => 'Błąd 404',
         'home' => 'Strona główna',
     ],
 
