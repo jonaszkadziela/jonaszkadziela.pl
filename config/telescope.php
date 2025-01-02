@@ -20,6 +20,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Telescope Filtering Switch
+    |--------------------------------------------------------------------------
+    |
+    | Custom option to enable or disable filtering of Telescope watchers.
+    | When set to false, all incoming Telescope entries will be stored.
+    |
+    */
+
+    'filtering_enabled' => env('TELESCOPE_FILTERING_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Telescope Domain
     |--------------------------------------------------------------------------
     |
