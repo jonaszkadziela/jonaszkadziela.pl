@@ -19,16 +19,12 @@
             <p class="dark:text-gray-300 text-gray-600 text-lg">
                 {{ Lang.get('not-found.description-2') }}.
             </p>
-            <p class="dark:text-gray-500 italic mt-4 text-gray-400">
-                {{ Lang.get('not-found.request-id') }}:
-                5a6952b4-a65e-496b-be0b-d6cf999abf78
-            </p>
             <div class="flex flex-col gap-4 justify-center md:flex-row md:justify-start mt-12">
-                <Button :label="Lang.get('not-found.buttons.report-issue')"
-                        as="RouterLink"
+                <Button :disabled="issueReported"
+                        :label="issueReported ? Lang.get('not-found.buttons.issue-reported') : Lang.get('not-found.buttons.report-issue')"
                         severity="secondary"
-                        to="/contact"
                         rounded
+                        @click="reportIssue"
                 />
                 <Button :label="Lang.get('not-found.buttons.return-to-home-page')"
                         as="RouterLink"
@@ -44,6 +40,47 @@
 <script setup>
 import Exhaust from '@/images/not-found-page/exhaust.png'
 import Spaceship from '@/images/not-found-page/spaceship.png'
+import { onBeforeRouteUpdate } from 'vue-router'
+import { ref } from 'vue'
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
+const issueReported = ref(false)
+const timestamp = Date.now()
+
+function reportIssue() {
+    axios
+        .post('/feedback', {
+            type: 'issue',
+            body: document.title,
+            data: {
+                _telescope: timestamp,
+                url: window.location.href,
+                userAgent: navigator.userAgent,
+            },
+        })
+        .then(() => {
+            toast.add({
+                severity: 'success',
+                summary: Lang.get('not-found.report-issue.success.summary'),
+                detail: Lang.get('not-found.report-issue.success.detail'),
+                life: 10000,
+            })
+
+            issueReported.value = true
+        })
+        .catch(() => {
+            toast.add({
+                severity: 'error',
+                summary: Lang.get('not-found.report-issue.error.summary'),
+                detail: Lang.get('not-found.report-issue.error.detail'),
+            })
+        })
+}
+
+onBeforeRouteUpdate(() => {
+    issueReported.value = false
+})
 </script>
 
 <style scoped>
