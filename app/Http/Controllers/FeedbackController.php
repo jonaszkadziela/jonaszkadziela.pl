@@ -20,8 +20,8 @@ class FeedbackController extends Controller
         if (Arr::has($request->data, '_telescope')) {
             $timestamp = Carbon::parse($request->data['_telescope'] / 1000);
             $telescopeEntry = EntryModel::where('type', '=', EntryType::REQUEST)
-                ->whereJsonContains('content->ip_address', $request->ip())
-                ->whereJsonContains('content->uri', Str::after($request->header('referer'), $request->schemeAndHttpHost()))
+                ->whereJsonContains('content->ip_address', $request->ip() ?? '')
+                ->whereJsonContains('content->uri', Str::after($request->header('referer') ?? '', $request->schemeAndHttpHost()))
                 ->whereBetween('created_at', [$timestamp->copy()->subSeconds(3), $timestamp->copy()->addSeconds(3)])
                 ->orderBy('created_at', 'desc')
                 ->first();
