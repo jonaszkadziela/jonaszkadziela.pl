@@ -10,7 +10,7 @@
             >
         </div>
         <div class="flex flex-col max-w-2xl md:order-first order-last">
-            <h1 class="text-6xl font-bold mb-12">
+            <h1 class="font-bold mb-12 sm:text-6xl text-4xl">
                 {{ Lang.get('not-found.title') }}!
             </h1>
             <p class="dark:text-gray-300 text-gray-600 text-lg">
