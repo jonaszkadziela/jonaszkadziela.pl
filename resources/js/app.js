@@ -5,6 +5,7 @@ import App from './components/App.vue'
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
 import Router from './router'
+import ToastService from 'primevue/toastservice'
 import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
@@ -42,6 +43,7 @@ app.use(PrimeVue, {
         preset: customPreset,
     },
 })
+app.use(ToastService)
 
 app.directive('tooltip', Tooltip)
 app.mount('#app')
