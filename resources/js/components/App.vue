@@ -1,12 +1,10 @@
 <template>
     <DefaultLayout :dark-mode="darkMode">
-        <DarkModeButton :dark-mode="darkMode" />
         <RouterView />
     </DefaultLayout>
 </template>
 
 <script setup>
-import DarkModeButton from './shared/DarkModeButton.vue'
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import {
     onBeforeUnmount,

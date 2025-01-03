@@ -22,12 +22,6 @@
                     {{ item.label }}
                 </RouterLink>
             </div>
-            <div class="flex justify-center mb-12 md:hidden">
-                <LanguageSelector>
-                    <i class="fa fa-earth-europe mr-1"></i>
-                    {{ Lang.get('main.footer.language') }}
-                </LanguageSelector>
-            </div>
             <div class="text-center">
                 {{ Lang.get('main.footer.programmed-with') }}
                 <i class="fa-solid fa-heart text-blue-500"></i>
@@ -44,7 +38,6 @@
 </template>
 
 <script setup>
-import LanguageSelector from './LanguageSelector.vue'
 import { ref } from 'vue'
 
 const socialData = [

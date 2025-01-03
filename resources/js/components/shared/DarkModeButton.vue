@@ -1,7 +1,6 @@
 <template>
-    <Button aria-label="Dark mode"
-            class="fixed bottom-5 right-5 z-50"
-            :icon="darkModeIcon"
+    <Button :icon="darkModeIcon"
+            aria-label="Dark mode"
             @click="toggleDarkMode"
     />
 </template>
@@ -11,9 +10,9 @@ import { computed } from 'vue'
 
 const props = defineProps(['darkMode'])
 
+const darkModeIcon = computed(() => props.darkMode ? 'fa fa-moon' : 'fa fa-sun')
+
 function toggleDarkMode() {
     return props.darkMode ? document.body.parentNode.classList.replace('dark', 'light') : document.body.parentNode.classList.replace('light', 'dark')
 }
-
-const darkModeIcon = computed(() => props.darkMode ? 'fa fa-moon' : 'fa fa-sun')
 </script>

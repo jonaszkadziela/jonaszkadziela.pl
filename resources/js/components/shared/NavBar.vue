@@ -5,14 +5,15 @@
     >
         <Menubar :model="items"
                  :pt="{
-                     button: 'flex md:hidden ml-auto p-2',
+                     button: 'flex md:hidden mr-2 order-2 p-2',
+                     end: 'flex gap-2 md:ml-0 ml-auto mr-2',
                      itemContent: 'container md:m-0 mx-auto my-1',
                      itemLabel: ({ context }) => [{
                          'cursor-pointer dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
                          'font-bold': context.item.route === $route.path,
                          'underline': context.focused,
                      }],
-                     root: 'container delay-100 duration-300 flex gap-4 items-center mx-auto py-4',
+                     root: 'container delay-100 duration-300 flex gap-0 items-center md:gap-4 mx-auto py-4',
                      rootList: ({ props }) => [{
                          'gap-6 md:flex md:mr-2 md:py-2 ml-auto': true,
                          'absolute border-t dark:border-gray-600 left-0 p-4 right-0 top-full': props.mobileActive,
@@ -38,7 +39,11 @@
                 </a>
             </template>
             <template #end>
-                <LanguageSelector class="hidden md:flex mr-2">
+                <DarkModeButton :dark-mode="darkMode"
+                                class="bg-white border border-zinc-300 dark:bg-zinc-950 dark:border-zinc-600"
+                                severity="secondary"
+                />
+                <LanguageSelector>
                     <i class="fa fa-earth-europe"></i>
                 </LanguageSelector>
             </template>
@@ -47,6 +52,7 @@
 </template>
 
 <script setup>
+import DarkModeButton from './DarkModeButton.vue'
 import LanguageSelector from './LanguageSelector.vue'
 import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
