@@ -2,7 +2,9 @@
     <div class="flex flex-col min-h-screen">
         <NavBar :dark-mode="props.darkMode" />
         <main class="flex-1 py-4">
-            <Toast position="bottom-right" />
+            <Toast class="max-w-72 md:max-w-full"
+                   position="bottom-right"
+            />
             <slot />
         </main>
         <Footer />
