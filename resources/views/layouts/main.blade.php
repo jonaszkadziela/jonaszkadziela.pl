@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ App::getLocale() }}" class="light">
+<html lang="{{ App::getLocale() }}" class="{{ Session::get('theme', config('app.default_theme')) }}">
     <head>
         <title>
             {{ (isset($title) ? $title . ' - ' : '') . config('app.name') }}
