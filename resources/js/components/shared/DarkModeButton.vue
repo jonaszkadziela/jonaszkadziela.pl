@@ -16,7 +16,10 @@ const darkModeIcon = computed(() => props.darkMode ? 'fa fa-moon' : 'fa fa-sun')
 const html = document.body.parentNode
 
 function toggleDarkMode() {
-    return props.darkMode ? html.classList.replace('dark', 'light') : html.classList.replace('light', 'dark')
+    props.darkMode ? html.classList.replace('dark', 'light') : html.classList.replace('light', 'dark')
+
+    axios.post(`/theme/${props.darkMode ? 'light' : 'dark'}`)
+        .catch(() => {})
 }
 
 onMounted(() => {
