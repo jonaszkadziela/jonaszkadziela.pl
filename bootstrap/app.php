@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DetermineLanguageFromIp;
 use App\Http\Middleware\SetLanguage;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
@@ -17,10 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
+            DetermineLanguageFromIp::class,
             SetLanguage::class,
         ]);
 
         $middleware->web([
+            DetermineLanguageFromIp::class,
             SetLanguage::class,
         ]);
     })
