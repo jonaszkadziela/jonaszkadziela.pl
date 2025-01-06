@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
@@ -18,7 +17,7 @@ class UserSettingTest extends TestCase
 
     public function test_correct_options_are_returned_when_language_is_set_to_english(): void
     {
-        App::setLocale('en');
+        Session::put('language', 'en');
 
         $response = $this->get('/language-options');
 
@@ -37,7 +36,7 @@ class UserSettingTest extends TestCase
 
     public function test_correct_options_are_returned_when_language_is_set_to_polish(): void
     {
-        App::setLocale('pl');
+        Session::put('language', 'pl');
 
         $response = $this->get('/language-options');
 
