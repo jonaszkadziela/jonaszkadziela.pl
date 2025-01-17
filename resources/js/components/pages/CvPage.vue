@@ -41,6 +41,27 @@
             </p>
         </Teleport>
     </div>
+    <SpeedDial :model="actions"
+               class="actions-button bottom-5 fixed right-5"
+               direction="up"
+    >
+        <template #button="{ toggleCallback }">
+            <Button class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl size-12 to-blue-900 transition-all"
+                    rounded
+                    @click="toggleCallback"
+            >
+                <i class="fa fa-ellipsis-vertical"></i>
+            </Button>
+        </template>
+        <template #item="{ item, toggleCallback }">
+            <div v-tooltip.left="item.label"
+                 class="border cursor-pointer flex items-center justify-center rounded-full size-12"
+                 @click="toggleCallback"
+            >
+                <i :class="item.icon"></i>
+            </div>
+        </template>
+    </SpeedDial>
 </template>
 
 <script setup>
@@ -55,6 +76,39 @@ const toast = useToast()
 
 const data = ref(null)
 const loading = ref(true)
+
+const actions = ref([
+    {
+        label: Lang.get('main.print'),
+        icon: 'fa fa-print',
+        command: () => {
+            window.print()
+        },
+    },
+    {
+        label: Lang.get('main.share'),
+        icon: 'fa fa-link',
+        command: () => {
+            const link = location.href
+
+            try {
+                navigator.clipboard.writeText(link)
+                    .then(() => toast.add({
+                        severity: 'success',
+                        summary: Lang.get('toast.success.copy-link.summary'),
+                        detail: Lang.get('toast.success.copy-link.detail', { link }),
+                        life: 3000,
+                    }))
+            } catch {
+                toast.add({
+                    severity: 'error',
+                    summary: Lang.get('toast.error.copy-link.summary'),
+                    detail: Lang.get('toast.error.copy-link.detail'),
+                })
+            }
+        },
+    },
+])
 
 onMounted(() => {
     axios
@@ -99,6 +153,7 @@ body {
 }
 
 @media print {
+    .actions-button,
     footer,
     nav {
         display: none;

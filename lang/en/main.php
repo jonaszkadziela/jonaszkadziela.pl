@@ -14,6 +14,8 @@ return [
     'description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
     'last-update' => 'Last update',
     'loading' => 'Loading',
+    'print' => 'Print',
+    'share' => 'Share',
 
     'footer' => [
         'author' => 'Jonasz Kadziela',
