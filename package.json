@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@primevue/themes": "^4.2.4",
+        "chart.js": "^4.4.7",
         "primevue": "^4.2.4",
         "vue-router": "^4.5.0"
     }
