@@ -7,6 +7,9 @@ import PrimeVue from 'primevue/config'
 import Router from './router'
 import ToastService from 'primevue/toastservice'
 import Tooltip from 'primevue/tooltip'
+import.meta.glob([
+    '../images/**',
+])
 
 const app = createApp(App)
 
