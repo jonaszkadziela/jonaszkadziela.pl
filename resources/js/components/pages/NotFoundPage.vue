@@ -62,8 +62,8 @@ function reportIssue() {
         .then(() => {
             toast.add({
                 severity: 'success',
-                summary: Lang.get('not-found.report-issue.success.summary'),
-                detail: Lang.get('not-found.report-issue.success.detail'),
+                summary: Lang.get('toast.success.report-issue.summary'),
+                detail: Lang.get('toast.success.report-issue.detail'),
                 life: 10000,
             })
 
@@ -72,8 +72,8 @@ function reportIssue() {
         .catch(() => {
             toast.add({
                 severity: 'error',
-                summary: Lang.get('not-found.report-issue.error.summary'),
-                detail: Lang.get('not-found.report-issue.error.detail'),
+                summary: Lang.get('toast.error.report-issue.summary'),
+                detail: Lang.get('toast.error.report-issue.detail'),
             })
         })
 }

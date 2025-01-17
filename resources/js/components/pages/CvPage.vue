@@ -62,8 +62,8 @@ onMounted(() => {
         .then(response => data.value = response.data)
         .catch(() => toast.add({
             severity: 'error',
-            summary: Lang.get('main.errors.load-data.summary'),
-            detail: Lang.get('main.errors.load-data.detail'),
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
         }))
         .finally(() => loading.value = false)
 })

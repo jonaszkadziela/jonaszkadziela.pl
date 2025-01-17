@@ -20,15 +20,5 @@ return [
         'report-issue' => 'Report Issue',
         'return-to-home-page' => 'Return to Home Page',
     ],
-    'report-issue' => [
-        'error' => [
-            'detail' => 'An unexpected error occurred while reporting the issue. Please try again later or contact me directly',
-            'summary' => 'Report Failed',
-        ],
-        'success' => [
-            'detail' => 'Thank you for reporting the issue! I will look into it as soon as possible',
-            'summary' => 'Issue Reported',
-        ],
-    ],
 
 ];

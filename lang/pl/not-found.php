@@ -20,15 +20,5 @@ return [
         'report-issue' => 'Zgłoś Problem',
         'return-to-home-page' => 'Wróć na Stronę Główną',
     ],
-    'report-issue' => [
-        'error' => [
-            'detail' => 'Wystąpił nieoczekiwany błąd podczas zgłaszania problemu. Spróbuj ponownie później lub skontaktuj się ze mną bezpośrednio',
-            'summary' => 'Zgłoszenie Nieudane',
-        ],
-        'success' => [
-            'detail' => 'Dziękuję za zgłoszenie problemu! Przyjrzę się temu najszybciej jak to możliwe',
-            'summary' => 'Zgłoszono Problem',
-        ],
-    ],
 
 ];

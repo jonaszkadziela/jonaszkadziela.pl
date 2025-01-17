@@ -15,12 +15,6 @@ return [
     'last-update' => 'Ostatnia aktualizacja',
     'loading' => 'Ładowanie',
 
-    'errors' => [
-        'load-data' => [
-            'detail' => 'Wystąpił nieoczekiwany błąd podczas ładowania danych. Spróbuj ponownie później lub skontaktuj się ze mną bezpośrednio',
-            'summary' => 'Błąd Ładowania Danych',
-        ],
-    ],
     'footer' => [
         'author' => 'Jonasza Kądzielę',
         'by' => 'przez',
