@@ -427,3 +427,9 @@ const achievementData = [
     },
 ]
 </script>
+
+<style>
+html {
+    scroll-padding-top: 65px;
+}
+</style>

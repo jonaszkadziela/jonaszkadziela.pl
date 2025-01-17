@@ -114,6 +114,6 @@ onBeforeUnmount(() => {
 
 <style>
 html {
-    scroll-padding-top: 65px;
+    scroll-padding-top: 80px;
 }
 </style>

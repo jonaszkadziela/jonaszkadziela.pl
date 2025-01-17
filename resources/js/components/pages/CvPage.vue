@@ -113,7 +113,20 @@ const actions = ref([
 onMounted(() => {
     axios
         .get('/json-page/cv')
-        .then(response => data.value = response.data)
+        .then(response => {
+            data.value = response.data
+
+            if (location.hash !== '') {
+                setTimeout(() => {
+                    const element = document.querySelector(location.hash)
+
+                    element.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    })
+                }, 250)
+            }
+        })
         .catch(() => toast.add({
             severity: 'error',
             summary: Lang.get('toast.error.load-data.summary'),
@@ -124,6 +137,10 @@ onMounted(() => {
 </script>
 
 <style>
+html {
+    scroll-padding-top: 80px;
+}
+
 body {
     min-width: 72rem !important;
     max-width: 100% !important;
