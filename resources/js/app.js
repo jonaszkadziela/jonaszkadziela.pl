@@ -1,6 +1,7 @@
 import './bootstrap'
 import { createApp } from 'vue'
 import { definePreset } from '@primevue/themes'
+import { getTranslation, hasTranslation } from './translation.js'
 import App from './components/App.vue'
 import Aura from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
@@ -34,6 +35,7 @@ const customPreset = definePreset(Aura, {
 })
 
 app.use(Router)
+app.use(ToastService)
 app.use(PrimeVue, {
     theme: {
         options: {
@@ -46,7 +48,14 @@ app.use(PrimeVue, {
         preset: customPreset,
     },
 })
-app.use(ToastService)
 
 app.directive('tooltip', Tooltip)
+
+app.mixin({
+    methods: {
+        getTranslation,
+        hasTranslation,
+    },
+})
+
 app.mount('#app')
