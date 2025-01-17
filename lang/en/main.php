@@ -12,7 +12,15 @@ return [
     */
 
     'description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
+    'last-update' => 'Last update',
+    'loading' => 'Loading',
 
+    'errors' => [
+        'load-data' => [
+            'detail' => 'An unexpected error occurred while loading the data. Please try again later or contact me directly',
+            'summary' => 'Data Loading Error',
+        ],
+    ],
     'footer' => [
         'author' => 'Jonasz Kadziela',
         'by' => 'by',
