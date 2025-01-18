@@ -42,8 +42,9 @@
         </Teleport>
     </div>
     <SpeedDial :model="actions"
-               class="actions-button bottom-5 fixed right-5"
+               class="bottom-5 fixed right-5"
                direction="up"
+               id="actions-button"
     >
         <template #button="{ toggleCallback }">
             <Button class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl size-12 to-blue-900 transition-all"
@@ -55,7 +56,7 @@
         </template>
         <template #item="{ item, toggleCallback }">
             <div v-tooltip.left="item.label"
-                 class="border cursor-pointer flex items-center justify-center rounded-full size-12"
+                 class="bg-white border cursor-pointer dark:bg-black flex items-center justify-center rounded-full size-12"
                  @click="toggleCallback"
             >
                 <i :class="item.icon"></i>
@@ -170,26 +171,35 @@ body {
 }
 
 @media print {
-    .actions-button,
+    #actions-button,
     footer,
     nav {
         display: none;
+    }
+
+    #footer {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-bottom: 1rem;
     }
 }
 
 @page {
     size: A4;
-    margin: 0;
+    margin: 20px 0;
 
     @bottom-right {
         background: linear-gradient(to right bottom, #2563eb, #1e3a8a);
         color: #ffffff;
-        content: 'Page ' counter(page) '/' counter(pages);
+        content: counter(page) '/' counter(pages);
         height: 32px;
-        margin-top: -48px !important;
+        margin-top: -110px !important;
+        margin-right: 16px;
         padding: 0 8px;
         text-align: center;
-        width: 72px;
+        width: 32px;
     }
 }
 </style>
