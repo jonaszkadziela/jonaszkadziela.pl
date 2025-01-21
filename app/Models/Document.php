@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Document extends Model
 {
@@ -34,5 +35,11 @@ class Document extends Model
             'translations' => 'array',
             'issued_at' => 'date',
         ];
+    }
+
+    public function files(): MorphToMany
+    {
+        return $this->morphToMany(File::class, 'model', 'model_file')
+            ->withPivot('file_role');
     }
 }
