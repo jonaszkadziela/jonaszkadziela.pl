@@ -42,4 +42,9 @@ class Document extends Model
         return $this->morphToMany(File::class, 'model', 'model_file')
             ->withPivot('file_role');
     }
+
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'model', 'model_tag');
+    }
 }
