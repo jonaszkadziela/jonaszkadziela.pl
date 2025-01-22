@@ -7,13 +7,15 @@ return [
     | Main Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used in the main layout.
+    | The following language lines are used in the main layout and throughout
+    | the application.
     |
     */
 
-    'description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
+    'description' => 'Description',
     'last-update' => 'Last update',
     'loading' => 'Loading',
+    'meta-description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
     'print' => 'Print',
     'share' => 'Share',
 

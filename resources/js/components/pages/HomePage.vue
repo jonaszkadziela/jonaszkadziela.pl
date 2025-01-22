@@ -227,18 +227,42 @@
                     <template #header>
                         <Image :src="achievement.image"
                                :pt="{
-                                   root: 'min-h-64 w-full',
-                                   image: 'object-cover rounded-t-xl w-full',
+                                   root: 'h-64 w-full',
+                                   image: 'border-b object-contain rounded-t-xl w-full',
+                                   mask: 'overflow-auto',
                                    previewMask: 'rounded-t-xl',
+                                   toolbar: 'z-[101]',
                                }"
                                :alt="`Achievement - ${achievement.title}`"
                                preview
-                        />
+                        >
+                            <template #original="slotProps">
+                                <div class="flex flex-col gap-4 h-max items-center w-min p-4">
+                                    <img :src="achievement.image"
+                                         :style="slotProps.style"
+                                         :class="slotProps.class"
+                                         class="max-h-[90vh] z-[100]"
+                                         @click="event => event.stopPropagation()"
+                                    >
+                                    <Panel v-if="achievement.body"
+                                           :collapsed="true"
+                                           :header="Lang.get('main.description')"
+                                           class="w-full"
+                                           toggleable
+                                           @click="event => event.stopPropagation()"
+                                    >
+                                        <p>
+                                            {{ getTranslation(achievement.translations, achievement.body) }}
+                                        </p>
+                                    </Panel>
+                                </div>
+                            </template>
+                        </Image>
                     </template>
                     <template #title>
                         <RouterLink :to="achievement.link">
                             <h4 class="font-semibold text-3xl">
-                                {{ achievement.title }}
+                                {{ getTranslation(achievement.translations, achievement.title) }}
                             </h4>
                         </RouterLink>
                     </template>
@@ -257,6 +281,13 @@
 
 <script setup>
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
+import {
+    onMounted,
+    ref,
+} from 'vue'
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
 
 const blogData = [
     {
@@ -400,32 +431,26 @@ const projectData = [
     },
 ]
 
-const achievementData = [
-    {
-        id: 1,
-        title: '1st place in the Cisco NetRiders ITE competition',
-        link: '/cv#achievements',
-        image: 'https://picsum.photos/600/405',
-    },
-    {
-        id: 2,
-        title: '1st place in the Robocode League',
-        link: '/cv#achievements',
-        image: 'https://picsum.photos/600/406',
-    },
-        {
-        id: 3,
-        title: 'Winner in one of the categories at the Robo Inspector Hackathon',
-        link: '/cv#achievements',
-        image: 'https://picsum.photos/600/407',
-    },
-    {
-        id: 4,
-        title: 'Scholarship for very good academic results',
-        link: '/cv#achievements',
-        image: 'https://picsum.photos/600/408',
-    },
-]
+const achievementData = ref(null)
+const loading = ref(true)
+
+onMounted(() => {
+    axios
+        .get('/documents', {
+            params: {
+                tags: ['achievement'],
+            },
+        })
+        .then(response => {
+            achievementData.value = response.data
+        })
+        .catch(() => toast.add({
+            severity: 'error',
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
+        }))
+        .finally(() => loading.value = false)
+})
 </script>
 
 <style>
