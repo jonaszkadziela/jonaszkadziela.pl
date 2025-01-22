@@ -3,7 +3,7 @@
          class="sticky top-[-1px] z-50"
          ref="navBar"
     >
-        <Menubar :model="items"
+        <Menubar :model="menuData"
                  :pt="{
                      button: 'flex md:hidden mr-2 order-2 p-2',
                      end: 'flex gap-2 md:ml-0 ml-auto mr-2',
@@ -56,7 +56,9 @@ import DarkModeButton from './DarkModeButton.vue'
 import LanguageSelector from './LanguageSelector.vue'
 import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
+import { getTranslation } from '../../translation.js'
 import { useRouter } from 'vue-router'
+import { useToast } from 'primevue/usetoast'
 import {
     computed,
     onBeforeUnmount,
@@ -65,37 +67,13 @@ import {
 } from 'vue'
 
 const props = defineProps(['darkMode'])
-const router = useRouter()
 
+const router = useRouter()
+const toast = useToast()
+
+const menuData = ref(null)
 const navBar = ref(null)
 const navBarSticky = ref(false)
-const items = ref([
-    {
-        label: 'Home',
-        route: '/',
-        command: ({ item }) => router.push(item.route),
-    },
-    {
-        label: 'Meet me',
-        route: '/meet-me',
-        command: ({ item }) => router.push(item.route),
-    },
-    {
-        label: 'CV',
-        route: '/cv',
-        command: ({ item }) => router.push(item.route),
-    },
-    {
-        label: 'Portfolio',
-        route: '/portfolio',
-        command: ({ item }) => router.push(item.route),
-    },
-    {
-        label: 'Contact',
-        route: '/contact',
-        command: ({ item }) => router.push(item.route),
-    },
-])
 
 const logo = computed(() => props.darkMode ? LogoWhite : LogoBlack)
 
@@ -106,6 +84,27 @@ const intersectionObserver = new IntersectionObserver(
 
 onMounted(() => {
     intersectionObserver.observe(navBar.value)
+
+    axios
+        .get('/menus')
+        .then(response => {
+            if (!Array.isArray(response.data)) {
+                return
+            }
+
+            menuData.value = response.data.map(menu => {
+                return {
+                    label: getTranslation(menu.translations, menu.name),
+                    route: menu.route,
+                    command: ({ item }) => router.push(item.route),
+                }
+            })
+        })
+        .catch(() => toast.add({
+            severity: 'error',
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
+        }))
 })
 onBeforeUnmount(() => {
     intersectionObserver.disconnect()
