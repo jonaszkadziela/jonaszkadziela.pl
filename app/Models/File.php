@@ -11,6 +11,8 @@ class File extends Model
 {
     use HasFactory;
 
+    public const MAIN_PICTURE = 'main_picture';
+
     /**
      * The attributes that are mass assignable.
      *

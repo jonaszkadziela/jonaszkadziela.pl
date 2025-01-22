@@ -47,4 +47,9 @@ class Document extends Model
     {
         return $this->morphToMany(Tag::class, 'model', 'model_tag');
     }
+
+    public function getMainPicture(): ?File
+    {
+        return $this->files->where('pivot.file_role', '=', File::MAIN_PICTURE)->first();
+    }
 }
