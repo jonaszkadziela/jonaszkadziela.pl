@@ -14,7 +14,7 @@
                 </a>
             </div>
             <div class="flex flex-col gap-4 items-center justify-center mb-12 md:flex-row md:gap-8">
-                <RouterLink v-for="item in menuItems"
+                <RouterLink v-for="item in menuData"
                             :key="item.label"
                             :to="item.route"
                             class="hover:underline underline-offset-8"
@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+defineProps({
+    menuData: Array,
+})
 
 const socialData = [
     {
@@ -78,27 +80,4 @@ const socialData = [
         icon: 'fa-brands fa-stack-overflow',
     },
 ]
-
-const menuItems = ref([
-    {
-        label: 'Home',
-        route: '/',
-    },
-    {
-        label: 'Meet me',
-        route: '/meet-me',
-    },
-    {
-        label: 'CV',
-        route: '/cv',
-    },
-    {
-        label: 'Portfolio',
-        route: '/portfolio',
-    },
-    {
-        label: 'Contact',
-        route: '/contact',
-    },
-])
 </script>
