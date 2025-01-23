@@ -1,6 +1,6 @@
 <template>
     <nav :class="navBarSticky ? 'backdrop-blur-md bg-white/75 dark:bg-black/75 dark:shadow-slate-800 shadow-lg transition-shadow' : 'dark:bg-black bg-white'"
-         class="sticky top-[-1px] z-50"
+         class="select-none sticky top-[-1px] z-50"
          ref="navBar"
     >
         <Menubar :model="menuData"
@@ -38,6 +38,15 @@
                         {{ Lang.get('main.navbar.header') }}
                     </span>
                 </a>
+            </template>
+            <template #item="{ props, item }">
+                <RouterLink v-bind="props.action"
+                            :to="item.route"
+                >
+                    <span v-bind="props.label">
+                        {{ item.label }}
+                    </span>
+                </RouterLink>
             </template>
             <template #end>
                 <DarkModeButton :dark-mode="darkMode"
