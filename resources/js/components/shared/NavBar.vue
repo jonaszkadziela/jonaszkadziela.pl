@@ -23,6 +23,7 @@
                      }],
                  }"
                  breakpoint="768px"
+                 ref="menubar"
                  unstyled
         >
             <template #start>
@@ -70,6 +71,7 @@ const props = defineProps({
 
 const navBar = ref(null)
 const navBarSticky = ref(false)
+const menubar = ref(null)
 
 const logo = computed(() => props.darkMode ? LogoWhite : LogoBlack)
 
@@ -79,6 +81,9 @@ const intersectionObserver = new IntersectionObserver(
 )
 
 onMounted(() => {
+    // Fix bug that causes automatic scrolling when clicking on NavBar links
+    menubar.value.onItemClick = () => {}
+
     intersectionObserver.observe(navBar.value)
 })
 onBeforeUnmount(() => {
