@@ -9,7 +9,6 @@
 <script setup>
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import { getTranslation } from '../translation.js'
-import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import {
     onBeforeUnmount,
@@ -17,7 +16,6 @@ import {
     ref,
 } from 'vue'
 
-const router = useRouter()
 const toast = useToast()
 
 const darkMode = ref(false)
@@ -44,7 +42,6 @@ onMounted(() => {
                 return {
                     label: getTranslation(menu.translations, menu.name),
                     route: menu.route,
-                    command: ({ item }) => router.push(item.route),
                 }
             })
         })
