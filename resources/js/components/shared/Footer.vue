@@ -40,44 +40,6 @@
 <script setup>
 defineProps({
     menuData: Array,
+    socialData: Array,
 })
-
-const socialData = [
-    {
-        id: 1,
-        title: 'Facebook',
-        link: 'https://facebook.com/jonaszkadzielapl',
-        icon: 'fa-brands fa-facebook-f',
-    },
-    {
-        id: 2,
-        title: 'LinkedIn',
-        link: 'https://linkedin.com/in/jonaszkadziela',
-        icon: 'fa-brands fa-linkedin-in',
-    },
-    {
-        id: 3,
-        title: 'X (Twitter)',
-        link: 'https://x.com/jonaszkadziela',
-        icon: 'fa-brands fa-x-twitter',
-    },
-    {
-        id: 4,
-        title: 'YouTube',
-        link: 'https://youtube.com/jonaszkadziela',
-        icon: 'fa-brands fa-youtube',
-    },
-    {
-        id: 5,
-        title: 'GitHub',
-        link: 'https://github.com/jonaszkadziela',
-        icon: 'fa-brands fa-github',
-    },
-    {
-        id: 6,
-        title: 'Stack Overflow',
-        link: 'https://stackoverflow.com/users/9310738/jonasz-kadziela',
-        icon: 'fa-brands fa-stack-overflow',
-    },
-]
 </script>

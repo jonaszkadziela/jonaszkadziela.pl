@@ -44,6 +44,12 @@ import { onBeforeRouteUpdate } from 'vue-router'
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 
+defineProps({
+    darkMode: Boolean,
+    menuData: Array,
+    socialData: Array,
+})
+
 const toast = useToast()
 const issueReported = ref(false)
 const timestamp = Date.now()

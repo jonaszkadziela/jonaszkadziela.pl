@@ -73,6 +73,12 @@ import {
 } from 'vue'
 import { useToast } from 'primevue/usetoast'
 
+defineProps({
+    darkMode: Boolean,
+    menuData: Array,
+    socialData: Array,
+})
+
 const toast = useToast()
 
 const data = ref(null)

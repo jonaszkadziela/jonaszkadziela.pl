@@ -9,7 +9,9 @@
             />
             <slot />
         </main>
-        <Footer :menu-data="props.menuData" />
+        <Footer :menu-data="props.menuData"
+                :social-data="socialData"
+        />
     </div>
 </template>
 
@@ -20,5 +22,6 @@ import NavBar from '../shared/NavBar.vue'
 const props = defineProps({
     darkMode: Boolean,
     menuData: Array,
+    socialData: Array,
 })
 </script>
