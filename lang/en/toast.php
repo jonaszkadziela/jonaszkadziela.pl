@@ -24,6 +24,10 @@ return [
             'detail' => 'An unexpected error occurred while reporting the issue. Please try again later or contact me directly',
             'summary' => 'Report Failed',
         ],
+        'send-message' => [
+            'detail' => 'An unexpected error occurred while sending the message. Please try again later or contact me in another way',
+            'summary' => 'Message Sending Error',
+        ],
     ],
     'success' => [
         'copy-link' => [
@@ -33,6 +37,10 @@ return [
         'report-issue' => [
             'detail' => 'Thank you for reporting the issue! I will look into it as soon as possible',
             'summary' => 'Issue Reported',
+        ],
+        'send-message' => [
+            'detail' => 'Thank you for contacting me! I will respond to your message as soon as possible',
+            'summary' => 'Message Sent',
         ],
     ],
 

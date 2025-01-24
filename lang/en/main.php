@@ -33,6 +33,7 @@ return [
         'header' => 'Jonasz Kadziela',
     ],
     'titles' => [
+        'contact' => 'Contact',
         'cv' => 'CV',
         'error-404' => 'Error 404',
         'home' => 'Home',
