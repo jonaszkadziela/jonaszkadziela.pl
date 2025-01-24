@@ -3,6 +3,7 @@
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\JsonPageController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserSettingController;
@@ -13,6 +14,7 @@ Route::get('/language/{code}', [UserSettingController::class, 'language']);
 Route::post('/theme/{mode}', [UserSettingController::class, 'theme']);
 
 Route::post('/feedback', [FeedbackController::class, 'store']);
+Route::post('/contact', [FormController::class, 'contact']);
 
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/menus', [MenuController::class, 'index']);
