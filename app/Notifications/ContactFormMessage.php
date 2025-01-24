@@ -6,6 +6,8 @@ use App\Notifications\Traits\HasTranslations;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 class ContactFormMessage extends Notification
 {
@@ -62,7 +64,10 @@ class ContactFormMessage extends Notification
             ->subject($this->lang('subject'))
             ->line($this->lang('line-1'))
             ->line($this->lang('line-2'))
-            ->line($this->lang('line-3'))
+            ->line(new HtmlString(Str::markdown($this->lang('line-3'), [
+                'allow_unsafe_links' => false,
+                'html_input' => 'escape',
+            ])))
             ->line($this->lang('line-4'))
             ->action($this->lang('action'), 'mailto:' . $this->fromEmail);
     }
