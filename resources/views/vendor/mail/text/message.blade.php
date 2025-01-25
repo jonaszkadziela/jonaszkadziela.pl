@@ -21,7 +21,8 @@
     {{-- Footer --}}
     <x-slot:footer>
         <x-mail::footer>
-            © {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+            {{ Lang::get('main.footer.programmed-with') }} ❤ {{ Lang::get('main.footer.by') }} {{ Lang::get('main.footer.author') }}
+            {{ config('app.name') }} © {{ date('Y') }}. @lang('notifications.all-rights-reserved').
         </x-mail::footer>
     </x-slot:footer>
 </x-mail::layout>
