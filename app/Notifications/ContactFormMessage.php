@@ -75,6 +75,7 @@ class ContactFormMessage extends Notification
     public function toMail(): MailMessage
     {
         return (new MailMessage())
+            ->replyTo($this->fromEmail, $this->fromName)
             ->subject($this->lang('subject'))
             ->line($this->lang('line-1'))
             ->line($this->lang('line-2'))
