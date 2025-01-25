@@ -52,7 +52,21 @@ class ContactFormMessage extends Notification
      */
     public function via(): array
     {
-        return ['mail'];
+        return [
+            'database',
+            'mail',
+        ];
+    }
+
+    /**
+     * Get the array representation of the notification.
+     */
+    public function toArray(): array
+    {
+        return [
+            'lang' => $this->lang,
+            'placeholders_map' => $this->placeholdersMap,
+        ];
     }
 
     /**
