@@ -37,6 +37,7 @@ return [
         'cv' => 'CV',
         'error-404' => 'Error 404',
         'home' => 'Home',
+        'portfolio' => 'Portfolio',
     ],
 
 ];
