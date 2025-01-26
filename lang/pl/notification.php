@@ -4,10 +4,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Notifications Language Lines
+    | Notification Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used in notifications.
+    | The following language lines are used in Notifications.
     |
     */
 

@@ -30,7 +30,7 @@
 </a>
 </p>
 <p style="margin-bottom: 0;">
-{{ config('app.name') }} © {{ date('Y') }}. @lang('notifications.all-rights-reserved').
+{{ config('app.name') }} © {{ date('Y') }}. @lang('notification.all-rights-reserved').
 </p>
 </x-mail::footer>
 </x-slot:footer>

@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('notifications.whoops')
+# @lang('notification.whoops')
 @else
-# @lang('notifications.greeting')
+# @lang('notification.greeting')
 @endif
 @endif
 
@@ -39,14 +39,14 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('notifications.regards'),<br>
-@lang('notifications.signature', ['app' => config('app.name')])
+@lang('notification.regards'),<br>
+@lang('notification.signature', ['app' => config('app.name')])
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
-@lang('notifications.action-button-help', [
+@lang('notification.action-button-help', [
     'actionText' => $actionText,
 ]): <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
