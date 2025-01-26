@@ -1,4 +1,11 @@
 <template>
+    <UnsavedFormDialog v-if="showUnsavedFormDialog"
+                       class="max-w-xl"
+                       position="top"
+                       @accepted="navigateTo(targetRoute)"
+                       @rejected="showUnsavedFormDialog = false"
+                       @closed="showUnsavedFormDialog = false"
+    />
     <section id="leave-a-message"
              class="container flex flex-col items-center justify-center md:flex-row md:gap-24 md:min-h-[85vh] md:text-left mx-auto px-4 py-16 relative"
     >
@@ -186,11 +193,16 @@
 </template>
 
 <script setup>
+import UnsavedFormDialog from '../dialogs/UnsavedFormDialog.vue'
+import { useToast } from 'primevue/usetoast'
 import {
     computed,
     ref,
 } from 'vue'
-import { useToast } from 'primevue/usetoast'
+import {
+    onBeforeRouteLeave,
+    useRouter,
+} from 'vue-router'
 
 defineProps({
     darkMode: Boolean,
@@ -198,12 +210,16 @@ defineProps({
     socialData: Array,
 })
 
+const router = useRouter()
 const toast = useToast()
 
+const acceptedUnsavedFormDialog = ref(false)
 const buttonConfetti = ref(null)
 const formData = ref({})
 const formErrors = ref({})
 const loading = ref(false)
+const showUnsavedFormDialog = ref(false)
+const targetRoute = ref(null)
 
 const disabled = computed(() => !formCompleted.value || loading.value)
 const formCompleted = computed(() => formData.value.name !== undefined && formData.value.email !== undefined && formData.value.message !== undefined)
@@ -241,6 +257,27 @@ function sendMessage() {
         })
         .finally(() => loading.value = false)
 }
+
+function navigateTo(to) {
+    acceptedUnsavedFormDialog.value = true
+
+    router.push(to)
+}
+
+onBeforeRouteLeave(to => {
+    if (acceptedUnsavedFormDialog.value) {
+        return true
+    }
+
+    if (Object.values(formData.value).length > 0) {
+        targetRoute.value = to
+        showUnsavedFormDialog.value = true
+
+        return false
+    }
+
+    return true
+})
 </script>
 
 <style>

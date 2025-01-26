@@ -4,6 +4,7 @@ import { definePreset } from '@primevue/themes'
 import { getTranslation, hasTranslation } from './translation.js'
 import App from './components/App.vue'
 import Aura from '@primevue/themes/aura'
+import ConfirmationService from 'primevue/confirmationservice'
 import PrimeVue from 'primevue/config'
 import Router from './router'
 import ToastService from 'primevue/toastservice'
@@ -34,6 +35,7 @@ const customPreset = definePreset(Aura, {
     },
 })
 
+app.use(ConfirmationService)
 app.use(Router)
 app.use(ToastService)
 app.use(PrimeVue, {
