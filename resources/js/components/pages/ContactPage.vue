@@ -80,18 +80,24 @@
                             {{ formErrors?.errors?.message[0] }}
                         </Message>
                     </div>
-                    <Button v-tooltip.left="{
-                                value: Lang.get('contact.form.fill-out'),
-                                disabled: !disabled,
-                                class: 'min-w-fit',
-                            }"
-                            :disabled="disabled"
-                            :class="disabled ? '' : 'hover:-translate-y-0.5 hover:shadow-xl'"
-                            :label="loading ? `${Lang.get('contact.form.sending')}...` : Lang.get('contact.form.send-message')"
-                            class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 md:min-w-36 md:ml-auto mt-4 to-blue-900 transition-all"
-                            rounded
-                            @click="sendMessage"
-                    />
+                    <div class="flex flex-col md:items-end">
+                        <div class="motion-duration-1000"
+                             ref="buttonConfetti"
+                        >
+                            <Button v-tooltip.left="{
+                                        value: Lang.get('contact.form.fill-out'),
+                                        disabled: formCompleted,
+                                        class: 'min-w-fit',
+                                    }"
+                                    :class="disabled ? '' : 'hover:-translate-y-0.5 hover:shadow-xl'"
+                                    :disabled="disabled"
+                                    :label="loading ? `${Lang.get('contact.form.sending')}...` : Lang.get('contact.form.send-message')"
+                                    class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 md:min-w-36 mt-4 to-blue-900 transition-all w-full"
+                                    rounded
+                                    @click="sendMessage"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,12 +200,13 @@ defineProps({
 
 const toast = useToast()
 
+const buttonConfetti = ref(null)
 const formData = ref({})
 const formErrors = ref({})
 const loading = ref(false)
 
 const disabled = computed(() => !formCompleted.value || loading.value)
-const formCompleted = computed(() => formData.value.name && formData.value.email && formData.value.message)
+const formCompleted = computed(() => formData.value.name !== undefined && formData.value.email !== undefined && formData.value.message !== undefined)
 
 function sendMessage() {
     loading.value = true
@@ -216,6 +223,12 @@ function sendMessage() {
 
             formData.value = {}
             formErrors.value = {}
+
+            buttonConfetti.value.classList.add('motion-preset-confetti')
+
+            setTimeout(() => {
+                buttonConfetti.value.classList.remove('motion-preset-confetti')
+            }, 1000)
         })
         .catch(error => {
             toast.add({

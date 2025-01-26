@@ -1,4 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
+import tailwindCssMotion from 'tailwindcss-motion'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,7 +14,9 @@ export default {
         '@media (prefers-color-scheme: dark) { &:not(.light *) }',
         '&:is(.dark *)',
     ]],
-    plugins: [],
+    plugins: [
+        tailwindCssMotion,
+    ],
     safelist: [
         '-mb-4',
         '-mt-4',
