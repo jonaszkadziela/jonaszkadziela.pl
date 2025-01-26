@@ -6,6 +6,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\JsonPageController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserSettingController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::post('/contact', [FormController::class, 'contact']);
 
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/menus', [MenuController::class, 'index']);
+Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/socials', [SocialController::class, 'index']);
 Route::get('/files/{file:slug}', [FileController::class, 'show']);
 Route::get('/json-pages/{jsonPage:name}', [JsonPageController::class, 'show']);
