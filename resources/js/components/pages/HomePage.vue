@@ -153,48 +153,10 @@
                     </p>
                 </div>
                 <div class="gap-8 grid grid-cols-1">
-                    <Card v-for="project in projectData"
-                          :key="project.id"
-                          :pt="{
-                              body: 'p-6',
-                              footer: 'mt-auto',
-                              root: 'dark:shadow-blue-800/80 duration-300 flex flex-col hover:shadow-xl md:flex-row transition-shadow',
-                          }"
-                    >
-                        <template #header>
-                            <div :style="`background-image: url(${project.image});`"
-                                 class="bg-center bg-cover h-full md:min-w-96 md:rounded-l-xl md:rounded-tr-none min-h-80 rounded-t-xl"
-                            ></div>
-                        </template>
-                        <template #title>
-                            <h4 class="font-semibold text-3xl">
-                                {{ project.title }}
-                            </h4>
-                        </template>
-                        <template #subtitle>
-                            <div class="flex flex-wrap gap-2 mb-4 mt-1">
-                                <Tag v-for="tag in project.tags"
-                                     :key="tag.value"
-                                     :severity="tag.order === 0 ? 'primary' : 'secondary'"
-                                     :value="tag.value"
-                                     rounded
-                                />
-                            </div>
-                        </template>
-                        <template #content>
-                            <div v-html="project.body"></div>
-                        </template>
-                        <template #footer>
-                            <div class="mt-4">
-                                <Button :label="Lang.get('home.buttons.see-details')"
-                                        :to="project.link"
-                                        as="RouterLink"
-                                        severity="primary"
-                                        rounded
-                                />
-                            </div>
-                        </template>
-                    </Card>
+                    <ProjectCard v-for="project in projectData"
+                                 :key="project.slug"
+                                 :project="project"
+                    />
                 </div>
                 <div class="mt-8 text-center">
                     <RouterLink class="hover:underline underline-offset-8"
@@ -281,6 +243,7 @@
 
 <script setup>
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
+import ProjectCard from '../shared/ProjectCard.vue'
 import {
     onMounted,
     ref,
@@ -367,80 +330,19 @@ const expertiseData = [
     },
 ]
 
-const projectData = [
-    {
-        id: 1,
-        title: 'EverestServer',
-        body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.</p><p>Phasellus euismod dictum elit, eu convallis elit vestibulum nec. Donec volutpat dui id iaculis viverra. Maecenas id iaculis massa, sed vestibulum justo.</p>',
-        link: '/portfolio/everestserver',
-        image: 'https://picsum.photos/600/402',
-        tags: [
-            {
-                order: 0,
-                value: 'Laravel',
-            },
-            {
-                order: 1,
-                value: 'PHP',
-            },
-            {
-                order: 2,
-                value: 'Tailwind CSS',
-            },
-            {
-                order: 3,
-                value: 'Alpine.js',
-            },
-        ],
-    },
-    {
-        id: 2,
-        title: 'Kadziela Hub',
-        body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.</p><p>Phasellus euismod dictum elit, eu convallis elit vestibulum nec. Donec volutpat dui id iaculis viverra. Maecenas id iaculis massa, sed vestibulum justo.</p>',
-        link: '/portfolio/kadziela-hub',
-        image: 'https://picsum.photos/600/403',
-        tags: [
-            {
-                order: 0,
-                value: 'Laravel',
-            },
-            {
-                order: 1,
-                value: 'PHP',
-            },
-            {
-                order: 2,
-                value: 'Tailwind CSS',
-            },
-            {
-                order: 3,
-                value: 'Alpine.js',
-            },
-        ],
-    },
-    {
-        id: 3,
-        title: 'BetterGram',
-        body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid totam numquam, saepe tenetur dolor inventore animi esse. Vero, minima possimus qui libero enim neque dignissimos dolore quibusdam? Voluptate, necessitatibus enim.</p><p>Phasellus euismod dictum elit, eu convallis elit vestibulum nec. Donec volutpat dui id iaculis viverra. Maecenas id iaculis massa, sed vestibulum justo.</p>',
-        link: '/portfolio/bettergram',
-        image: 'https://picsum.photos/600/404',
-        tags: [
-            {
-                order: 0,
-                value: 'PHP',
-            },
-            {
-                order: 1,
-                value: 'jQuery',
-            },
-        ],
-    },
-]
-
+const projectData = ref(null)
 const achievementData = ref(null)
-const loading = ref(true)
 
 onMounted(() => {
+    axios
+        .get('/projects')
+        .then(response => projectData.value = response.data)
+        .catch(() => toast.add({
+            severity: 'error',
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
+        }))
+
     axios
         .get('/documents', {
             params: {
@@ -455,7 +357,6 @@ onMounted(() => {
             summary: Lang.get('toast.error.load-data.summary'),
             detail: Lang.get('toast.error.load-data.detail'),
         }))
-        .finally(() => loading.value = false)
 })
 </script>
 
