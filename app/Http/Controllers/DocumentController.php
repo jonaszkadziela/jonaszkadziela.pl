@@ -17,19 +17,15 @@ class DocumentController extends Controller
                 fn (Builder $query) => $query->whereHas('tags', fn (Builder $query) => $query->whereIn('name', $request->tags)),
             )
             ->get()
-            ->map(function (Document $document) {
-                $mainPicture = $document->getMainPicture();
-
-                return [
-                    'slug' => $document->slug,
-                    'title' => $document->title,
-                    'body' => $document->body,
-                    'link' => $document->link,
-                    'translations' => $document->translations ?? [],
-                    'issuedAt' => $document->issued_at,
-                    'image' => $mainPicture !== null ? secure_url('/files/' . $mainPicture->slug) : null,
-                ];
-            })
+            ->map(fn (Document $document) => [
+                'slug' => $document->slug,
+                'title' => $document->title,
+                'body' => $document->body,
+                'link' => $document->link,
+                'translations' => $document->translations ?? [],
+                'issuedAt' => $document->issued_at,
+                'image' => $document->getMainPicture()?->getUrl(),
+            ])
             ->toArray();
 
         return response()->json($documents);

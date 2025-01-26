@@ -40,4 +40,9 @@ class File extends Model
 
         return FileFacade::get($path);
     }
+
+    public function getUrl(): string
+    {
+        return secure_url('/files/' . $this->slug);
+    }
 }
