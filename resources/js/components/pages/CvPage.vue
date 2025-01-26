@@ -119,7 +119,7 @@ const actions = ref([
 
 onMounted(() => {
     axios
-        .get('/json-page/cv')
+        .get('/json-pages/cv')
         .then(response => {
             data.value = response.data
 

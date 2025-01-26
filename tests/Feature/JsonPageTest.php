@@ -48,7 +48,7 @@ class JsonPageTest extends TestCase
 
     private function getJsonPage(string $name): TestResponse
     {
-        return $this->get('/json-page/' . $name);
+        return $this->get('/json-pages/' . $name);
     }
 
     public function test_json_page_can_be_returned(): void

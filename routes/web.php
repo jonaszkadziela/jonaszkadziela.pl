@@ -21,6 +21,6 @@ Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/menus', [MenuController::class, 'index']);
 Route::get('/socials', [SocialController::class, 'index']);
 Route::get('/files/{file:slug}', [FileController::class, 'show']);
-Route::get('/json-page/{jsonPage:name}', [JsonPageController::class, 'show']);
+Route::get('/json-pages/{jsonPage:name}', [JsonPageController::class, 'show']);
 
 Route::get('{any}', fn () => view('vue'))->where('any', '.*');
