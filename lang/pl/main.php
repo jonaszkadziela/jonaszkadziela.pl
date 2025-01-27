@@ -16,9 +16,15 @@ return [
     'last-update' => 'Ostatnia aktualizacja',
     'loading' => 'Ładowanie',
     'meta-description' => 'Strona internetowa Jonasza Kądzieli - Zobacz moje portfolio i poznaj mnie',
+    'present' => 'Obecnie',
     'print' => 'Drukuj',
+    'pro-bono' => 'Pro bono',
     'share' => 'Udostępnij',
 
+    'buttons' => [
+        'project-page' => 'Strona Projektu',
+        'see-details' => 'Zobacz Szczegóły',
+    ],
     'footer' => [
         'author' => 'Jonasza Kądzielę',
         'by' => 'przez',

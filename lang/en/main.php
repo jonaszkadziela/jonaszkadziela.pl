@@ -16,9 +16,15 @@ return [
     'last-update' => 'Last update',
     'loading' => 'Loading',
     'meta-description' => 'Personal website of Jonasz Kadziela - See my portfolio and get to know me',
+    'present' => 'Present',
     'print' => 'Print',
+    'pro-bono' => 'Pro bono',
     'share' => 'Share',
 
+    'buttons' => [
+        'project-page' => 'Project Page',
+        'see-details' => 'See Details',
+    ],
     'footer' => [
         'author' => 'Jonasz Kadziela',
         'by' => 'by',

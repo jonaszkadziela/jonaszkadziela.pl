@@ -2,7 +2,7 @@
     <LoadingScreen :loading="loading" />
     <template v-if="!loading && projectData">
         <section id="latest-project"
-                 class="container flex flex-col gap-16 items-center md:min-h-[85vh] mx-auto px-4 py-16 relative"
+                 class="container flex flex-col gap-16 items-center latest-project md:min-h-[85vh] mx-auto px-4 py-16 relative"
         >
             <div class="max-w-2xl mx-auto text-center">
                 <h1 class="font-bold mb-8 sm:text-6xl text-4xl">
@@ -12,17 +12,29 @@
                     {{ Lang.get('portfolio.latest-project.description') }}
                 </p>
             </div>
-            <div class="flex flex-col gap-12 items-center max-w-6xl md:flex-row md:text-left text-center">
+            <div v-if="latestProject"
+                 class="flex flex-col gap-12 items-center max-w-6xl md:flex-row md:text-left text-center"
+            >
                 <div class="flex flex-col md:w-2/3 md:order-first order-last">
                     <h2 class="font-bold mb-12 sm:text-5xl text-4xl">
-                        {{ getTranslation(projectData[0].translations, projectData[0].title) }}
+                        {{ getTranslation(latestProject.translations, latestProject.title) }}
                     </h2>
-                    <div v-html="getTranslation(projectData[0].translations, projectData[0].body)"
+                    <div v-html="getTranslation(latestProject.translations, latestProject.body)"
                          class="dark:text-gray-300 mb-12 project-body text-gray-600 text-lg"
                     ></div>
                     <div class="flex flex-col gap-4 justify-center md:flex-row md:justify-start">
+                        <Button v-if="latestProject.link"
+                                :href="latestProject.link"
+                                :label="Lang.get('main.buttons.project-page')"
+                                as="a"
+                                icon="fa-solid fa-up-right-from-square"
+                                iconPos="right"
+                                severity="secondary"
+                                target="_blank"
+                                rounded
+                        />
                         <Button :label="Lang.get('portfolio.buttons.see-details')"
-                                :to="projectData[0].route"
+                                :to="latestProject.route"
                                 as="RouterLink"
                                 class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl to-blue-900 transition-all"
                                 rounded
@@ -30,7 +42,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/3">
-                    <img :src="projectData[0].image"
+                    <img :src="latestProject.image"
                          alt="Project"
                          class="max-h-[500px]"
                     >
@@ -86,13 +98,17 @@ defineProps({
 
 const toast = useToast()
 
+const latestProject = ref(null)
 const loading = ref(true)
 const projectData = ref(null)
 
 onMounted(() => {
     axios
         .get('/projects')
-        .then(response => projectData.value = response.data)
+        .then(response => {
+            projectData.value = response.data
+            latestProject.value = projectData.value.shift()
+        })
         .catch(() => toast.add({
             severity: 'error',
             summary: Lang.get('toast.error.load-data.summary'),
@@ -105,5 +121,23 @@ onMounted(() => {
 <style>
 html {
     scroll-padding-top: 65px;
+}
+
+.latest-project ul {
+    margin-left: 1.25rem;
+}
+
+.latest-project li {
+    list-style-type: disc;
+}
+
+@media (max-width: 768px) {
+    .latest-project ul {
+        margin-left: 0;
+    }
+
+    .latest-project li {
+        list-style-position: inside;
+    }
 }
 </style>
