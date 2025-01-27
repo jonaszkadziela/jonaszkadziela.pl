@@ -19,8 +19,11 @@ class Project extends Model
         'slug',
         'title',
         'body',
+        'link',
         'translations',
         'is_pro_bono',
+        'started_at',
+        'finished_at',
     ];
 
     /**
@@ -33,6 +36,8 @@ class Project extends Model
         return [
             'translations' => 'array',
             'is_pro_bono' => 'boolean',
+            'started_at' => 'date',
+            'finished_at' => 'date',
         ];
     }
 

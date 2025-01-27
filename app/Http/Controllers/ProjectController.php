@@ -11,6 +11,7 @@ class ProjectController extends Controller
     public function index(): JsonResponse
     {
         $projects = Project::with(['files', 'tags'])
+            ->orderByRaw('-`finished_at`')
             ->get()
             ->map(fn (Project $project) => [
                 'slug' => $project->slug,
@@ -19,6 +20,8 @@ class ProjectController extends Controller
                 'link' => $project->link,
                 'translations' => $project->translations ?? [],
                 'isProBono' => $project->is_pro_bono,
+                'startedAt' => $project->started_at->isoFormat('MMM Y'),
+                'finishedAt' => $project->finished_at?->isoFormat('MMM Y'),
                 'tags' => $project->tags->map(fn (Tag $tag) => [
                     'name' => $tag->name,
                     'translations' => $tag->translations ?? [],

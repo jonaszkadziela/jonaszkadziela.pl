@@ -15,8 +15,11 @@ return new class () extends Migration {
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('body')->nullable();
+            $table->string('link')->nullable();
             $table->json('translations')->nullable();
             $table->boolean('is_pro_bono')->default(false);
+            $table->timestamp('started_at');
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
         });
     }
