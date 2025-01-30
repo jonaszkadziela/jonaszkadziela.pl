@@ -20,6 +20,18 @@ class Tag extends Model
         'translations',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'translations' => 'array',
+        ];
+    }
+
     public function documents(): MorphToMany
     {
         return $this->morphedByMany(Document::class, 'model', 'model_tag');
