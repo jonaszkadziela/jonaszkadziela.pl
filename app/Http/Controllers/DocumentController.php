@@ -14,7 +14,7 @@ class DocumentController extends Controller
         $documents = Document::with('files')
             ->when(
                 $request->has('tags'),
-                fn (Builder $query) => $query->whereHas('tags', fn (Builder $query) => $query->whereIn('name', $request->tags)),
+                fn (Builder $query) => $query->whereHas('tags', fn (Builder $query) => $query->whereIn('name', $request->tags), '=', count($request->tags)),
             )
             ->get()
             ->map(fn (Document $document) => [

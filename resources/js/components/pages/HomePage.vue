@@ -335,7 +335,11 @@ const achievementData = ref(null)
 
 onMounted(() => {
     axios
-        .get('/projects')
+        .get('/projects', {
+            params: {
+                tags: ['featured'],
+            },
+        })
         .then(response => projectData.value = response.data)
         .catch(() => toast.add({
             severity: 'error',
@@ -346,7 +350,10 @@ onMounted(() => {
     axios
         .get('/documents', {
             params: {
-                tags: ['achievement'],
+                tags: [
+                    'achievement',
+                    'featured',
+                ],
             },
         })
         .then(response => {
