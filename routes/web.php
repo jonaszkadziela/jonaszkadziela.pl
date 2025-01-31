@@ -21,6 +21,7 @@ Route::post('/contact', [FormController::class, 'contact']);
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/menus', [MenuController::class, 'index']);
 Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/projects/{project:slug}', [ProjectController::class, 'show']);
 Route::get('/socials', [SocialController::class, 'index']);
 Route::get('/files/{file:slug}', [FileController::class, 'show']);
 Route::get('/json-pages/{jsonPage:name}', [JsonPageController::class, 'show']);

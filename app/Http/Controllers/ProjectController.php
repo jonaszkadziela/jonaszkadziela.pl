@@ -33,10 +33,32 @@ class ProjectController extends Controller
                     'translations' => $tag->translations ?? [],
                 ]),
                 'image' => $project->getMainPicture()?->getUrl(),
-                'route' => 'portfolio/' . $project->slug,
+                'route' => '/portfolio/' . $project->slug,
             ])
             ->toArray();
 
         return response()->json($projects);
+    }
+
+    public function show(Project $project): JsonResponse
+    {
+        $project->load(['files', 'tags']);
+
+        return response()->json([
+            'slug' => $project->slug,
+            'title' => $project->title,
+            'body' => $project->body,
+            'link' => $project->link,
+            'translations' => $project->translations ?? [],
+            'isProBono' => $project->is_pro_bono,
+            'startedAt' => $project->started_at->isoFormat('MMM Y'),
+            'finishedAt' => $project->finished_at?->isoFormat('MMM Y'),
+            'tags' => $project->tags->map(fn (Tag $tag) => [
+                'name' => $tag->name,
+                'translations' => $tag->translations ?? [],
+            ]),
+            'image' => $project->getMainPicture()?->getUrl(),
+            'route' => '/portfolio/' . $project->slug,
+        ]);
     }
 }
