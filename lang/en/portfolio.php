@@ -23,5 +23,21 @@ return [
         'description' => 'These are projects I worked on in the past. Even though they are a bit old, they are still worth checking out!',
         'title' => 'Other Works',
     ],
+    'show' => [
+        'description' => [
+            'title' => 'Description',
+        ],
+        'explore-more' => [
+            'title' => 'Explore More',
+        ],
+        'statistics' => [
+            'finish-date' => 'Finish date',
+            'start-date' => 'Start date',
+            'title' => 'Statistics',
+        ],
+        'tools-and-technologies' => [
+            'title' => 'Tools & Technologies',
+        ],
+    ],
 
 ];

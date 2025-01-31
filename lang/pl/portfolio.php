@@ -23,5 +23,21 @@ return [
         'description' => 'Oto projekty, nad którymi pracowałem w przeszłości. Mimo że są trochę stare, nadal warto je sprawdzić!',
         'title' => 'Inne Prace',
     ],
+   'show' => [
+        'description' => [
+            'title' => 'Opis',
+        ],
+        'explore-more' => [
+            'title' => 'Odkryj Więcej',
+        ],
+        'statistics' => [
+            'finish-date' => 'Data zakończenia',
+            'start-date' => 'Data rozpoczęcia',
+            'title' => 'Statystyki',
+        ],
+        'tools-and-technologies' => [
+            'title' => 'Narzędzia i Technologia',
+        ],
+    ],
 
 ];
