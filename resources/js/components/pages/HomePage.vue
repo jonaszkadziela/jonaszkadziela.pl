@@ -340,7 +340,7 @@ onMounted(() => {
                 tags: ['featured'],
             },
         })
-        .then(response => projectData.value = response.data)
+        .then(response => projectData.value = response.data.data)
         .catch(() => toast.add({
             severity: 'error',
             summary: Lang.get('toast.error.load-data.summary'),
@@ -356,9 +356,7 @@ onMounted(() => {
                 ],
             },
         })
-        .then(response => {
-            achievementData.value = response.data
-        })
+        .then(response => achievementData.value = response.data.data)
         .catch(() => toast.add({
             severity: 'error',
             summary: Lang.get('toast.error.load-data.summary'),

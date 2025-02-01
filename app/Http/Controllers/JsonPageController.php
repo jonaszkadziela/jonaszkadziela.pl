@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JsonPageResource;
 use App\Models\JsonPage;
-use Illuminate\Http\JsonResponse;
 
 class JsonPageController extends Controller
 {
-    public function show(JsonPage $jsonPage): JsonResponse
+    public function show(JsonPage $jsonPage): JsonPageResource
     {
-        return response()->json([
-            'sections' => $jsonPage->sections,
-            'translations' => $jsonPage->translations,
-            'updatedAt' => $jsonPage->updated_at->diffForHumans() . ' (' . $jsonPage->updated_at->toDateString() . ')',
-        ]);
+        return JsonPageResource::make($jsonPage);
     }
 }

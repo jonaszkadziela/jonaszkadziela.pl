@@ -111,7 +111,7 @@ onMounted(() => {
     axios
         .get('/json-pages/cv')
         .then(response => {
-            data.value = response.data
+            data.value = response.data.data
 
             if (location.hash !== '') {
                 setTimeout(() => {

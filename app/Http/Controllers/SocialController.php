@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SocialResource;
 use App\Models\Social;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SocialController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        $socials = Social::get()
-            ->map(fn (Social $social) => [
-                'id' => $social->id,
-                'title' => $social->title,
-                'link' => $social->link,
-                'icon' => $social->icon,
-            ])
-            ->toArray();
+        $socials = Social::get();
 
-        return response()->json($socials);
+        return SocialResource::collection($socials);
     }
 }

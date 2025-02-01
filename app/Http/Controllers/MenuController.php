@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MenuResource;
 use App\Models\Menu;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class MenuController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        $menus = Menu::get()
-            ->map(fn (Menu $menu) => [
-                'name' => $menu->name,
-                'route' => $menu->route,
-                'translations' => $menu->translations ?? [],
-            ])
-            ->toArray();
+        $menus = Menu::get();
 
-        return response()->json($menus);
+        return MenuResource::collection($menus);
     }
 }
