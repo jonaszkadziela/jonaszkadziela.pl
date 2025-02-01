@@ -1,4 +1,5 @@
 import './bootstrap'
+import '@fortawesome/fontawesome-free/css/all.css'
 import { createApp } from 'vue'
 import { definePreset } from '@primevue/themes'
 import { getTranslation, hasTranslation } from './translation.js'
