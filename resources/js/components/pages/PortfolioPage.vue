@@ -106,7 +106,7 @@ onMounted(() => {
     axios
         .get('/projects')
         .then(response => {
-            projectData.value = response.data
+            projectData.value = response.data.data
             latestProject.value = projectData.value.shift()
         })
         .catch(() => toast.add({

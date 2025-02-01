@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IndexProjectRequest;
+use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProjectController extends Controller
 {
-    public function index(IndexProjectRequest $request): JsonResponse
+    public function index(IndexProjectRequest $request): AnonymousResourceCollection
     {
         $projects = Project::with(['files', 'tags'])
             ->when(
@@ -18,47 +18,15 @@ class ProjectController extends Controller
                 fn (Builder $query) => $query->whereHas('tags', fn (Builder $query) => $query->whereIn('name', $request->tags), '=', count($request->tags)),
             )
             ->orderByRaw('-`finished_at`')
-            ->get()
-            ->map(fn (Project $project) => [
-                'slug' => $project->slug,
-                'title' => $project->title,
-                'body' => $project->body,
-                'link' => $project->link,
-                'translations' => $project->translations ?? [],
-                'isProBono' => $project->is_pro_bono,
-                'startedAt' => $project->started_at->isoFormat('MMM Y'),
-                'finishedAt' => $project->finished_at?->isoFormat('MMM Y'),
-                'tags' => $project->tags->map(fn (Tag $tag) => [
-                    'name' => $tag->name,
-                    'translations' => $tag->translations ?? [],
-                ]),
-                'image' => $project->getMainPicture()?->getUrl(),
-                'route' => '/portfolio/' . $project->slug,
-            ])
-            ->toArray();
+            ->get();
 
-        return response()->json($projects);
+        return ProjectResource::collection($projects);
     }
 
-    public function show(Project $project): JsonResponse
+    public function show(Project $project): ProjectResource
     {
         $project->load(['files', 'tags']);
 
-        return response()->json([
-            'slug' => $project->slug,
-            'title' => $project->title,
-            'body' => $project->body,
-            'link' => $project->link,
-            'translations' => $project->translations ?? [],
-            'isProBono' => $project->is_pro_bono,
-            'startedAt' => $project->started_at->isoFormat('MMM Y'),
-            'finishedAt' => $project->finished_at?->isoFormat('MMM Y'),
-            'tags' => $project->tags->map(fn (Tag $tag) => [
-                'name' => $tag->name,
-                'translations' => $tag->translations ?? [],
-            ]),
-            'image' => $project->getMainPicture()?->getUrl(),
-            'route' => '/portfolio/' . $project->slug,
-        ]);
+        return ProjectResource::make($project);
     }
 }

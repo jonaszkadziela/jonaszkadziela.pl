@@ -145,7 +145,7 @@ onMounted(() => {
     axios
         .get(`/projects/${route.params.slug}`)
         .then(response => {
-            data.value = response.data
+            data.value = response.data.data
             statistics.value = [
                 {
                     icon: 'fa-regular fa-calendar-plus',
