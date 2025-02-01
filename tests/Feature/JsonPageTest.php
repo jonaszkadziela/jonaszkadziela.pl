@@ -48,7 +48,7 @@ class JsonPageTest extends TestCase
 
     private function getJsonPage(string $name): TestResponse
     {
-        return $this->get('/json-pages/' . $name);
+        return $this->get('/api/json-pages/' . $name);
     }
 
     public function test_json_page_can_be_returned(): void
@@ -59,9 +59,11 @@ class JsonPageTest extends TestCase
 
         $response->assertOk();
         $response->assertJson([
-            'sections' => $this->jsonPage->sections,
-            'translations' => $this->jsonPage->translations,
-            'updatedAt' => $this->jsonPage->updated_at->diffForHumans() . ' (' . $this->jsonPage->updated_at->toDateString() . ')',
+            'data' => [
+                'sections' => $this->jsonPage->sections,
+                'translations' => $this->jsonPage->translations,
+                'updatedAt' => $this->jsonPage->updated_at->diffForHumans() . ' (' . $this->jsonPage->updated_at->toDateString() . ')',
+            ],
         ]);
     }
 }

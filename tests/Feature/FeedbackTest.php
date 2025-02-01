@@ -13,7 +13,7 @@ class FeedbackTest extends TestCase
 {
     private function postFeedback(string $type, string $body, array $data = []): TestResponse
     {
-        return $this->post('/feedback', [
+        return $this->post('/api/feedback', [
             'type' => $type,
             'body' => $body,
             'data' => $data,
