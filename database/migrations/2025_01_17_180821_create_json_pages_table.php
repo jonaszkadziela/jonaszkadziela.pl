@@ -14,7 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->json('sections');
-            $table->json('translations');
+            $table->json('translations')->nullable();
             $table->timestamps();
         });
     }
