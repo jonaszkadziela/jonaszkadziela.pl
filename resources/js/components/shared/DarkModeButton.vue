@@ -18,7 +18,7 @@ const html = document.body.parentNode
 function toggleDarkMode() {
     props.darkMode ? html.classList.replace('dark', 'light') : html.classList.replace('light', 'dark')
 
-    axios.post(`/theme/${props.darkMode ? 'light' : 'dark'}`)
+    axios.post(`${location.origin}/theme/${props.darkMode ? 'light' : 'dark'}`)
         .catch(() => {})
 }
 

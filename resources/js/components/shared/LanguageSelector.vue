@@ -40,7 +40,7 @@ onMounted(() => {
     select.value.show = () => show()
     select.value.hide = () => hide()
 
-    axios.get('/language-options')
+    axios.get(`${location.origin}/language-options`)
         .then(response => options.value = response.data)
 })
 </script>

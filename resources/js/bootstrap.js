@@ -1,4 +1,13 @@
 import axios from 'axios'
-window.axios = axios
 
+const absoluteUrlRegex = new RegExp('^(?:[a-z+]+:)?//', 'i')
+
+window.axios = axios
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.interceptors.request.use(config => {
+    if (!absoluteUrlRegex.test(config.url)) {
+        config.url = `/api${config.url}`
+    }
+
+    return config
+})
