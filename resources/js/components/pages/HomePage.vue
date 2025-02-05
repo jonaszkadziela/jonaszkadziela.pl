@@ -55,47 +55,11 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-8 justify-center">
-                    <Card v-for="post in blogData"
-                          :key="post.id"
-                          :pt="{
-                              body: 'p-6',
-                              root: 'dark:shadow-blue-800/80 duration-300 hover:shadow-xl md:w-[calc(50%-16px)] transition-shadow w-full',
-                          }"
-                    >
-                        <template #header>
-                            <div :style="`background-image: url(${post.image});`"
-                                 class="bg-center bg-cover min-h-64 rounded-t-xl"
-                            ></div>
-                        </template>
-                        <template #title>
-                            <h4 class="font-semibold text-3xl">
-                                {{ post.title }}
-                            </h4>
-                        </template>
-                        <template #subtitle>
-                            <div class="flex flex-wrap gap-2 mb-4 mt-1">
-                                <Tag v-for="tag in post.tags"
-                                     :key="tag.value"
-                                     :severity="tag.order === 0 ? 'primary' : 'secondary'"
-                                     :value="tag.value"
-                                     rounded
-                                />
-                            </div>
-                        </template>
-                        <template #content>
-                            <div v-html="post.body"></div>
-                        </template>
-                        <template #footer>
-                            <div class="mt-4">
-                                <Button :label="Lang.get('home.buttons.read-more')"
-                                        :to="`/blog/${post.slug}`"
-                                        as="RouterLink"
-                                        severity="primary"
-                                        rounded
-                                />
-                            </div>
-                        </template>
-                    </Card>
+                    <PostCard v-for="post in blogData"
+                              :key="post.slug"
+                              :post="post"
+                              class="md:w-[calc(50%-16px)]"
+                    />
                 </div>
                 <div class="mt-8 text-center">
                     <RouterLink class="hover:underline underline-offset-8"
@@ -243,6 +207,7 @@
 
 <script setup>
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
+import PostCard from '../shared/PostCard.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
 import {
     onMounted,
@@ -257,47 +222,6 @@ defineProps({
 })
 
 const toast = useToast()
-
-const blogData = [
-    {
-        id: 1,
-        title: 'Non Consequuntur Vero',
-        body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae porro omnis perferendis sint illo quidem, quasi ullam accusamus harum ex voluptatibus debitis cupiditate sequi dolor nostrum fuga dolorem esse obcaecati.</p><p>Ad ullam, iusto mollitia perferendis ipsa pariatur eaque tempora atque exercitationem molestiae officiis quos facilis. Culpa excepturi accusamus quidem accusantium! Rem, quod?</p>',
-        slug: 'non-consequuntur-vero-1',
-        image: 'https://picsum.photos/600/400',
-        tags: [
-            {
-                order: 0,
-                value: 'Latest',
-            },
-            {
-                order: 1,
-                value: 'Web Application',
-            },
-            {
-                order: 2,
-                value: 'Laravel',
-            },
-        ],
-    },
-    {
-        id: 2,
-        title: 'Molestiae Porro Omnis',
-        body: '<p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae porro omnis perferendis sint illo quidem, quasi ullam accusamus harum ex voluptatibus debitis cupiditate sequi dolor nostrum fuga dolorem esse obcaecati.</p><p>Ad ullam, iusto mollitia perferendis ipsa pariatur eaque tempora atque exercitationem molestiae officiis quos facilis. Culpa excepturi accusamus quidem accusantium! Rem, quod?</p>',
-        slug: 'molestiae-porro-omnis-2',
-        image: 'https://picsum.photos/600/401',
-        tags: [
-            {
-                order: 0,
-                value: 'Security',
-            },
-            {
-                order: 1,
-                value: 'Password Policy',
-            },
-        ],
-    },
-]
 
 const expertiseData = [
     {
@@ -330,10 +254,24 @@ const expertiseData = [
     },
 ]
 
+const blogData = ref(null)
 const projectData = ref(null)
 const achievementData = ref(null)
 
 onMounted(() => {
+    axios
+        .get('/posts', {
+            params: {
+                tags: ['featured'],
+            },
+        })
+        .then(response => blogData.value = response.data.data)
+        .catch(() => toast.add({
+            severity: 'error',
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
+        }))
+
     axios
         .get('/projects', {
             params: {
