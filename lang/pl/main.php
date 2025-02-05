@@ -39,6 +39,7 @@ return [
         'header' => 'Jonasz Kądziela',
     ],
     'titles' => [
+        'blog' => 'Blog',
         'contact' => 'Kontakt',
         'cv' => 'CV',
         'error-404' => 'Błąd 404',
