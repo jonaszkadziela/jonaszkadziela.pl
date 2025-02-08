@@ -9,6 +9,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Pipeline;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,16 @@ class PostController extends Controller
                 new WhereHasInFilter($request, 'name', 'tags'),
             ])
             ->thenReturn()
-            ->get();
+            ->get()
+            ->map(function (Post $post) {
+                $post->translations = collect($post->translations)
+                    ->map(fn (array $translations) => array_replace($translations, [
+                        'body' => Str::limit(Arr::get($translations, 'body', ''), 250),
+                    ]))
+                    ->toArray();
+
+                return $post;
+            });
 
         return PostResource::collection($posts);
     }
