@@ -17,8 +17,10 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'translations' => $this->translations ?? [],
+            'publishedAt' => $this->published_at->diffForHumans() . ' (' . $this->published_at->toDateString() . ')',
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'image' => $this->getMainPicture()?->getUrl(),
+            'user' => UserResource::make($this->user),
         ];
     }
 }

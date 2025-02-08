@@ -12,10 +12,12 @@ return new class () extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('body')->nullable();
             $table->json('translations')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
