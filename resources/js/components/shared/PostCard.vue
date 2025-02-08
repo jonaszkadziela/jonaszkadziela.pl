@@ -11,7 +11,7 @@
         </template>
         <template #title>
             <h4 class="font-semibold text-3xl">
-                {{ post.title }}
+                {{ getTranslation(post.translations, post.title) }}
             </h4>
         </template>
         <template #subtitle>
@@ -25,7 +25,9 @@
             </div>
         </template>
         <template #content>
-            <div v-html="post.body"></div>
+            <div v-html="getTranslation(post.translations, post.body)"
+                 class="formatted-html"
+            ></div>
         </template>
         <template #footer>
             <div class="mt-4">

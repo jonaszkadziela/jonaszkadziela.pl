@@ -16,3 +16,38 @@ html {
 body {
     min-width: 320px;
 }
+
+.formatted-html section {
+    margin-bottom: 2rem;
+}
+
+.formatted-html section:last-child {
+    margin-bottom: 0;
+}
+
+.formatted-html h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.formatted-html p {
+    margin-bottom: 1rem;
+}
+
+.formatted-html p:last-child {
+    margin-bottom: 0;
+}
+
+.formatted-html ul {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.formatted-html ul:last-child {
+    margin-bottom: 0;
+}
+
+.formatted-html li {
+    list-style-type: disc;
+}
