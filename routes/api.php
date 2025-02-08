@@ -22,6 +22,7 @@ Route::get('/json-pages/{jsonPage:name}', [JsonPageController::class, 'show']);
 Route::get('/menus', [MenuController::class, 'index']);
 
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{slugWithId}', [PostController::class, 'show']);
 
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/{project:slug}', [ProjectController::class, 'show']);

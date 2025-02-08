@@ -7,8 +7,10 @@ use App\Filters\WhereLikeFilter;
 use App\Http\Requests\IndexPostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Pipeline;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -25,5 +27,17 @@ class PostController extends Controller
             ->get();
 
         return PostResource::collection($posts);
+    }
+
+    /**
+     * @throws ModelNotFoundException
+     */
+    public function show(string $slugWithId): PostResource
+    {
+        $post = Post::with(['files', 'tags'])
+            ->where('id', '=', Str::afterLast($slugWithId, '-'))
+            ->firstOrFail();
+
+        return PostResource::make($post);
     }
 }
