@@ -26,7 +26,7 @@
             />
         </section>
         <section id="description"
-                 class="bg-blue-50 dark:bg-blue-950 dark:text-blue-100 py-16 text-blue-900"
+                 class="bg-blue-50 dark:bg-blue-950 dark:text-blue-100 project-description py-16 text-blue-900"
         >
             <div class="container mx-auto px-4 text-center">
                 <div class="max-w-2xl mb-16 mx-auto">
@@ -35,7 +35,7 @@
                     </h3>
                 </div>
                 <div v-html="getTranslation(data.translations, data.body)"
-                     class="dark:text-blue-200 project-body text-blue-800"
+                     class="dark:text-blue-200 formatted-html text-blue-800"
                 ></div>
             </div>
         </section>
@@ -177,12 +177,11 @@ html {
     scroll-padding-top: 65px;
 }
 
-.project-body ul {
-    margin-left: 1.25rem;
+.project-description ul {
+    margin-left: 0;
 }
 
-.project-body li {
-    list-style-type: disc;
+.project-description li {
     list-style-position: inside;
 }
 </style>

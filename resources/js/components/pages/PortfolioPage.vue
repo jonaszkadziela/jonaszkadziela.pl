@@ -20,7 +20,7 @@
                         {{ getTranslation(latestProject.translations, latestProject.title) }}
                     </h2>
                     <div v-html="getTranslation(latestProject.translations, latestProject.body)"
-                         class="dark:text-gray-300 mb-12 project-body text-gray-600 text-lg"
+                         class="dark:text-gray-300 formatted-html mb-12 text-gray-600 text-lg"
                     ></div>
                     <div class="flex flex-col gap-4 justify-center md:flex-row md:justify-start">
                         <Button v-if="latestProject.link"
@@ -121,14 +121,6 @@ onMounted(() => {
 <style>
 html {
     scroll-padding-top: 65px;
-}
-
-.latest-project ul {
-    margin-left: 1.25rem;
-}
-
-.latest-project li {
-    list-style-type: disc;
 }
 
 @media (max-width: 768px) {

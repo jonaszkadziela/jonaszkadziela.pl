@@ -47,7 +47,7 @@
         </template>
         <template #content>
             <div v-html="getTranslation(project.translations, project.body)"
-                 class="project-body"
+                 class="formatted-html"
             ></div>
         </template>
         <template #footer>
@@ -78,13 +78,3 @@ defineProps({
     project: Object,
 })
 </script>
-
-<style>
-.project-body ul {
-    margin-left: 1.25rem;
-}
-
-.project-body li {
-    list-style-type: disc;
-}
-</style>
