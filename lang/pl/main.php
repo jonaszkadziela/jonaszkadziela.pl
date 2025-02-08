@@ -44,7 +44,6 @@ return [
         'cv' => 'CV',
         'error-404' => 'Błąd 404',
         'home' => 'Strona główna',
-        'portfolio-show' => 'Szczegóły projektu',
         'portfolio' => 'Portfolio',
     ],
 

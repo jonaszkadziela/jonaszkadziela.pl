@@ -1,7 +1,7 @@
 <template>
     <LoadingScreen :loading="loading" />
     <template v-if="!loading && data">
-        <section id="project-summary"
+        <section id="title"
                  class="flex flex-col gap-16 items-center latest-project min-h-[85vh] pt-16 relative"
         >
             <div class="max-w-2xl mx-auto px-4 text-center">
@@ -142,6 +142,8 @@ const loading = ref(true)
 const statistics = ref(null)
 
 onMounted(() => {
+    const initialTitle = document.title
+
     axios
         .get(`/projects/${route.params.slug}`)
         .then(response => {
@@ -158,6 +160,8 @@ onMounted(() => {
                     value: data.value.finishedAt || Lang.get('main.present'),
                 },
             ]
+
+            document.title = `${data.value.title} - ${initialTitle}`
         })
         .catch(() => toast.add({
             severity: 'error',
