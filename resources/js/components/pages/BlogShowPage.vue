@@ -3,7 +3,7 @@
     <template v-if="!loading && data">
         <section :style="`background-image: url(${data.image});`"
                  id="title"
-                 class="-mt-4 bg-center bg-cover min-h-80 relative"
+                 class="-mt-4 bg-center bg-contain min-h-80 relative"
         >
             <div class="absolute bg-gradient-to-t bottom-0 dark:from-zinc-900 dark:via-zinc-900/70 from-white left-0 right-0 to-transparent top-0 via-white/70">
                 <div class="container flex flex-col gap-6 h-full items-center justify-end mx-auto">
@@ -24,13 +24,16 @@
         <section id="body"
                  class="-mb-4 max-w-4xl mx-auto px-4 py-16"
         >
-            <div v-html="getTranslation(data.translations, data.body)"></div>
+            <div v-html="getTranslation(data.translations, data.body)"
+                 class="formatted-html"
+            ></div>
         </section>
     </template>
 </template>
 
 <script setup>
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import {
@@ -58,7 +61,7 @@ onMounted(() => {
         .then(response => {
             data.value = response.data.data
 
-            document.title = `${data.value.title} - ${initialTitle}`
+            document.title = `${getTranslation(data.value.translations, data.value.title)} - ${initialTitle}`
         })
         .catch(() => toast.add({
             severity: 'error',
