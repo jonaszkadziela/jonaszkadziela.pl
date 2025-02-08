@@ -11,7 +11,9 @@ return [
     |
     */
 
+    'by' => 'by',
     'description' => 'Welcome to my blog, where I write about the projects I\'ve worked on and share my thoughts on all things IT. Hope you enjoy the insights and ideas!',
+    'published' => 'Published',
     'title' => 'Blog Posts',
 
     'buttons' => [

@@ -27,6 +27,11 @@
             <div v-html="getTranslation(data.translations, data.body)"
                  class="formatted-html"
             ></div>
+            <div class="dark:text-gray-300 italic mt-8 text-gray-600">
+                {{ Lang.get('blog.published') }}
+                {{ data.user ? `${Lang.get('blog.by')} ${data.user.name}` : '' }}
+                {{ data.publishedAt }}
+            </div>
         </section>
     </template>
 </template>

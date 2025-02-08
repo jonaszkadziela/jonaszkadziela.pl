@@ -11,7 +11,9 @@ return [
     |
     */
 
+    'by' => 'przez',
     'description' => 'Witaj na moim blogu, gdzie piszę o projektach, nad którymi pracowałem i dzielę się swoimi przemyśleniami na temat IT. Mam nadzieję, że spodobają Ci się moje spostrzeżenia i pomysły!',
+    'published' => 'Opublikowane',
     'title' => 'Posty na Blogu',
 
     'buttons' => [
