@@ -27,8 +27,8 @@
                  unstyled
         >
             <template #start>
-                <a href="/"
-                   class="flex items-center"
+                <RouterLink to="/"
+                            class="flex items-center"
                 >
                     <img :src="logo"
                          alt="Logo"
@@ -37,7 +37,7 @@
                     <span class="font-semibold">
                         {{ Lang.get('main.navbar.header') }}
                     </span>
-                </a>
+                </RouterLink>
             </template>
             <template #item="{ props, item }">
                 <RouterLink v-bind="props.action"

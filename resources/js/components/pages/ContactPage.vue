@@ -269,7 +269,7 @@ onBeforeRouteLeave(to => {
         return true
     }
 
-    if (Object.values(formData.value).length > 0) {
+    if (Object.entries(formData.value).filter(([, value]) => value).length > 0) {
         targetRoute.value = to
         showUnsavedFormDialog.value = true
 
