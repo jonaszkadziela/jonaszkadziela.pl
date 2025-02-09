@@ -159,7 +159,7 @@
                                    previewMask: 'rounded-t-xl',
                                    toolbar: 'z-[101]',
                                }"
-                               :alt="`Achievement - ${achievement.title}`"
+                               :alt="`Achievement - ${getTranslation(achievement.translations, achievement.title)}`"
                                preview
                         >
                             <template #original="slotProps">

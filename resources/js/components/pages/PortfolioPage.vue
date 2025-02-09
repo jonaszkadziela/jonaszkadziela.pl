@@ -43,7 +43,7 @@
                 </div>
                 <div class="md:w-1/3">
                     <img :src="latestProject.image"
-                         alt="Project"
+                         :alt="Lang.get('portfolio.latest-project.title')"
                          class="max-h-[500px]"
                     >
                 </div>

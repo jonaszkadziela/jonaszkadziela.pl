@@ -11,8 +11,8 @@
             </div>
             <div class="flex-1 overflow-hidden relative w-full">
                 <img :src="data.image"
-                     alt="Project"
-                     class="absolute left-0 md:bottom-[-75%] md:left-[25%] right-0 top-0 z-[-1]"
+                     :alt="`Project - ${getTranslation(data.translations, data.title)}`"
+                     class="absolute left-0 md:bottom-[-75%] md:left-[calc(50%-300px)] right-0 top-0 z-[-1]"
                 >
             </div>
             <Button :label="Lang.get('portfolio.buttons.see-more')"
