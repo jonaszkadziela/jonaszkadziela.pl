@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DetermineLanguageFromHeader;
 use App\Http\Middleware\DetermineLanguageFromIp;
 use App\Http\Middleware\SetLanguage;
 use Illuminate\Console\Scheduling\Schedule;
@@ -20,9 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
+            DetermineLanguageFromHeader::class,
             ThrottleRequests::class . ':api',
-            DetermineLanguageFromIp::class,
-            SetLanguage::class,
         ]);
 
         $middleware->web([
