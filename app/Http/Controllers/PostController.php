@@ -10,6 +10,7 @@ use App\Models\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Pipeline;
 use Illuminate\Support\Str;
 
@@ -18,11 +19,16 @@ class PostController extends Controller
     public function index(IndexPostRequest $request): AnonymousResourceCollection
     {
         $query = Post::with(['files', 'tags']);
+        $locale = Lang::getLocale();
 
         $posts = Pipeline::send($query)
             ->through([
-                new WhereLikeFilter($request, 'title'),
-                new WhereHasInFilter($request, 'name', 'tags'),
+                new WhereLikeFilter($request, [
+                    'title' => 'translations->' . $locale . '->title',
+                ]),
+                new WhereHasInFilter($request, [
+                    'tags' => 'name',
+                ]),
             ])
             ->thenReturn()
             ->get()

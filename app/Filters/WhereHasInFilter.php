@@ -4,25 +4,25 @@ namespace App\Filters;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 
 class WhereHasInFilter extends BaseFilter
 {
-    public function __construct(Request $request, string $attribute, protected string $relation)
-    {
-        parent::__construct($request, $attribute);
-    }
-
     public function handle(Builder $query, Closure $next): Builder
     {
-        $values = $this->request->get($this->relation, []);
+        $values = $this->request->get($this->requestAttribute, []);
 
         $query->when(
             count($values) > 0,
             fn (Builder $query) => $query
             ->whereHas(
-                $this->relation,
-                fn (Builder $query) => $query->whereIn($this->attribute, $values),
+                $this->requestAttribute,
+                fn (Builder $query) => $query->when(
+                    $this->isModelAttributeJson(),
+                    fn (Builder $query) => $query->whereJsonContains($this->modelAttribute, $values),
+                    fn (Builder $query) => $query->whereIn($this->modelAttribute, $values),
+                ),
+                '=',
+                count($values),
             )
         );
 
