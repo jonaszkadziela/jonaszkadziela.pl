@@ -83,7 +83,7 @@
             </div>
             <div class="gap-8 grid grid-cols-1 md:grid-cols-2">
                 <RouterLink v-for="expertise in expertiseData"
-                            :key="expertise.id"
+                            :key="expertise.title"
                             :to="expertise.link"
                             class="border dark:shadow-blue-800/80 flex flex-row gap-6 group hover:shadow-xl p-6 relative rounded-xl transition-shadow"
                 >
@@ -94,9 +94,9 @@
                         <h4 class="duration-300 font-semibold group-hover:text-blue-700 text-2xl">
                             {{ expertise.title }}
                         </h4>
-                        <p class="dark:text-gray-300 text-gray-600">
-                            {{ expertise.body }}
-                        </p>
+                        <p v-html="expertise.body"
+                           class="dark:text-gray-300 formatted-html text-gray-600"
+                        ></p>
                     </div>
                     <div class="-translate-x-4 absolute duration-300 group-hover:opacity-100 group-hover:translate-x-0 opacity-0 right-5 text-2xl text-blue-700 top-5 transition-transform">
                         <i class="fa fa-arrow-right"></i>
@@ -223,40 +223,35 @@ defineProps({
 
 const toast = useToast()
 
+const achievementData = ref(null)
+const blogData = ref(null)
+const projectData = ref(null)
 const expertiseData = [
     {
-        id: 1,
-        title: 'Programming',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo autem vero sed mollitia, dolorum quaerat nam sequi veritatis, laudantium nesciunt aliquid saepe totam facilis quos deserunt quod quas aspernatur.',
-        link: '/cv#programming',
+        title: Lang.get('home.expertise.programming.title'),
+        body: Lang.get('home.expertise.programming.body'),
+        link: '/cv#expertise',
         icon: 'fa fa-code',
     },
     {
-        id: 2,
-        title: 'Graphics Design',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo autem vero sed mollitia, dolorum quaerat nam sequi veritatis, laudantium nesciunt aliquid saepe totam facilis quos deserunt quod quas aspernatur.',
-        link: '/cv#graphics-design',
+        title: Lang.get('home.expertise.graphics-design.title'),
+        body: Lang.get('home.expertise.graphics-design.body'),
+        link: '/cv#expertise',
         icon: 'fa fa-paintbrush',
     },
     {
-        id: 3,
-        title: 'System Administration',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo autem vero sed mollitia, dolorum quaerat nam sequi veritatis, laudantium nesciunt aliquid saepe totam facilis quos deserunt quod quas aspernatur.',
-        link: '/cv#system-administration',
+        title: Lang.get('home.expertise.system-administration.title'),
+        body: Lang.get('home.expertise.system-administration.body'),
+        link: '/cv#expertise',
         icon: 'fa fa-server',
     },
     {
-        id: 4,
-        title: 'And More! :)',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo autem vero sed mollitia, dolorum quaerat nam sequi veritatis, laudantium nesciunt aliquid saepe totam facilis quos deserunt quod quas aspernatur.',
-        link: '/cv#more',
+        title: Lang.get('home.expertise.more.title'),
+        body: Lang.get('home.expertise.more.body'),
+        link: '/cv#expertise',
         icon: 'fa fa-wand-magic-sparkles',
     },
 ]
-
-const blogData = ref(null)
-const projectData = ref(null)
-const achievementData = ref(null)
 
 onMounted(() => {
     axios

@@ -18,6 +18,24 @@ return [
         'see-more' => 'Zobacz Więcej',
         'view-portfolio' => 'Zobacz Portfolio',
     ],
+    'expertise' => [
+        'graphics-design' => [
+            'body' => '<p>Każdy projekt, nad którym pracuję, w tym również ta strona internetowa, jest w całości zaprojektowany przeze mnie, co gwarantuje wyjątkowy i dopracowany wygląd.</p><p>Lubię projektować animacje 2D i kiedyś tworzyłem je pro bono dla potrzebujących.</p><p>Biegle posługuję się pakietem Adobe Suite, a także korzystam z alternatyw typu open-source, aby dostosować się do różnych procesów pracy i potrzeb projektu.</p>',
+            'title' => 'Projektowanie Grafiki',
+        ],
+        'more' => [
+            'body' => '<p>Moja szeroka wiedza na temat różnych dziedzin IT pozwala mi rozwiązywać problemy, optymalizować systemy i wprowadzać innowacje w różnych technologiach.</p><p>Mam doświadczenie w projektowaniu, programowaniu i składaniu małych robotów, łącząc wiedzę z zakresu sprzętu i oprogramowania.</p><p>Gdy urządzenia, takie jak telefony, laptopy czy tablety, ulegają awarii, wolę je naprawiać samodzielnie, zamiast je wymieniać.</p>',
+            'title' => 'I Jeszcze Więcej :)',
+        ],
+        'programming' => [
+            'body' => '<p>Posiadam ponad siedem lat doświadczenia zawodowego, pracowałem nad aplikacjami internetowymi na dużą skalę, które obsługują dziesiątki tysięcy użytkowników.</p><p>Mam duże doświadczenie w zakresie frameworków do tworzenia aplikacji webowych, co pozwala mi budować skalowalne i wydajne aplikacje.</p><p>Przez lata samodzielnie stworzyłem wiele aplikacji internetowych od podstaw, zajmując się zarówno front-endem, jak i back-endem.</p>',
+            'title' => 'Programowanie',
+        ],
+        'system-administration' => [
+            'body' => '<p>Moje doświadczenie zawodowe w administracji systemami obejmuje zarządzanie serwerami o dużym ruchu, które obsługują miliony żądań rocznie.</p><p>Zbudowałem i skonfigurowałem własny serwer do obsługi usług EverestServer, optymalizując go pod kątem stabilności i wydajności.</p><p>Potrafię konserwować serwery, rozwiązywać problemy w zabezpieczeniach oraz optymalizacji wydajności, aby zapewnić ich niezawodne działanie.</p>',
+            'title' => 'Administracja Systemów',
+        ],
+    ],
     'featured-posts' => [
         'description' => 'Poniżej znajdują się wpisy na blogu, które starannie wybrałem. Wierzę, że będą one interesujące i wciągające. Aby zobaczyć pełną treść, po prostu kliknij przycisk "Czytaj Więcej"',
         'title' => 'Wyróżnione Posty',
