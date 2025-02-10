@@ -15,7 +15,9 @@ yarn-error.log
 /.vscode
 /node_modules
 /public/build
+/public/games
 /public/hot
+/public/ludum-dare
 /public/storage
 /storage/*.key
 /vendor
