@@ -1,7 +1,7 @@
 <template>
     <div>
         <section id="introduction"
-                 class="container flex flex-col gap-12 items-center justify-center md:flex-row md:gap-24 md:min-h-[85vh] md:text-left mx-auto px-4 py-16 relative text-center"
+                 class="container flex flex-col gap-12 items-center justify-center md:flex-row md:gap-24 md:min-h-[85vh] md:py-0 md:text-left mx-auto px-4 py-16 relative text-center"
         >
             <div class="flex flex-col max-w-2xl md:order-first order-last">
                 <h1 class="text-6xl font-bold mb-1">
@@ -30,7 +30,7 @@
             </div>
             <img :src="FullBodyPicture"
                  alt="Picture"
-                 class="h-64 md:h-auto"
+                 class="md:max-h-[50vh] md:h-auto lg:max-h-[85vh] h-64"
             >
             <Button :label="Lang.get('main.buttons.see-more')"
                     as="a"
