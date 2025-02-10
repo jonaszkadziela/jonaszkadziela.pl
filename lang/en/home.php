@@ -14,8 +14,6 @@ return [
     'buttons' => [
         'get-in-touch' => 'Get in Touch',
         'read-more' => 'Read More',
-        'see-details' => 'See Details',
-        'see-more' => 'See More',
         'view-portfolio' => 'View Portfolio',
     ],
     'expertise' => [

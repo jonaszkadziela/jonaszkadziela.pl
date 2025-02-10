@@ -13,7 +13,6 @@ return [
 
     'buttons' => [
         'see-details' => 'See Details',
-        'see-more' => 'See More',
     ],
     'latest-project' => [
         'description' => 'This is the latest project I have been working on. I think you will absolutely love it!',

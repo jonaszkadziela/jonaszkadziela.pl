@@ -24,6 +24,7 @@ return [
     'buttons' => [
         'project-page' => 'Project Page',
         'see-details' => 'See Details',
+        'see-more' => 'See More',
     ],
     'footer' => [
         'author' => 'Jonasz Kadziela',

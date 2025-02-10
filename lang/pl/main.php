@@ -24,6 +24,7 @@ return [
     'buttons' => [
         'project-page' => 'Strona Projektu',
         'see-details' => 'Zobacz Szczegóły',
+        'see-more' => 'Zobacz Więcej',
     ],
     'footer' => [
         'author' => 'Jonasza Kądzielę',

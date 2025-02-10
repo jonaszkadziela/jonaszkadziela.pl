@@ -13,7 +13,6 @@ return [
 
     'buttons' => [
         'see-details' => 'Zobacz Szczegóły',
-        'see-more' => 'Zobacz Więcej',
     ],
     'latest-project' => [
         'description' => 'To najnowszy projekt nad którym pracowałem. Myślę, że na pewno ci się spodoba!',

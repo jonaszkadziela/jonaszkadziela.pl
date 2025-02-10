@@ -14,8 +14,6 @@ return [
     'buttons' => [
         'get-in-touch' => 'Porozmawiajmy',
         'read-more' => 'Czytaj Więcej',
-        'see-details' => 'Zobacz Szczegóły',
-        'see-more' => 'Zobacz Więcej',
         'view-portfolio' => 'Zobacz Portfolio',
     ],
     'expertise' => [
