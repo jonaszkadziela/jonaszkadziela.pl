@@ -21,4 +21,9 @@ class DocumentController extends Controller
 
         return DocumentResource::collection($documents);
     }
+
+    public function show(Document $document): DocumentResource
+    {
+        return DocumentResource::make($document);
+    }
 }

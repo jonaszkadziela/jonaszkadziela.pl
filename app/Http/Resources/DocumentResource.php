@@ -18,7 +18,7 @@ class DocumentResource extends JsonResource
             'body' => $this->body,
             'link' => $this->link,
             'translations' => $this->translations ?? [],
-            'issuedAt' => $this->issued_at,
+            'issuedAt' => $this->issued_at->diffForHumans() . ' (' . $this->issued_at->toDateString() . ')',
             'image' => $this->getMainPicture()?->getUrl(),
         ];
     }

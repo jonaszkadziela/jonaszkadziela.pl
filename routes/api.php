@@ -12,6 +12,7 @@ use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/documents', [DocumentController::class, 'index']);
+Route::get('/documents/{document:slug}', [DocumentController::class, 'show']);
 
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
