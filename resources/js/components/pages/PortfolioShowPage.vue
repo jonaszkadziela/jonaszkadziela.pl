@@ -121,6 +121,7 @@
 
 <script setup>
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
 import {
@@ -161,7 +162,7 @@ onMounted(() => {
                 },
             ]
 
-            document.title = `${data.value.title} - ${initialTitle}`
+            document.title = `${getTranslation(data.value.translations, data.value.title)} - ${initialTitle}`
         })
         .catch(() => toast.add({
             severity: 'error',
