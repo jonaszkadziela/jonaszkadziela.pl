@@ -2,17 +2,17 @@
     <LoadingScreen :loading="loading" />
     <template v-if="!loading && data">
         <section id="title"
-                 class="flex flex-col gap-16 items-center latest-project min-h-[85vh] pt-16 relative"
+                 class="flex flex-col gap-16 h-[85vh] items-center latest-project pt-16 relative"
         >
             <div class="max-w-2xl mx-auto px-4 text-center">
                 <h1 class="font-bold sm:text-6xl text-4xl">
                     {{ getTranslation(data.translations, data.title) }}
                 </h1>
             </div>
-            <div class="flex-1 overflow-hidden relative w-full">
+            <div class="flex flex-1 justify-center overflow-hidden relative w-full">
                 <img :src="data.image"
                      :alt="`Project - ${getTranslation(data.translations, data.title)}`"
-                     class="absolute left-0 md:bottom-[-75%] md:left-[calc(50%-300px)] right-0 top-0 z-[-1]"
+                     class="md:absolute object-cover"
                 >
             </div>
             <Button :label="Lang.get('main.buttons.see-more')"

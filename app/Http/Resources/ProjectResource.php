@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class ProjectResource extends JsonResource
 {
@@ -12,6 +13,8 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $mainPicture = $this->getMainPicture();
+
         return [
             'slug' => $this->slug,
             'title' => $this->title,
@@ -22,7 +25,8 @@ class ProjectResource extends JsonResource
             'startedAt' => $this->started_at->isoFormat('MMM Y'),
             'finishedAt' => $this->finished_at?->isoFormat('MMM Y'),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
-            'image' => $this->getMainPicture()?->getUrl(),
+            'image' => $mainPicture?->getUrl(),
+            'isImagePhoneRender' => $mainPicture ? Str::contains($mainPicture->storage_path, '-phone') : false,
             'route' => '/portfolio/' . $this->slug,
         ];
     }

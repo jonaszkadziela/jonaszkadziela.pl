@@ -8,7 +8,7 @@
         <template #header>
             <Image :pt="{
                        root: 'min-h-72 overflow-hidden relative w-full',
-                       image: 'absolute inset-0 lg:my-0 md:my-auto',
+                       image: `md:rounded-l-xl md:rounded-tr-none object-cover rounded-t-xl ${project.isImagePhoneRender ? 'absolute inset-0 lg:my-0 md:my-auto' : ''}`,
                        previewMask: 'md:rounded-l-xl md:rounded-tr-none rounded-t-xl',
                    }"
                    :src="project.image"
