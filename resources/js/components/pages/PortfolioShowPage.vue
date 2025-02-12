@@ -8,6 +8,13 @@
                 <h1 class="font-bold sm:text-6xl text-4xl">
                     {{ getTranslation(data.translations, data.title) }}
                 </h1>
+                <Tag v-if="data.isProBono"
+                     :value="Lang.get('main.pro-bono')"
+                     class="mt-8"
+                     icon="fa-hand-holding-dollar fa-solid mr-1"
+                     severity="contrast"
+                     rounded
+                />
             </div>
             <div class="flex flex-1 justify-center overflow-hidden relative w-full">
                 <img :src="data.image"
