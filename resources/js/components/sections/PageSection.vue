@@ -2,14 +2,6 @@
     <section :id="section.id"
              :class="section.class"
     >
-        <h3 v-if="section.showTitle"
-            class="text-2xl font-bold uppercase"
-        >
-            {{ getTranslation(translations, section.title) }}
-        </h3>
-        <div v-if="section.showSplitter"
-             class="border border-black dark:border-white my-4"
-        ></div>
         <component :is="components[section.type]"
                    :section="section"
                    :translations="translations"

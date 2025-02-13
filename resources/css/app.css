@@ -48,6 +48,25 @@ body {
     margin-bottom: 0;
 }
 
-.formatted-html li {
+.formatted-html ul li {
     list-style-type: disc;
+}
+
+.formatted-html ol {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.formatted-html ol li {
+    list-style-type: decimal;
+}
+
+.formatted-html a {
+    color: #3b82f6;
+    text-underline-offset: 8px;
+}
+
+.formatted-html a:hover {
+    color: #2563eb;
+    text-decoration-line: underline;
 }
