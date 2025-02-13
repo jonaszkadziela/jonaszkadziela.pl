@@ -18,6 +18,7 @@ class Menu extends Model
         'name',
         'route',
         'translations',
+        'is_only_in_footer',
     ];
 
     /**
@@ -29,6 +30,7 @@ class Menu extends Model
     {
         return [
             'translations' => 'array',
+            'is_only_in_footer' => 'boolean',
         ];
     }
 }

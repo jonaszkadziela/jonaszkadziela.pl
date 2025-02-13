@@ -16,6 +16,7 @@ class MenuResource extends JsonResource
             'name' => $this->name,
             'route' => $this->route,
             'translations' => $this->translations ?? [],
+            'isOnlyInFooter' => $this->is_only_in_footer,
         ];
     }
 }

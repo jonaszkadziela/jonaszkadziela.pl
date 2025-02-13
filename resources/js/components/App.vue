@@ -45,6 +45,7 @@ onMounted(() => {
 
             menuData.value = response.data.data.map(menu => {
                 return {
+                    ...menu,
                     label: getTranslation(menu.translations, menu.name),
                     route: menu.route,
                 }

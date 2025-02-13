@@ -3,7 +3,7 @@
          class="select-none sticky top-[-1px] z-50"
          ref="navBar"
     >
-        <Menubar :model="menuData"
+        <Menubar :model="filteredMenuData"
                  :pt="{
                      button: 'flex md:hidden mr-2 order-2 p-2',
                      end: 'flex gap-2 md:ml-0 ml-auto mr-2',
@@ -82,6 +82,7 @@ const navBar = ref(null)
 const navBarSticky = ref(false)
 const menubar = ref(null)
 
+const filteredMenuData = computed(() => props.menuData.filter(menu => !menu.isOnlyInFooter))
 const logo = computed(() => props.darkMode ? LogoWhite : LogoBlack)
 
 const intersectionObserver = new IntersectionObserver(

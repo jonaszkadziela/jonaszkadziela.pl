@@ -15,6 +15,7 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('route');
             $table->json('translations')->nullable();
+            $table->boolean('is_only_in_footer')->default(false);
             $table->timestamps();
         });
     }
