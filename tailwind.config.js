@@ -21,6 +21,7 @@ export default {
         '-mb-4',
         '-mt-4',
         'bg-gradient-to-br',
+        'pb-20',
         'w-12',
         'w-20',
         'w-44',

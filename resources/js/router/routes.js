@@ -7,6 +7,7 @@ const HomePage = () => import('../components/pages/HomePage.vue')
 const NotFoundPage = () => import('../components/pages/NotFoundPage.vue')
 const PortfolioPage = () => import('../components/pages/PortfolioPage.vue')
 const PortfolioShowPage = () => import('../components/pages/PortfolioShowPage.vue')
+const PrivacyPage = () => import('../components/pages/PrivacyPage.vue')
 
 export default [
     { path: '/', name: 'home', component: HomePage },
@@ -17,5 +18,6 @@ export default [
     { path: '/documents/:slug', name: 'document-show', component: DocumentShowPage },
     { path: '/portfolio', name: 'portfolio', component: PortfolioPage },
     { path: '/portfolio/:slug', name: 'portfolio-show', component: PortfolioShowPage },
+    { path: '/privacy', name: 'privacy', component: PrivacyPage },
     { path: '/:pathMatch(.*)*', name: 'error-404', component: NotFoundPage },
 ]

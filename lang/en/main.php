@@ -12,6 +12,7 @@ return [
     |
     */
 
+    'contact-email' => 'contact@jonaszkadziela.pl',
     'description' => 'Description',
     'last-update' => 'Last update',
     'loading' => 'Loading',
@@ -46,6 +47,7 @@ return [
         'error-404' => 'Error 404',
         'home' => 'Home',
         'portfolio' => 'Portfolio',
+        'privacy' => 'Privacy policy',
     ],
 
 ];
