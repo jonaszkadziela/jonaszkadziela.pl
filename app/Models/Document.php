@@ -45,7 +45,7 @@ class Document extends Model
 
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'model', 'model_tag');
+        return $this->morphToMany(Tag::class, 'model', 'model_tag')->orderByPivot('order');
     }
 
     public function getMainPicture(): ?File

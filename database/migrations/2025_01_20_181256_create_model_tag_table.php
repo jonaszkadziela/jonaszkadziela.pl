@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('model_id');
             $table->string('model_type');
             $table->unsignedBigInteger('tag_id');
+            $table->unsignedInteger('order');
 
             $table->unique([
                 'model_id',
