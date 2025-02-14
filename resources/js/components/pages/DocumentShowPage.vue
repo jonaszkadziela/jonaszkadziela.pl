@@ -26,7 +26,7 @@
             />
         </section>
         <section id="related-files"
-                 class="-mb-4 bg-blue-50 dark:bg-blue-950 dark:text-blue-100 project-description py-16 text-blue-900"
+                 class="bg-blue-50 dark:bg-blue-950 dark:text-blue-100 project-description py-16 text-blue-900"
         >
             <div class="container mx-auto px-4 text-center">
                 <div class="max-w-2xl mb-16 mx-auto">

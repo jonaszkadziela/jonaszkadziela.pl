@@ -30,7 +30,7 @@
             </div>
             <img :src="FullBodyPicture"
                  alt="Picture"
-                 class="md:max-h-[50vh] md:h-auto lg:max-h-[85vh] h-64"
+                 class="md:max-h-[50vh] md:h-auto lg:pt-8 lg:max-h-[85vh] h-64"
             >
             <Button :label="Lang.get('main.buttons.see-more')"
                     as="a"

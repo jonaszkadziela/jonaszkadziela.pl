@@ -103,7 +103,7 @@
             </div>
         </section>
         <section id="explore-more"
-                 class="-mb-4 container mx-auto px-4 py-16"
+                 class="container mx-auto px-4 py-16"
         >
             <div class="max-w-2xl mb-16 mx-auto text-center">
                 <h3 class="text-4xl font-bold">

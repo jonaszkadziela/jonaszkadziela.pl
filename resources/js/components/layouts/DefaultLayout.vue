@@ -3,7 +3,7 @@
         <NavBar :dark-mode="props.darkMode"
                 :menu-data="props.menuData"
         />
-        <main class="flex-1 py-4">
+        <main class="flex-1">
             <Toast class="max-w-72 md:max-w-full"
                    position="bottom-right"
             />
