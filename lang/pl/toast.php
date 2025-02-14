@@ -11,6 +11,12 @@ return [
     |
     */
 
+    'cookies' => [
+        'acknowledge' => 'Rozumiem',
+        'description' => 'Ta strona korzysta z plików cookies, które pomagają nam świadczyć nasze usługi. Korzystając z naszych usług, wyrażasz zgodę na używanie przez nas plików cookies i akceptujesz naszą',
+        'learn-more' => 'Dowiedz się więcej',
+        'privacy-policy' => 'Politykę Prywatności',
+    ],
     'error' => [
         'copy-link' => [
             'detail' => 'Wystąpił błąd podczas kopiowania linku. Spróbuj ponownie później lub skontaktuj się ze mną bezpośrednio',

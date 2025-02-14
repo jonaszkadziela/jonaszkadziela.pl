@@ -11,6 +11,12 @@ return [
     |
     */
 
+    'cookies' => [
+        'acknowledge' => 'Acknowledge',
+        'description' => 'This website uses cookies to help us provide our services. By using our services, you consent to our use of cookies and accept our',
+        'learn-more' => 'Learn more',
+        'privacy-policy' => 'Privacy Policy',
+    ],
     'error' => [
         'copy-link' => [
             'detail' => 'An error occurred while copying the link. Please try again later or contact me directly',

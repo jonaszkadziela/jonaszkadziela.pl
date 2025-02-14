@@ -27,12 +27,6 @@ return [
         'see-details' => 'Zobacz Szczegóły',
         'see-more' => 'Zobacz Więcej',
     ],
-    'cookies' => [
-        'acknowledge' => 'Rozumiem',
-        'description' => 'Ta strona korzysta z plików cookies, które pomagają nam świadczyć nasze usługi. Korzystając z naszych usług, wyrażasz zgodę na używanie przez nas plików cookies i akceptujesz naszą',
-        'learn-more' => 'Dowiedz się więcej',
-        'privacy-policy' => 'Politykę Prywatności',
-    ],
     'footer' => [
         'author' => 'Jonasza Kądzielę',
         'by' => 'przez',

@@ -10,18 +10,18 @@
                     <a href="/privacy"
                        class="duration-300 hover:text-blue-600 hover:underline text-blue-500 transition-color underline-offset-[6px]"
                     >
-                        {{ Lang.get('main.cookies.privacy-policy') }}.
+                        {{ Lang.get('toast.cookies.privacy-policy') }}.
                     </a>
                 </div>
                 <div class="border-t border-gray-300 dark:border-gray-600"></div>
                 <div class="flex flex-col gap-2 md:flex-row md:justify-end">
-                    <Button :label="Lang.get('main.cookies.learn-more')"
+                    <Button :label="Lang.get('toast.cookies.learn-more')"
                             as="RouterLink"
                             to="/privacy"
                             variant="text"
                             rounded
                     />
-                    <Button :label="Lang.get('main.cookies.acknowledge')"
+                    <Button :label="Lang.get('toast.cookies.acknowledge')"
                             class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl to-blue-900 transition-all"
                             rounded
                             @click="onAcknowledge"
@@ -43,7 +43,7 @@ function showTemplate() {
         closable: false,
         group: 'cookies',
         severity: 'other',
-        summary: Lang.get('main.cookies.description'),
+        summary: Lang.get('toast.cookies.description'),
     })
 }
 
