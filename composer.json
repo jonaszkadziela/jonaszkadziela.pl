@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.31",
-        "laravel/telescope": "^5.2",
+        "laravel/telescope": "^5.5",
         "laravel/tinker": "^2.9",
         "mariuzzo/laravel-js-localization": "^1.11",
         "symfony/http-client": "^7.2",
