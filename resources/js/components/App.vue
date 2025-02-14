@@ -7,10 +7,12 @@
                     :menu-data="menuData"
                     :social-data="socialData"
         />
+        <CookiesToast />
     </DefaultLayout>
 </template>
 
 <script setup>
+import CookiesToast from './toasts/CookiesToast.vue'
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import { getTranslation } from '../translation.js'
 import { useToast } from 'primevue/usetoast'
