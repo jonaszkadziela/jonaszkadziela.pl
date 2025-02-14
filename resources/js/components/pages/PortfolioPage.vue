@@ -120,10 +120,6 @@ onMounted(() => {
 </script>
 
 <style>
-html {
-    scroll-padding-top: 65px;
-}
-
 @media (max-width: 768px) {
     .latest-project ul {
         margin-left: 0;

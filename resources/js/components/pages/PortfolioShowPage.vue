@@ -182,10 +182,6 @@ onMounted(() => {
 </script>
 
 <style>
-html {
-    scroll-padding-top: 65px;
-}
-
 .project-description ul {
     margin-left: 0;
 }

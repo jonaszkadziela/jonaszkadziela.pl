@@ -279,9 +279,3 @@ onBeforeRouteLeave(to => {
     return true
 })
 </script>
-
-<style>
-html {
-    scroll-padding-top: 65px;
-}
-</style>

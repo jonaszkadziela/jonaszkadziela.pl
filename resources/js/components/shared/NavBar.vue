@@ -100,9 +100,3 @@ onBeforeUnmount(() => {
     intersectionObserver.disconnect()
 })
 </script>
-
-<style>
-html {
-    scroll-padding-top: 80px;
-}
-</style>

@@ -43,9 +43,3 @@ onMounted(() => {
         .finally(() => loading.value = false)
 })
 </script>
-
-<style>
-html {
-    scroll-padding-top: 65px;
-}
-</style>
