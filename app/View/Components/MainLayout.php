@@ -13,6 +13,7 @@ class MainLayout extends Component
     public function __construct(
         public ?string $title = null,
         public ?string $bodyClass = null,
+        public ?bool $withAnalytics = null,
     ) {
     }
 

@@ -1,4 +1,4 @@
-<x-main-layout>
+<x-main-layout with-analytics>
     <script src="{{ asset('/build/messages.js') }}"></script>
     <script>
         Lang.setLocale('{{ App::getLocale() }}')

@@ -19,6 +19,9 @@
         <meta property="og:url" content="{{ config('app.url') }}">
         <link href="{{ Vite::asset('resources/images/brand/favicon.png') }}" rel="shortcut icon" type="image/png">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @if (App::isProduction() && isset($withAnalytics))
+            <x-analytics g-id="G-8PCE4BKP32" />
+        @endif
     </head>
     <body class="{{ isset($bodyClass) ? $bodyClass : '' }}">
         {{ $slot }}
