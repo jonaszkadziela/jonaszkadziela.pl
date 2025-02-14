@@ -94,7 +94,7 @@
                         <h4 class="duration-300 font-semibold group-hover:text-blue-700 text-2xl">
                             {{ expertise.title }}
                         </h4>
-                        <p v-html="expertise.body"
+                        <p v-html="DOMPurify.sanitize(expertise.body)"
                            class="dark:text-gray-300 formatted-html text-gray-600"
                         ></p>
                     </div>
@@ -206,14 +206,15 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
 import PostCard from '../shared/PostCard.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
+import { useToast } from 'primevue/usetoast'
 import {
     onMounted,
     ref,
 } from 'vue'
-import { useToast } from 'primevue/usetoast'
 
 defineProps({
     darkMode: Boolean,

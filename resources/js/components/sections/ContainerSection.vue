@@ -4,7 +4,7 @@
             {{ getTranslation(translations, section.title) }}
         </h1>
         <div class="dark:text-gray-300 formatted-html text-gray-600 text-lg"
-             v-html="getTranslation(translations, section.body)"
+             v-html="DOMPurify.sanitize(getTranslation(translations, section.body))"
         ></div>
     </div>
     <template v-if="section.showButton">
@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
+
 defineProps({
     section: Object,
     translations: Object,

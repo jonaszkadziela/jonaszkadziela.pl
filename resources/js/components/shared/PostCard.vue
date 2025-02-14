@@ -25,7 +25,7 @@
             </div>
         </template>
         <template #content>
-            <div v-html="getTranslation(post.translations, post.body)"
+            <div v-html="DOMPurify.sanitize(getTranslation(post.translations, post.body))"
                  class="formatted-html"
             ></div>
         </template>
@@ -43,6 +43,8 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
+
 defineProps({
     post: Object,
 })

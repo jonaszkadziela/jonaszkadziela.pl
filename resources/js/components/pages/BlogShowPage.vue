@@ -24,7 +24,7 @@
         <section id="body"
                  class="max-w-4xl mx-auto px-4 py-16"
         >
-            <div v-html="getTranslation(data.translations, data.body)"
+            <div v-html="DOMPurify.sanitize(getTranslation(data.translations, data.body))"
                  class="formatted-html"
             ></div>
             <div class="dark:text-gray-300 italic mt-8 text-gray-600">
@@ -37,6 +37,7 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'

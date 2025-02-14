@@ -19,7 +19,7 @@
                     <h2 class="font-bold mb-12 sm:text-5xl text-4xl">
                         {{ getTranslation(latestProject.translations, latestProject.title) }}
                     </h2>
-                    <div v-html="getTranslation(latestProject.translations, latestProject.body)"
+                    <div v-html="DOMPurify.sanitize(getTranslation(latestProject.translations, latestProject.body))"
                          class="dark:text-gray-300 formatted-html mb-12 text-gray-600 text-lg"
                     ></div>
                     <div class="flex flex-col gap-4 justify-center md:flex-row md:justify-start">
@@ -82,6 +82,7 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
 import { useToast } from 'primevue/usetoast'

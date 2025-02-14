@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import { marked } from 'marked'
 
 defineProps({
     section: Object,

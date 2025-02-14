@@ -41,7 +41,7 @@
                         {{ Lang.get('portfolio.show.description.title') }}
                     </h3>
                 </div>
-                <div v-html="getTranslation(data.translations, data.body)"
+                <div v-html="DOMPurify.sanitize(getTranslation(data.translations, data.body))"
                      class="dark:text-blue-200 formatted-html text-blue-800"
                 ></div>
             </div>
@@ -127,6 +127,7 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'

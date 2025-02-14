@@ -30,7 +30,7 @@
                     {{ getTranslation(translations, slotProps.item.title) }}
                 </p>
                 <div v-if="slotProps.item.body"
-                     v-html="getTranslation(translations, slotProps.item.body)"
+                     v-html="DOMPurify.sanitize(getTranslation(translations, slotProps.item.body))"
                      class="dark:text-gray-300 text-gray-600"
                 ></div>
             </template>
@@ -39,6 +39,8 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
+
 defineProps({
     section: Object,
     translations: Object,

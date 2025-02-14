@@ -51,7 +51,7 @@
             </div>
         </template>
         <template #content>
-            <div v-html="getTranslation(project.translations, project.body)"
+            <div v-html="DOMPurify.sanitize(getTranslation(project.translations, project.body))"
                  class="formatted-html"
             ></div>
         </template>
@@ -79,6 +79,8 @@
 </template>
 
 <script setup>
+import DOMPurify from 'dompurify'
+
 defineProps({
     project: Object,
 })
