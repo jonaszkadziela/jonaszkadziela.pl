@@ -22,14 +22,9 @@
                      class="md:absolute object-cover"
                 >
             </div>
-            <Button :label="Lang.get('main.buttons.see-more')"
-                    as="a"
-                    class="-mb-6 absolute bg-blue-50 border-blue-50 bottom-0 dark:bg-blue-950 dark:border-blue-950 dark:hover:bg-blue-900 dark:text-blue-100 hover:bg-blue-100 text-blue-900"
-                    href="#description"
-                    icon="fa fa-chevron-down"
-                    iconPos="right"
-                    severity="secondary"
-                    rounded
+            <SectionButton :label="Lang.get('main.buttons.see-more')"
+                           as="a"
+                           href="#description"
             />
         </section>
         <section id="description"
@@ -129,6 +124,7 @@
 <script setup>
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import SectionButton from '../shared/SectionButton.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'

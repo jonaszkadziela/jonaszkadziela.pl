@@ -48,14 +48,9 @@
                     >
                 </div>
             </div>
-            <Button :label="Lang.get('main.buttons.see-more')"
-                    as="a"
-                    class="-mb-6 absolute bg-blue-50 border-blue-50 bottom-0 dark:bg-blue-950 dark:border-blue-950 dark:hover:bg-blue-900 dark:text-blue-100 hover:bg-blue-100 text-blue-900"
-                    href="#other-works"
-                    icon="fa fa-chevron-down"
-                    iconPos="right"
-                    severity="secondary"
-                    rounded
+            <SectionButton :label="Lang.get('main.buttons.see-more')"
+                           as="a"
+                           href="#other-works"
             />
         </section>
         <section id="other-works"
@@ -85,6 +80,7 @@
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
+import SectionButton from '../shared/SectionButton.vue'
 import { useToast } from 'primevue/usetoast'
 import {
     onMounted,
