@@ -23,7 +23,7 @@
                                     variant="on"
                         >
                             <InputText v-model="formData.name"
-                                       :invalid="formErrors?.errors?.name"
+                                       :invalid="Boolean(formErrors?.errors?.name)"
                                        id="name"
                                        type="text"
                                        fluid
@@ -45,7 +45,7 @@
                                     variant="on"
                         >
                             <InputText v-model="formData.email"
-                                       :invalid="formErrors?.errors?.name"
+                                       :invalid="Boolean(formErrors?.errors?.name)"
                                        id="email"
                                        type="email"
                                        fluid
@@ -69,7 +69,7 @@
                                     variant="on"
                         >
                             <Textarea v-model="formData.message"
-                                      :invalid="formErrors?.errors?.message"
+                                      :invalid="Boolean(formErrors?.errors?.message)"
                                       id="message"
                                       rows="5"
                                       autoResize
