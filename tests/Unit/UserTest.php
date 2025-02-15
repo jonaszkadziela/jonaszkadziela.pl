@@ -2,9 +2,11 @@
 
 namespace Tests\Unit;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -48,10 +50,10 @@ class UserTest extends TestCase
     public function test_user_casts(): void
     {
         $this->assertTrue($this->user->email_verified_at instanceof Carbon);
+        $this->assertTrue(Hash::isHashed($this->user->password));
+        $this->assertTrue(getType($this->user->is_admin) === 'boolean');
         $this->assertTrue($this->user->created_at instanceof Carbon);
         $this->assertTrue($this->user->updated_at instanceof Carbon);
-        $this->assertTrue(getType($this->user->is_admin) === 'boolean');
-        $this->assertTrue(Hash::isHashed($this->user->password));
     }
 
     public function test_user_traits(): void
@@ -83,5 +85,16 @@ class UserTest extends TestCase
 
         $this->assertFalse($regularUser->is_admin);
         $this->assertSame($regularUser->id, $foundRegularUser->id);
+    }
+
+    public function test_user_posts_relation(): void
+    {
+        $post = Post::factory()->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $this->assertTrue($this->user->posts() instanceof HasMany);
+        $this->assertCount(1, $this->user->posts()->get());
+        $this->assertSame($post->id, $this->user->posts()->first()->id);
     }
 }
