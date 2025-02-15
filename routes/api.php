@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\JsonPageController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SocialController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\FeedbackController;
+use App\Http\Controllers\Api\FormController;
+use App\Http\Controllers\Api\JsonPageController;
+use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\SocialController;
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/documents', [DocumentController::class, 'index']);

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFeedbackRequest;
 use App\Models\Feedback;
 use Illuminate\Http\JsonResponse;

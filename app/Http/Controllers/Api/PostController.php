@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Filters\WhereHasInFilter;
 use App\Filters\WhereLikeFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexPostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;

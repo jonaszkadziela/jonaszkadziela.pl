@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactFormRequest;
 use App\Models\User;
 use App\Notifications\ContactFormMessage;
