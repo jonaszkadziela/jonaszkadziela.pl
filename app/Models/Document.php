@@ -26,14 +26,12 @@ class Document extends Model
 
     /**
      * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
             'translations' => 'array',
-            'issued_at' => 'date',
+            'issued_at' => 'datetime',
         ];
     }
 
@@ -45,7 +43,9 @@ class Document extends Model
 
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'model', 'model_tag')->orderByPivot('order');
+        return $this->morphToMany(Tag::class, 'model', 'model_tag')
+            ->withPivot('order')
+            ->orderByPivot('order');
     }
 
     public function getMainPicture(): ?File

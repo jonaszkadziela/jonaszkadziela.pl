@@ -28,16 +28,14 @@ class Project extends Model
 
     /**
      * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
             'translations' => 'array',
             'is_pro_bono' => 'boolean',
-            'started_at' => 'date',
-            'finished_at' => 'date',
+            'started_at' => 'datetime',
+            'finished_at' => 'datetime',
         ];
     }
 
@@ -49,7 +47,9 @@ class Project extends Model
 
     public function tags(): MorphToMany
     {
-        return $this->morphToMany(Tag::class, 'model', 'model_tag')->orderByPivot('order');
+        return $this->morphToMany(Tag::class, 'model', 'model_tag')
+            ->withPivot('order')
+            ->orderByPivot('order');
     }
 
     public function getMainPicture(): ?File

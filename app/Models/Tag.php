@@ -22,8 +22,6 @@ class Tag extends Model
 
     /**
      * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
      */
     protected function casts(): array
     {
@@ -34,6 +32,19 @@ class Tag extends Model
 
     public function documents(): MorphToMany
     {
-        return $this->morphedByMany(Document::class, 'model', 'model_tag');
+        return $this->morphedByMany(Document::class, 'model', 'model_tag')
+            ->withPivot('order');
+    }
+
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'model', 'model_tag')
+            ->withPivot('order');
+    }
+
+    public function projects(): MorphToMany
+    {
+        return $this->morphedByMany(Project::class, 'model', 'model_tag')
+            ->withPivot('order');
     }
 }

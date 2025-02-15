@@ -30,6 +30,18 @@ class File extends Model
             ->withPivot('file_role');
     }
 
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Post::class, 'model', 'model_file')
+            ->withPivot('file_role');
+    }
+
+    public function projects(): MorphToMany
+    {
+        return $this->morphedByMany(Project::class, 'model', 'model_file')
+            ->withPivot('file_role');
+    }
+
     public function getContent(): ?string
     {
         $path = storage_path($this->storage_path);
