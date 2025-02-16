@@ -37,9 +37,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Blue,
                 'gray' => Color::Neutral,
             ])
-            ->favicon(Vite::asset('resources/images/brand/favicon.png'))
-            ->darkModeBrandLogo(Vite::asset('resources/images/brand/logo-white.svg'))
-            ->brandLogo(Vite::asset('resources/images/brand/logo-black.svg'))
+            ->favicon(fn () => Vite::asset('resources/images/brand/favicon.png'))
+            ->darkModeBrandLogo(fn () => Vite::asset('resources/images/brand/logo-white.svg'))
+            ->brandLogo(fn () => Vite::asset('resources/images/brand/logo-black.svg'))
             ->brandLogoHeight('48px')
             ->userMenuItems([
                 MenuItem::make()
