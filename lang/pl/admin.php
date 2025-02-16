@@ -23,6 +23,7 @@ return [
             'email' => 'Email',
             'is_admin' => 'Administrator',
             'name' => 'Nazwa',
+            'password' => 'Hasło',
             'updated_at' => 'Zaktualizowano',
         ],
     ],

@@ -22,19 +22,24 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(Lang::get('admin.users.labels.name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->label(Lang::get('admin.users.labels.email'))
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\DateTimePicker::make('email_verified_at')
+                    ->label(Lang::get('admin.users.labels.email_verified_at')),
                 Forms\Components\TextInput::make('password')
+                    ->label(Lang::get('admin.users.labels.password'))
                     ->password()
                     ->required()
                     ->maxLength(255)
                     ->hiddenOn('edit'),
                 Forms\Components\Toggle::make('is_admin')
+                    ->label(Lang::get('admin.users.labels.is_admin'))
                     ->required()
                     ->columnSpanFull(),
             ]);
