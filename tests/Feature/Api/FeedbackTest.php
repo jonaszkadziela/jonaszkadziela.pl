@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Feedback;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Testing\TestResponse;
@@ -11,38 +13,48 @@ use Tests\TestCase;
 
 class FeedbackTest extends TestCase
 {
-    private function postFeedback(string $type, string $body, array $data = []): TestResponse
+    private array $payload = [
+        'type' => Feedback::FEEDBACK_ISSUE,
+        'body' => 'Error 404 - JonaszKadziela.pl',
+        'data' => [
+            '_telescope' => 1739642093167,
+            'url' => 'http://jonaszkadziela.test/error',
+            'userAgent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        ],
+    ];
+
+    private function postFeedback(array $payload): TestResponse
     {
-        return $this->post('/api/feedback', [
-            'type' => $type,
-            'body' => $body,
-            'data' => $data,
-        ], [
-            'Referer' => Arr::get($data, 'url') ?? '',
+        return $this->postJson('/api/feedback', $payload, [
+            'Referer' => Arr::get($payload, 'data.url') ?? '',
         ]);
+    }
+
+    public function test_error_422_is_returned_when_type_parameter_is_missing(): void
+    {
+        $response = $this->postFeedback(Arr::except($this->payload, 'type'));
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_error_422_is_returned_when_body_parameter_is_missing(): void
+    {
+        $response = $this->postFeedback(Arr::except($this->payload, 'body'));
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_issue_feedback_can_be_stored_without_telescope_entry(): void
     {
-        $payload = [
-            'type' => 'issue',
-            'body' => 'Error 404 - JonaszKadziela.pl',
-            'data' => [
-                '_telescope' => Carbon::now()->timestamp * 1000,
-                'url' => 'http://jonaszkadziela.test/meet-me',
-                'userAgent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-            ],
-        ];
-
-        $response = $this->postFeedback($payload['type'], $payload['body'], $payload['data']);
+        $response = $this->postFeedback($this->payload);
 
         $response->assertOk();
 
         $this->assertDatabaseHas('feedback', [
-            'type' => $payload['type'],
-            'body' => $payload['body'],
+            'type' => $this->payload['type'],
+            'body' => $this->payload['body'],
             'data' => json_encode([
-                ...$payload['data'],
+                ...$this->payload['data'],
                 'telescopeEntry' => null,
             ]),
         ]);
@@ -56,30 +68,22 @@ class FeedbackTest extends TestCase
             'type' => EntryType::REQUEST,
             'content' => [
                 'ip_address' => '127.0.0.1',
-                'uri' => '/meet-me',
+                'uri' => '/error',
             ],
             'created_at' => $now,
         ]);
 
-        $payload = [
-            'type' => 'issue',
-            'body' => 'Error 404 - JonaszKadziela.pl',
-            'data' => [
-                '_telescope' => $now->timestamp * 1000,
-                'url' => 'http://jonaszkadziela.test/meet-me',
-                'userAgent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-            ],
-        ];
+        $this->payload['data']['_telescope'] = $now->timestamp * 1000;
 
-        $response = $this->postFeedback($payload['type'], $payload['body'], $payload['data']);
+        $response = $this->postFeedback($this->payload);
 
         $response->assertOk();
 
         $this->assertDatabaseHas('feedback', [
-            'type' => $payload['type'],
-            'body' => $payload['body'],
+            'type' => $this->payload['type'],
+            'body' => $this->payload['body'],
             'data' => json_encode([
-                ...$payload['data'],
+                ...$this->payload['data'],
                 'telescopeEntry' => $telescopeEntry->refresh()->toArray(),
             ]),
         ]);

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api;
 
 use App\Models\JsonPage;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -49,6 +50,13 @@ class JsonPageTest extends TestCase
     private function getJsonPage(string $name): TestResponse
     {
         return $this->get('/api/json-pages/' . $name);
+    }
+
+    public function test_error_404_is_returned_when_json_page_does_not_exist(): void
+    {
+        $response = $this->getJsonPage('wrong');
+
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
     public function test_json_page_can_be_returned(): void

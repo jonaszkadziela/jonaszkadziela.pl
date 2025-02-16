@@ -19,7 +19,7 @@ class UserSettingTest extends TestCase
     {
         Session::put('language', 'en');
 
-        $response = $this->get('/language-options');
+        $response = $this->getJson('/language-options');
 
         $response->assertOk();
         $response->assertJson([
@@ -38,7 +38,7 @@ class UserSettingTest extends TestCase
     {
         Session::put('language', 'pl');
 
-        $response = $this->get('/language-options');
+        $response = $this->getJson('/language-options');
 
         $response->assertOk();
         $response->assertJson([
@@ -73,7 +73,7 @@ class UserSettingTest extends TestCase
     {
         Session::put('theme', 'light');
 
-        $response = $this->post('/theme/dark');
+        $response = $this->postJson('/theme/dark');
 
         $response->assertOk();
         $response->assertJson([
@@ -87,7 +87,7 @@ class UserSettingTest extends TestCase
     {
         Session::put('theme', 'dark');
 
-        $response = $this->post('/theme/light');
+        $response = $this->postJson('/theme/light');
 
         $response->assertOk();
         $response->assertJson([
