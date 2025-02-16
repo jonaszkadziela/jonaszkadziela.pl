@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Post;
 use App\Models\User;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -64,6 +65,7 @@ class UserTest extends TestCase
 
     public function test_user_interfaces(): void
     {
+        $this->assertTrue(in_array(FilamentUser::class, class_implements($this->user)));
         $this->assertTrue(in_array(MustVerifyEmail::class, class_implements($this->user)));
     }
 
@@ -96,5 +98,16 @@ class UserTest extends TestCase
         $this->assertTrue($this->user->posts() instanceof HasMany);
         $this->assertCount(1, $this->user->posts()->get());
         $this->assertSame($post->id, $this->user->posts()->first()->id);
+    }
+
+    public function test_user_can_access_panel_method(): void
+    {
+        $adminUser = User::factory()->admin()->create();
+        $regularUser = User::factory()->create();
+
+        $adminPanel = filament()->getDefaultPanel();
+
+        $this->assertTrue($adminUser->canAccessPanel($adminPanel));
+        $this->assertFalse($regularUser->canAccessPanel($adminPanel));
     }
 }
