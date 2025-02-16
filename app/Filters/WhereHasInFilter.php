@@ -9,6 +9,10 @@ class WhereHasInFilter extends BaseFilter
 {
     public function handle(Builder $query, Closure $next): Builder
     {
+        if ($this->request->missing($this->requestAttribute)) {
+            return $next($query);
+        }
+
         $values = $this->request->get($this->requestAttribute, []);
 
         $query->when(
