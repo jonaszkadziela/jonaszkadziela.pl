@@ -30,6 +30,25 @@ return [
             'user' => 'Author',
         ],
     ],
+    'projects' => [
+        'model' => 'Project',
+        'models' => 'Projects',
+
+        'labels' => [
+            'body' => 'Body',
+            'created_at' => 'Created',
+            'finished_at' => 'Finished',
+            'is_pro_bono' => 'Pro bono',
+            'link' => 'Link',
+            'only_finished' => 'Only finished',
+            'only_unfinished' => 'Only unfinished',
+            'slug' => 'Slug',
+            'started_at' => 'Started',
+            'title' => 'Title',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'users' => [
         'model' => 'User',
         'models' => 'Users',

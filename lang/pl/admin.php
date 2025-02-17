@@ -30,6 +30,25 @@ return [
             'user' => 'Autor',
         ],
     ],
+    'projects' => [
+        'model' => 'Projekt',
+        'models' => 'Projekty',
+
+        'labels' => [
+            'body' => 'Treść',
+            'created_at' => 'Utworzono',
+            'finished_at' => 'Zakończono',
+            'is_pro_bono' => 'Pro bono',
+            'link' => 'Link',
+            'only_finished' => 'Tylko zakończone',
+            'only_unfinished' => 'Tylko niezakończone',
+            'slug' => 'Slug',
+            'started_at' => 'Rozpoczęto',
+            'title' => 'Tytuł',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'users' => [
         'model' => 'Użytkownik',
         'models' => 'Użytkownicy',
