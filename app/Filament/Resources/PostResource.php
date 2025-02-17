@@ -57,15 +57,26 @@ class PostResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label(Lang::get('admin.posts.labels.user'))
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->label(Lang::get('admin.posts.labels.slug'))
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->label(Lang::get('admin.posts.labels.title'))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('body')
+                    ->label(Lang::get('admin.posts.labels.body'))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('published_at')
                     ->label(Lang::get('admin.posts.labels.published_at'))
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(Lang::get('admin.posts.labels.created_at'))
                     ->dateTime()

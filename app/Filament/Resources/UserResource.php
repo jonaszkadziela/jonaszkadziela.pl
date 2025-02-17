@@ -52,19 +52,23 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(Lang::get('admin.users.labels.name'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('email')
                     ->label(Lang::get('admin.users.labels.email'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->label(Lang::get('admin.users.labels.email_verified_at'))
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\IconColumn::make('is_admin')
                     ->label(Lang::get('admin.users.labels.is_admin'))
                     ->boolean()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(Lang::get('admin.users.labels.created_at'))
                     ->dateTime()
