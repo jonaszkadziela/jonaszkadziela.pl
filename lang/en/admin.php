@@ -13,6 +13,23 @@ return [
 
     'change-language' => 'Change to Polish',
 
+    'posts' => [
+        'model' => 'Post',
+        'models' => 'Posts',
+
+        'labels' => [
+            'body' => 'Body',
+            'created_at' => 'Created',
+            'only_published' => 'Only published',
+            'only_unpublished' => 'Only unpublished',
+            'published_at' => 'Published',
+            'slug' => 'Slug',
+            'title' => 'Title',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+            'user' => 'Author',
+        ],
+    ],
     'users' => [
         'model' => 'User',
         'models' => 'Users',

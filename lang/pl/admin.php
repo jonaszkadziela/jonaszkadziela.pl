@@ -13,6 +13,23 @@ return [
 
     'change-language' => 'Zmień na angielski',
 
+    'posts' => [
+        'model' => 'Post',
+        'models' => 'Posty',
+
+        'labels' => [
+            'body' => 'Treść',
+            'created_at' => 'Utworzono',
+            'only_published' => 'Tylko opublikowane',
+            'only_unpublished' => 'Tylko nieopublikowane',
+            'published_at' => 'Opublikowano',
+            'slug' => 'Slug',
+            'title' => 'Tytuł',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+            'user' => 'Autor',
+        ],
+    ],
     'users' => [
         'model' => 'Użytkownik',
         'models' => 'Użytkownicy',
