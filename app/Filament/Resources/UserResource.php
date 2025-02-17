@@ -77,7 +77,8 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_admin')
+                    ->label(Lang::get('admin.users.labels.is_admin')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
