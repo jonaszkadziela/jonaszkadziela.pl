@@ -43,7 +43,7 @@ class PostResource extends Resource
                 Forms\Components\Textarea::make('translations')
                     ->label(Lang::get('admin.posts.labels.translations'))
                     ->formatStateUsing(fn (?Post $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
-                    ->mutateDehydratedStateUsing(fn (string $state) => json_decode($state, true))
+                    ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()
                     ->columnSpanFull(),
