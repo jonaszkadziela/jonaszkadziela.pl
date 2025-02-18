@@ -43,7 +43,8 @@ class TagResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(Lang::get('admin.tags.labels.name'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(Lang::get('admin.tags.labels.created_at'))
                     ->dateTime()

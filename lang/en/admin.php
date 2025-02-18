@@ -13,6 +13,21 @@ return [
 
     'change-language' => 'Change to Polish',
 
+    'documents' => [
+        'model' => 'Document',
+        'models' => 'Documents',
+
+        'labels' => [
+            'body' => 'Body',
+            'created_at' => 'Created',
+            'issued_at' => 'Issued',
+            'link' => 'Link',
+            'slug' => 'Slug',
+            'title' => 'Title',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'feedbacks' => [
         'model' => 'Feedback',
         'models' => 'Feedbacks',

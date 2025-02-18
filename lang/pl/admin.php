@@ -13,6 +13,21 @@ return [
 
     'change-language' => 'Zmień na angielski',
 
+    'documents' => [
+        'model' => 'Dokument',
+        'models' => 'Dokumenty',
+
+        'labels' => [
+            'body' => 'Treść',
+            'created_at' => 'Utworzono',
+            'issued_at' => 'Wydano',
+            'link' => 'Link',
+            'slug' => 'Slug',
+            'title' => 'Tytuł',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'feedbacks' => [
         'model' => 'Opinia',
         'models' => 'Opinie',
