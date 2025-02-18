@@ -86,6 +86,17 @@ return [
             'updated_at' => 'Updated',
         ],
     ],
+    'tags' => [
+        'model' => 'Tag',
+        'models' => 'Tags',
+
+        'labels' => [
+            'created_at' => 'Created',
+            'name' => 'Name',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'users' => [
         'model' => 'User',
         'models' => 'Users',

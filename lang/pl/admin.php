@@ -86,6 +86,17 @@ return [
             'updated_at' => 'Zaktualizowano',
         ],
     ],
+    'tags' => [
+        'model' => 'Tag',
+        'models' => 'Tagi',
+
+        'labels' => [
+            'created_at' => 'Utworzono',
+            'name' => 'Nazwa',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'users' => [
         'model' => 'Użytkownik',
         'models' => 'Użytkownicy',
