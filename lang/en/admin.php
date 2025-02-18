@@ -49,6 +49,18 @@ return [
             'updated_at' => 'Updated',
         ],
     ],
+    'socials' => [
+        'model' => 'Social',
+        'models' => 'Socials',
+
+        'labels' => [
+            'created_at' => 'Created',
+            'icon' => 'Icon',
+            'link' => 'Link',
+            'title' => 'Title',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'users' => [
         'model' => 'User',
         'models' => 'Users',

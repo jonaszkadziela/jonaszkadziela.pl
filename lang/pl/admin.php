@@ -49,6 +49,18 @@ return [
             'updated_at' => 'Zaktualizowano',
         ],
     ],
+    'socials' => [
+        'model' => 'Medium społecznościowe',
+        'models' => 'Media społecznościowe',
+
+        'labels' => [
+            'created_at' => 'Utworzono',
+            'icon' => 'Ikona',
+            'link' => 'Link',
+            'title' => 'Tytuł',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'users' => [
         'model' => 'Użytkownik',
         'models' => 'Użytkownicy',
