@@ -13,6 +13,19 @@ return [
 
     'change-language' => 'Zmień na angielski',
 
+    'menus' => [
+        'model' => 'Menu',
+        'models' => 'Menu',
+
+        'labels' => [
+            'created_at' => 'Utworzono',
+            'is_only_in_footer' => 'Tylko w stopce',
+            'name' => 'Nazwa',
+            'route' => 'Ścieżka',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'posts' => [
         'model' => 'Post',
         'models' => 'Posty',

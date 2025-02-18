@@ -13,6 +13,19 @@ return [
 
     'change-language' => 'Change to Polish',
 
+    'menus' => [
+        'model' => 'Menu',
+        'models' => 'Menus',
+
+        'labels' => [
+            'created_at' => 'Created',
+            'is_only_in_footer' => 'Only in footer',
+            'name' => 'Name',
+            'route' => 'Route',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'posts' => [
         'model' => 'Post',
         'models' => 'Posts',
