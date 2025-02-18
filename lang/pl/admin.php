@@ -13,6 +13,23 @@ return [
 
     'change-language' => 'Zmień na angielski',
 
+    'feedbacks' => [
+        'model' => 'Opinia',
+        'models' => 'Opinie',
+
+        'labels' => [
+            'body' => 'Treść',
+            'created_at' => 'Utworzono',
+            'data' => 'Dane',
+            'type' => 'Typ',
+            'updated_at' => 'Zaktualizowano',
+        ],
+        'types' => [
+            'issue' => 'Problem',
+            'praise' => 'Pochwała',
+            'suggestion' => 'Sugestia',
+        ],
+    ],
     'json_pages' => [
         'model' => 'Strona JSON',
         'models' => 'Strony JSON',

@@ -13,6 +13,23 @@ return [
 
     'change-language' => 'Change to Polish',
 
+    'feedbacks' => [
+        'model' => 'Feedback',
+        'models' => 'Feedbacks',
+
+        'labels' => [
+            'body' => 'Body',
+            'created_at' => 'Created',
+            'data' => 'Data',
+            'type' => 'Type',
+            'updated_at' => 'Updated',
+        ],
+        'types' => [
+            'issue' => 'Issue',
+            'praise' => 'Praise',
+            'suggestion' => 'Suggestion',
+        ],
+    ],
     'json_pages' => [
         'model' => 'JSON page',
         'models' => 'JSON pages',
