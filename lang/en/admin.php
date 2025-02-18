@@ -13,6 +13,18 @@ return [
 
     'change-language' => 'Change to Polish',
 
+    'json_pages' => [
+        'model' => 'JSON page',
+        'models' => 'JSON pages',
+
+        'labels' => [
+            'created_at' => 'Created',
+            'name' => 'Name',
+            'sections' => 'Sections',
+            'translations' => 'Translations',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'menus' => [
         'model' => 'Menu',
         'models' => 'Menus',

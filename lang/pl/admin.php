@@ -13,6 +13,18 @@ return [
 
     'change-language' => 'Zmień na angielski',
 
+    'json_pages' => [
+        'model' => 'Strona JSON',
+        'models' => 'Strony JSON',
+
+        'labels' => [
+            'created_at' => 'Utworzono',
+            'name' => 'Nazwa',
+            'sections' => 'Sekcje',
+            'translations' => 'Tłumaczenie',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'menus' => [
         'model' => 'Menu',
         'models' => 'Menu',
