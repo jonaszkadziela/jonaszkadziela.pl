@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Facades\File as FileFacade;
+use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
@@ -20,6 +20,7 @@ class File extends Model
      */
     protected $fillable = [
         'slug',
+        'storage_disk',
         'storage_path',
         'mime_type',
     ];
@@ -44,13 +45,11 @@ class File extends Model
 
     public function getContent(): ?string
     {
-        $path = storage_path($this->storage_path);
-
-        if (!FileFacade::exists($path)) {
+        if (!Storage::disk($this->storage_disk)->exists($this->storage_path)) {
             return null;
         }
 
-        return FileFacade::get($path);
+        return Storage::disk($this->storage_disk)->get($this->storage_path);
     }
 
     public function getUrl(): string

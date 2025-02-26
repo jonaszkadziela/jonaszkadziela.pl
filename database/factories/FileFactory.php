@@ -17,6 +17,7 @@ class FileFactory extends Factory
     {
         return [
             'slug' => fake()->uuid(),
+            'storage_disk' => fake()->randomElement(['local', 'public']),
             'storage_path' => fake()->filePath(),
             'mime_type' => fake()->mimeType(),
         ];

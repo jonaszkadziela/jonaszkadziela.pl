@@ -13,6 +13,7 @@ return new class () extends Migration {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
+            $table->string('storage_disk');
             $table->string('storage_path');
             $table->string('mime_type');
             $table->timestamps();

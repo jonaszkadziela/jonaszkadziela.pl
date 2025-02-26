@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\File;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\File as FileFacade;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -20,11 +20,9 @@ class FileTest extends TestCase
         $this->file = File::factory()->create();
         $this->fileContent = 'Sample file content';
 
-        $path = storage_path($this->file->storage_path);
-
-        FileFacade::spy();
-        FileFacade::shouldReceive('exists')->with($path)->andReturn(true);
-        FileFacade::shouldReceive('get')->with($path)->andReturn($this->fileContent);
+        Storage::shouldReceive('disk')->andReturnSelf();
+        Storage::shouldReceive('exists')->with($this->file->storage_path)->andReturn(true);
+        Storage::shouldReceive('get')->with($this->file->storage_path)->andReturn($this->fileContent);
     }
 
     private function getFile(string $slug): TestResponse

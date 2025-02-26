@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File as FileFacade;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class FileTest extends TestCase
@@ -120,12 +120,11 @@ class FileTest extends TestCase
 
     public function test_file_get_content_method_when_file_exists(): void
     {
-        $path = storage_path($this->file->storage_path);
         $fileContent = 'Sample file content';
 
-        FileFacade::spy();
-        FileFacade::shouldReceive('exists')->with($path)->andReturn(true);
-        FileFacade::shouldReceive('get')->with($path)->andReturn($fileContent);
+        Storage::shouldReceive('disk')->andReturnSelf();
+        Storage::shouldReceive('exists')->with($this->file->storage_path)->andReturn(true);
+        Storage::shouldReceive('get')->with($this->file->storage_path)->andReturn($fileContent);
 
         $this->assertSame($fileContent, $this->file->getContent());
     }
