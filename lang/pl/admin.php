@@ -12,6 +12,7 @@ return [
     */
 
     'change-language' => 'Zmień na angielski',
+    'return-to-home-page' => 'Wróć na Stronę Główną',
 
     'documents' => [
         'model' => 'Dokument',

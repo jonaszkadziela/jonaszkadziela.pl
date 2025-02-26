@@ -12,6 +12,7 @@ return [
     */
 
     'change-language' => 'Change to Polish',
+    'return-to-home-page' => 'Return to Home Page',
 
     'documents' => [
         'model' => 'Document',
