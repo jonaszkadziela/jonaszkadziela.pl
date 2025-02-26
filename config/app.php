@@ -148,4 +148,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed MIME types
+    |--------------------------------------------------------------------------
+    |
+    | This value defines the allowed MIME types of uploaded files.
+    |
+    */
+
+    'allowed_mime_types' => explode(',', env('APP_ALLOWED_MIME_TYPES', 'application/pdf,image/png,image/jpeg')),
+
 ];
