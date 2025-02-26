@@ -45,6 +45,25 @@ return [
             'suggestion' => 'Suggestion',
         ],
     ],
+    'files' => [
+        'model' => 'File',
+        'models' => 'Files',
+
+        'disks' => [
+            'local' => 'Local',
+            'public' => 'Public',
+            's3' => 'S3',
+        ],
+        'labels' => [
+            'created_at' => 'Created',
+            'image_upload' => 'Image upload',
+            'mime_type' => 'MIME type',
+            'slug' => 'Slug',
+            'storage_disk' => 'Storage disk',
+            'storage_path' => 'Storage path',
+            'updated_at' => 'Updated',
+        ],
+    ],
     'json_pages' => [
         'model' => 'JSON page',
         'models' => 'JSON pages',

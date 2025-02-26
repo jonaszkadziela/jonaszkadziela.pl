@@ -45,6 +45,25 @@ return [
             'suggestion' => 'Sugestia',
         ],
     ],
+    'files' => [
+        'model' => 'Plik',
+        'models' => 'Pliki',
+
+        'disks' => [
+            'local' => 'Lokalny',
+            'public' => 'Publiczny',
+            's3' => 'S3',
+        ],
+        'labels' => [
+            'created_at' => 'Utworzono',
+            'image_upload' => 'Prześlij obraz',
+            'mime_type' => 'Typ MIME',
+            'slug' => 'Slug',
+            'storage_disk' => 'Dysk magazynujący',
+            'storage_path' => 'Ścieżka do pliku',
+            'updated_at' => 'Zaktualizowano',
+        ],
+    ],
     'json_pages' => [
         'model' => 'Strona JSON',
         'models' => 'Strony JSON',

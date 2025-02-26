@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class File extends Model
@@ -55,5 +57,16 @@ class File extends Model
     public function getUrl(): string
     {
         return secure_url('/files/' . $this->slug);
+    }
+
+    /**
+     * The FileUpload component from Filament expects filenames to be stored as an array.
+     * So, we need to grab the first value from the array to avoid array to string conversion issues.
+     */
+    protected function storagePath(): Attribute
+    {
+        return Attribute::make(
+            set: fn (mixed $value) => is_array($value) ? Arr::first($value) : $value,
+        );
     }
 }
