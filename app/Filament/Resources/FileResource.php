@@ -53,16 +53,34 @@ class FileResource extends Resource
                     ->placeholder(fn (?File $record) => $record?->storage_path)
                     ->readOnly()
                     ->disabled(),
-                Forms\Components\FileUpload::make('image_upload')
-                    ->label(Lang::get('admin.files.labels.image_upload'))
-                    ->statePath('storage_path')
-                    ->image()
-                    ->imageEditor()
-                    ->downloadable()
-                    ->openable()
-                    ->preserveFilenames()
-                    ->storeFileNamesIn('storage_path')
-                    ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args()))
+                Forms\Components\Tabs::make('upload')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make(Lang::get('admin.files.labels.image_upload'))
+                            ->schema([
+                                Forms\Components\FileUpload::make('image_upload')
+                                    ->label(Lang::get('admin.files.labels.image_upload'))
+                                    ->statePath('storage_path')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->downloadable()
+                                    ->openable()
+                                    ->preserveFilenames()
+                                    ->storeFileNamesIn('storage_path')
+                                    ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args())),
+                            ]),
+                        Forms\Components\Tabs\Tab::make(Lang::get('admin.files.labels.document_upload'))
+                            ->schema([
+                                Forms\Components\FileUpload::make('document_upload')
+                                    ->label(Lang::get('admin.files.labels.document_upload'))
+                                    ->statePath('storage_path')
+                                    ->downloadable()
+                                    ->openable()
+                                    ->previewable(false)
+                                    ->preserveFilenames()
+                                    ->storeFileNamesIn('storage_path')
+                                    ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args())),
+                        ]),
+                    ])
                     ->columnSpanFull(),
             ]);
     }

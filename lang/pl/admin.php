@@ -56,6 +56,7 @@ return [
         ],
         'labels' => [
             'created_at' => 'Utworzono',
+            'document_upload' => 'Prześlij dokument',
             'image_upload' => 'Prześlij obraz',
             'mime_type' => 'Typ MIME',
             'slug' => 'Slug',

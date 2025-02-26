@@ -56,6 +56,7 @@ return [
         ],
         'labels' => [
             'created_at' => 'Created',
+            'document_upload' => 'Document upload',
             'image_upload' => 'Image upload',
             'mime_type' => 'MIME type',
             'slug' => 'Slug',
