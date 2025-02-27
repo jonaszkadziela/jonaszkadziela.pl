@@ -58,6 +58,7 @@ return [
         'labels' => [
             'created_at' => 'Utworzono',
             'document_upload' => 'Prześlij dokument',
+            'file_role' => 'Rola',
             'image_upload' => 'Prześlij obraz',
             'mime_type' => 'Typ MIME',
             'slug' => 'Slug',
@@ -146,6 +147,7 @@ return [
         'labels' => [
             'created_at' => 'Utworzono',
             'name' => 'Nazwa',
+            'order' => 'Kolejność',
             'translations' => 'Tłumaczenie',
             'updated_at' => 'Zaktualizowano',
         ],

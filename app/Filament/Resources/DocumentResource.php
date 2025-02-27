@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DocumentResource\Pages;
+use App\Filament\Resources\DocumentResource\RelationManagers;
 use App\Models\Document;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -96,6 +97,14 @@ class DocumentResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\FilesRelationManager::class,
+            RelationManagers\TagsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

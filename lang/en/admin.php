@@ -58,6 +58,7 @@ return [
         'labels' => [
             'created_at' => 'Created',
             'document_upload' => 'Document upload',
+            'file_role' => 'Role',
             'image_upload' => 'Image upload',
             'mime_type' => 'MIME type',
             'slug' => 'Slug',
@@ -146,6 +147,7 @@ return [
         'labels' => [
             'created_at' => 'Created',
             'name' => 'Name',
+            'order' => 'Order',
             'translations' => 'Translations',
             'updated_at' => 'Updated',
         ],

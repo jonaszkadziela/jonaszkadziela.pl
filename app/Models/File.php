@@ -15,6 +15,10 @@ class File extends Model
 
     public const MAIN_PICTURE = 'main_picture';
 
+    public const SUPPORTED_ROLES = [
+        self::MAIN_PICTURE,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
