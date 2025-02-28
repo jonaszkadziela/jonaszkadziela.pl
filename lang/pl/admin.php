@@ -40,6 +40,14 @@ return [
             'type' => 'Typ',
             'updated_at' => 'Zaktualizowano',
         ],
+        'stats' => [
+            'breakdown-by-type-description' => 'Liczba opinii pogrupowanych według typu',
+            'breakdown-by-type' => 'Podział Według Typu',
+            'feedback-count-description' => 'Łączna liczba opinii przesłanych przez użytkowników',
+            'feedback-count' => 'Liczba Opinii',
+            'recent-feedback-description' => 'Opinie przesłane w ciągu ostatnich 24 godzin',
+            'recent-feedback' => 'Najnowsze Opinie',
+        ],
         'types' => [
             'issue' => 'Problem',
             'praise' => 'Pochwała',

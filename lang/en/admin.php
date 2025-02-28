@@ -40,6 +40,14 @@ return [
             'type' => 'Type',
             'updated_at' => 'Updated',
         ],
+        'stats' => [
+            'breakdown-by-type-description' => 'Number of feedback grouped by type',
+            'breakdown-by-type' => 'Breakdown By Type',
+            'feedback-count-description' => 'Total number of feedback submitted by users',
+            'feedback-count' => 'Feedback Count',
+            'recent-feedback-description' => 'Feedback submitted within last 24 hours',
+            'recent-feedback' => 'Recent Feedback',
+        ],
         'types' => [
             'issue' => 'Issue',
             'praise' => 'Praise',
