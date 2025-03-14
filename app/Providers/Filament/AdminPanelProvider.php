@@ -14,6 +14,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -81,6 +82,9 @@ class AdminPanelProvider extends PanelProvider
     {
         parent::register();
 
-        FilamentView::registerRenderHook('panels::body.end', fn () => Blade::render("@vite('resources/js/app.js')"));
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::HEAD_END,
+            fn () => Blade::render('@vite(["resources/css/admin.css", "resources/js/admin.js"])'),
+        );
     }
 }
