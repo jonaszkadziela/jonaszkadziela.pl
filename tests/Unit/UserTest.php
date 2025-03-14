@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Post;
 use App\Models\User;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel\Concerns\HasAvatars;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -59,6 +60,7 @@ class UserTest extends TestCase
 
     public function test_user_traits(): void
     {
+        $this->assertTrue(in_array(HasAvatars::class, class_uses($this->user)));
         $this->assertTrue(in_array(HasFactory::class, class_uses($this->user)));
         $this->assertTrue(in_array(Notifiable::class, class_uses($this->user)));
     }
@@ -109,5 +111,12 @@ class UserTest extends TestCase
 
         $this->assertTrue($adminUser->canAccessPanel($adminPanel));
         $this->assertFalse($regularUser->canAccessPanel($adminPanel));
+    }
+
+    public function test_user_get_avatar_method(): void
+    {
+        $avatarUrl = $this->user->getAvatar();
+
+        $this->assertSame('https://ui-avatars.com/api/?name=J+D&color=FFFFFF&background=09090b', $avatarUrl);
     }
 }

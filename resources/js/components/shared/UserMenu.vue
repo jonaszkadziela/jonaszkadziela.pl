@@ -10,15 +10,24 @@
             @change="changeUserMenu"
     >
         <template #header>
-            <div class="border-b cursor-default dark:border-gray-600 font-semibold p-4">
-                <i class="fa-solid fa-circle-user mr-2"></i>
-                <span>
+            <div class="border-b cursor-default dark:border-gray-600 p-4 select-text">
+                <p class="font-semibold">
                     {{ userStore.currentUser.name }}
-                </span>
+                </p>
+                <p class="dark:text-gray-300 text-gray-600">
+                    {{ userStore.currentUser.email }}
+                </p>
             </div>
         </template>
         <template #value>
-            <i class="fa-solid fa-user"></i>
+            <img v-if="userStore.currentUser.avatar"
+                 :src="userStore.currentUser.avatar"
+                 alt="Avatar"
+                 class="size-6 rounded-full min-w-6 border"
+            >
+            <i v-else
+               class="fa-solid fa-user"
+            ></i>
         </template>
         <template #footer>
             <div class="border-t dark:border-gray-600">

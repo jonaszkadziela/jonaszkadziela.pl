@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Filament\AvatarProviders\Contracts\AvatarProvider;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Filament\Panel\Concerns\HasAvatars;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
+    use HasAvatars;
     use HasFactory;
     use Notifiable;
 
@@ -70,5 +73,13 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function getAvatar(): string
+    {
+        /** @var AvatarProvider $provider */
+        $provider = new ($this->getDefaultAvatarProvider());
+
+        return $provider->get($this);
     }
 }
