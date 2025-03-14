@@ -40,6 +40,10 @@ return [
             'detail' => 'Copied ":link" link to clipboard',
             'summary' => 'Link Copied',
         ],
+        'log-out' => [
+            'detail' => 'You have been logged out. See you soon!',
+            'summary' => 'Logged Out',
+        ],
         'report-issue' => [
             'detail' => 'Thank you for reporting the issue! I will look into it as soon as possible',
             'summary' => 'Issue Reported',

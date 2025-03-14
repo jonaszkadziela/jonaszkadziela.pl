@@ -15,6 +15,7 @@
 import CookiesToast from './toasts/CookiesToast.vue'
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import { getTranslation } from '../translation.js'
+import { userStore } from '../store/user.js'
 import { useToast } from 'primevue/usetoast'
 import {
     onBeforeUnmount,
@@ -37,6 +38,15 @@ const mutationObserver = new MutationObserver(([ entry ]) => {
 onMounted(() => {
     darkMode.value = document.body.parentNode.classList.contains('dark')
     mutationObserver.observe(document.body.parentNode, { attributes: true })
+
+    axios
+        .get(`${location.origin}/users/current`)
+        .then(response => userStore.currentUser = response.data)
+        .catch(() => toast.add({
+            severity: 'error',
+            summary: Lang.get('toast.error.load-data.summary'),
+            detail: Lang.get('toast.error.load-data.detail'),
+        }))
 
     axios
         .get('/menus')

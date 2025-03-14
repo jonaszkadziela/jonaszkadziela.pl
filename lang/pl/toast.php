@@ -40,6 +40,10 @@ return [
             'detail' => 'Skopiowano link ":link" do schowka',
             'summary' => 'Link Skopiowany',
         ],
+        'log-out' => [
+            'detail' => 'Zostałeś wylogowany. Do zobaczenia wkrótce!',
+            'summary' => 'Wylogowano',
+        ],
         'report-issue' => [
             'detail' => 'Dziękuję za zgłoszenie problemu! Przyjrzę się temu najszybciej jak to możliwe',
             'summary' => 'Zgłoszono Problem',

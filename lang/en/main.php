@@ -49,5 +49,9 @@ return [
         'portfolio' => 'Portfolio',
         'privacy' => 'Privacy policy',
     ],
+    'user-menu' => [
+        'admin' => 'Admin panel',
+        'logout' => 'Log out',
+    ],
 
 ];

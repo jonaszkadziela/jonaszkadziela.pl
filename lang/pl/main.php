@@ -49,5 +49,9 @@ return [
         'portfolio' => 'Portfolio',
         'privacy' => 'Polityka prywatności',
     ],
+    'user-menu' => [
+        'admin' => 'Panel administracyjny',
+        'logout' => 'Wyloguj się',
+    ],
 
 ];

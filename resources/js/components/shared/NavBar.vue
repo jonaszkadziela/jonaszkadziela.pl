@@ -53,7 +53,12 @@
                                 class="bg-white border border-zinc-300 dark:bg-zinc-950 dark:border-zinc-600"
                                 severity="secondary"
                 />
-                <LanguageSelector>
+                <UserMenu v-if="Object.keys(userStore.currentUser).length > 0">
+                    <LanguageSelector class="border-none px-2 py-1 shadow-none w-full">
+                        <i class="fa fa-earth-europe"></i>
+                    </LanguageSelector>
+                </UserMenu>
+                <LanguageSelector v-else>
                     <i class="fa fa-earth-europe"></i>
                 </LanguageSelector>
             </template>
@@ -66,6 +71,8 @@ import DarkModeButton from './DarkModeButton.vue'
 import LanguageSelector from './LanguageSelector.vue'
 import LogoBlack from '@/images/brand/logo-black.svg'
 import LogoWhite from '@/images/brand/logo-white.svg'
+import UserMenu from './UserMenu.vue'
+import { userStore } from '../../store/user.js'
 import {
     computed,
     onBeforeUnmount,
