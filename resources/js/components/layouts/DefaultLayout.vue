@@ -8,7 +8,9 @@
                    position="bottom-right"
             />
             <slot />
-            <FeedbackButton class="fixed left-4 bottom-4" />
+            <FeedbackButton v-if="appStore.optionalFeatures.feedback"
+                            class="fixed left-4 bottom-4"
+            />
         </main>
         <Footer :menu-data="props.menuData"
                 :social-data="socialData"
@@ -20,6 +22,7 @@
 import FeedbackButton from '../shared/FeedbackButton.vue'
 import Footer from '../shared/Footer.vue'
 import NavBar from '../shared/NavBar.vue'
+import { appStore } from '../../store/app.js'
 
 const props = defineProps({
     darkMode: Boolean,

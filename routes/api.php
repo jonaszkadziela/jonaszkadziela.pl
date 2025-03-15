@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AppSettingController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\FormController;
@@ -10,6 +11,9 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\TagController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/language-options', [AppSettingController::class, 'languageOptions']);
+Route::get('/optional-features', [AppSettingController::class, 'optionalFeatures']);
 
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/documents/{document:slug}', [DocumentController::class, 'show']);

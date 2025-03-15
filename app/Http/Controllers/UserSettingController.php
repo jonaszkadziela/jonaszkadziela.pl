@@ -5,23 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 
 class UserSettingController extends Controller
 {
-    public function languageOptions(): JsonResponse
-    {
-        $options = collect(config('app.languages'))
-            ->map(fn (string $code) => [
-                'label' => Lang::get('main.languages.' . $code),
-                'value' => $code,
-            ])
-            ->toArray();
-
-        return response()->json($options);
-    }
-
     public function language(Request $request, string $code): RedirectResponse
     {
         $validated = $this->validate($request->merge(['code' => $code]), [

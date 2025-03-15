@@ -5,7 +5,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserSettingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/language-options', [UserSettingController::class, 'languageOptions']);
 Route::get('/language/{code}', [UserSettingController::class, 'language']);
 Route::post('/theme/{mode}', [UserSettingController::class, 'theme']);
 

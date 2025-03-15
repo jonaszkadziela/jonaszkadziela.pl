@@ -14,6 +14,7 @@
 <script setup>
 import CookiesToast from './toasts/CookiesToast.vue'
 import DefaultLayout from './layouts/DefaultLayout.vue'
+import { appStore } from '../store/app.js'
 import { getTranslation } from '../translation.js'
 import { userStore } from '../store/user.js'
 import { useToast } from 'primevue/usetoast'
@@ -39,6 +40,11 @@ function getCurrentUser() {
     return axios
         .get(`${location.origin}/users/current`)
         .then(response => userStore.currentUser = response.data)
+}
+
+function getOptionalFeatures() {
+    return axios.get('/optional-features')
+        .then(response => appStore.optionalFeatures = response.data)
 }
 
 function getMenuData() {
@@ -74,6 +80,7 @@ onMounted(() => {
             getCurrentUser(),
             getMenuData(),
             getSocialData(),
+            getOptionalFeatures(),
         ])
         .then(results => {
             const errors = results.filter(result => result.status === 'rejected')

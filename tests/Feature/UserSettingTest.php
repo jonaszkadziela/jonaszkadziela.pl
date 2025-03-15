@@ -2,57 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class UserSettingTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Config::set('app.languages', ['en', 'pl']);
-    }
-
-    public function test_correct_options_are_returned_when_language_is_set_to_english(): void
-    {
-        Session::put('language', 'en');
-
-        $response = $this->getJson('/language-options');
-
-        $response->assertOk();
-        $response->assertJson([
-            [
-                'label' => 'English',
-                'value' => 'en',
-            ],
-            [
-                'label' => 'Polish',
-                'value' => 'pl',
-            ],
-        ]);
-    }
-
-    public function test_correct_options_are_returned_when_language_is_set_to_polish(): void
-    {
-        Session::put('language', 'pl');
-
-        $response = $this->getJson('/language-options');
-
-        $response->assertOk();
-        $response->assertJson([
-            [
-                'label' => 'Angielski (English)',
-                'value' => 'en',
-            ],
-            [
-                'label' => 'Polski (Polish)',
-                'value' => 'pl',
-            ],
-        ]);
-    }
-
     public function test_language_can_be_changed_to_english(): void
     {
         $response = $this->get('/language/en');

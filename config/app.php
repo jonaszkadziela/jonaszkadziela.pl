@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,5 +158,17 @@ return [
     */
 
     'allowed_mime_types' => explode(',', env('APP_ALLOWED_MIME_TYPES', 'application/pdf,image/png,image/jpeg')),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Feedback
+    |--------------------------------------------------------------------------
+    |
+    | This value defines whether it is possible to send feedback via a
+    | dedicated form.
+    |
+    */
+
+    'feedback_enabled' => (bool)env('APP_FEEDBACK_ENABLED', false),
 
 ];
