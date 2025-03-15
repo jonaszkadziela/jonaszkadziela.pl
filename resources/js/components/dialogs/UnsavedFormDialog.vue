@@ -1,5 +1,8 @@
 <template>
-    <ConfirmDialog />
+    <ConfirmDialog :pt="{
+        header: 'cursor-grab',
+    }"
+    />
 </template>
 
 <script setup>
