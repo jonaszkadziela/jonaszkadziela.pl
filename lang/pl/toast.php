@@ -30,6 +30,10 @@ return [
             'detail' => 'Wystąpił nieoczekiwany błąd podczas zgłaszania problemu. Spróbuj ponownie później lub skontaktuj się ze mną bezpośrednio',
             'summary' => 'Zgłoszenie Nieudane',
         ],
+        'send-feedback' => [
+            'detail' => 'Wystąpił nieoczekiwany błąd podczas wysyłania opinii. Spróbuj ponownie później lub skontaktuj się ze mną w inny sposób',
+            'summary' => 'Błąd Wysyłania Opinii',
+        ],
         'send-message' => [
             'detail' => 'Wystąpił nieoczekiwany błąd podczas wysyłania wiadomości. Spróbuj ponownie później lub skontaktuj się ze mną w inny sposób',
             'summary' => 'Błąd Wysyłania Wiadomości',
@@ -47,6 +51,10 @@ return [
         'report-issue' => [
             'detail' => 'Dziękuję za zgłoszenie problemu! Przyjrzę się temu najszybciej jak to możliwe',
             'summary' => 'Zgłoszono Problem',
+        ],
+        'send-feedback' => [
+            'detail' => 'Dziękuję za przesłanie opinii! Wkrótce ją przeczytam :)',
+            'summary' => 'Opinia wysłana',
         ],
         'send-message' => [
             'detail' => 'Dziękuję za skontaktowanie się ze mną! Odpowiem na Twoją wiadomość tak szybko, jak to możliwe',

@@ -22,6 +22,7 @@ class CreateFeedbackRequest extends FormRequest
             'body' => [
                 'required',
                 'string',
+                'min:3',
                 'max:1000',
             ],
             'data' => [

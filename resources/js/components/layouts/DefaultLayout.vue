@@ -8,6 +8,7 @@
                    position="bottom-right"
             />
             <slot />
+            <FeedbackButton class="fixed left-4 bottom-4" />
         </main>
         <Footer :menu-data="props.menuData"
                 :social-data="socialData"
@@ -16,6 +17,7 @@
 </template>
 
 <script setup>
+import FeedbackButton from '../shared/FeedbackButton.vue'
 import Footer from '../shared/Footer.vue'
 import NavBar from '../shared/NavBar.vue'
 

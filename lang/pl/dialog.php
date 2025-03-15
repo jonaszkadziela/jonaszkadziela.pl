@@ -11,6 +11,20 @@ return [
     |
     */
 
+    'feedback' => [
+        'body' => 'Treść',
+        'cancel' => 'Anuluj',
+        'choose-type' => 'Wybierz typ opinii',
+        'header' => 'Formularz Opinii',
+        'message' => 'Napotkałeś problem lub zauważyłeś literówkę? A może po prostu chcesz napisać kilka miłych słów o mojej stronie? Nie krępuj się, zostaw opinię :)',
+        'save' => 'Prześlij Opinię',
+
+        'types' => [
+            'issue' => 'Problem',
+            'praise' => 'Pochwała',
+            'suggestion' => 'Sugestia',
+        ],
+    ],
     'unsaved-form' => [
         'accept' => 'Kontynuuj',
         'header' => 'Niezapisany Formularz',

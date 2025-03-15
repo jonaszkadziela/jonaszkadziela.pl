@@ -26,6 +26,7 @@ return [
         'project-page' => 'Project Page',
         'see-details' => 'See Details',
         'see-more' => 'See More',
+        'send-feedback' => 'Send Feedback',
     ],
     'footer' => [
         'author' => 'Jonasz Kadziela',

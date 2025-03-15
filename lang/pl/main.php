@@ -26,6 +26,7 @@ return [
         'project-page' => 'Strona Projektu',
         'see-details' => 'Zobacz Szczegóły',
         'see-more' => 'Zobacz Więcej',
+        'send-feedback' => 'Prześlij Opinię',
     ],
     'footer' => [
         'author' => 'Jonasza Kądzielę',
