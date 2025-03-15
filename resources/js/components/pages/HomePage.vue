@@ -263,34 +263,28 @@ const expertiseData = [
     },
 ]
 
-onMounted(() => {
-    axios
+function getBlogData() {
+    return axios
         .get('/posts', {
             params: {
                 tags: ['featured'],
             },
         })
         .then(response => blogData.value = response.data.data)
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
 
-    axios
+function getProjectData() {
+    return axios
         .get('/projects', {
             params: {
                 tags: ['featured'],
             },
         })
         .then(response => projectData.value = response.data.data)
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
 
-    axios
+function getAchievementData() {
+    return axios
         .get('/documents', {
             params: {
                 tags: [
@@ -300,10 +294,25 @@ onMounted(() => {
             },
         })
         .then(response => achievementData.value = response.data.data)
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
+
+onMounted(() => {
+    Promise
+        .allSettled([
+            getBlogData(),
+            getProjectData(),
+            getAchievementData(),
+        ])
+        .then(results => {
+            const errors = results.filter(result => result.status === 'rejected')
+
+            if (errors.length > 0) {
+                toast.add({
+                    severity: 'error',
+                    summary: Lang.get('toast.error.load-data.summary'),
+                    detail: Lang.get('toast.error.load-data.detail'),
+                })
+            }
+        })
 })
 </script>
