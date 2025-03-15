@@ -15,7 +15,7 @@ return [
         'body' => 'Treść',
         'cancel' => 'Anuluj',
         'choose-type' => 'Wybierz typ opinii',
-        'header' => 'Formularz Opinii',
+        'header' => 'Twoja Opinia',
         'message' => 'Napotkałeś problem lub zauważyłeś literówkę? A może po prostu chcesz napisać kilka miłych słów o mojej stronie? Nie krępuj się, zostaw opinię :)',
         'save' => 'Prześlij Opinię',
 

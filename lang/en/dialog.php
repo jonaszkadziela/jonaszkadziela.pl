@@ -15,7 +15,7 @@ return [
         'body' => 'Body',
         'cancel' => 'Cancel',
         'choose-type' => 'Choose feedback type',
-        'header' => 'Feedback Form',
+        'header' => 'Your Feedback',
         'message' => 'Did you encounter a problem or notice a typo? Perhaps you just want to say a few nice words about my website? Feel free to leave some feedback :)',
         'save' => 'Send Feedback',
 
