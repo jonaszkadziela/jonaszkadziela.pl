@@ -8,10 +8,10 @@
                      button: 'flex md:hidden mr-2 order-2 p-2',
                      end: 'flex gap-2 md:ml-0 ml-auto mr-2',
                      itemContent: 'container md:m-0 mx-auto my-1',
-                     itemLabel: ({ context }) => [{
+                     itemLabel: ({ context, props }) => [{
                          'cursor-pointer dark:text-gray-300 hover:underline text-gray-600 underline-offset-8': true,
                          'font-bold': context.item.route === $route.path,
-                         'underline': context.focused,
+                         'underline': context.focused && !props.mobileActive,
                      }],
                      root: 'container delay-100 duration-300 flex gap-0 items-center md:gap-4 mx-auto py-4',
                      rootList: ({ props }) => [{
