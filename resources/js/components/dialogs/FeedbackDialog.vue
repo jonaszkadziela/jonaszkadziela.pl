@@ -11,10 +11,11 @@
             {{ Lang.get('dialog.feedback.message') }}
         </span>
         <div class="flex flex-col gap-1 mb-4 w-full">
-            <div class="flex gap-4 items-center">
+            <div class="flex flex-col-reverse gap-4 items-center md:flex-row">
                 <SelectButton v-model="formData.type"
                               :invalid="Boolean(formErrors?.errors?.type)"
                               :options="options"
+                              :size="selectButtonSize"
                               id="type"
                               optionLabel="label"
                               optionValue="value"
@@ -78,7 +79,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 
 const emit = defineEmits([
@@ -86,6 +88,7 @@ const emit = defineEmits([
     'saved',
 ])
 
+const breakpoints = useBreakpoints(breakpointsTailwind)
 const toast = useToast()
 
 const formData = ref({})
@@ -111,6 +114,8 @@ const options = ref([
         value: 'suggestion',
     }
 ])
+
+const selectButtonSize = computed(() => breakpoints.greater('md').value ? 'medium' : 'small')
 
 function closeDialog() {
     emit('closed')
