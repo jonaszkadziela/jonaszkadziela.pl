@@ -35,20 +35,14 @@ const mutationObserver = new MutationObserver(([ entry ]) => {
     }
 })
 
-onMounted(() => {
-    darkMode.value = document.body.parentNode.classList.contains('dark')
-    mutationObserver.observe(document.body.parentNode, { attributes: true })
-
-    axios
+function getCurrentUser() {
+    return axios
         .get(`${location.origin}/users/current`)
         .then(response => userStore.currentUser = response.data)
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
 
-    axios
+function getMenuData() {
+    return axios
         .get('/menus')
         .then(response => {
             if (!Array.isArray(response.data.data)) {
@@ -63,20 +57,35 @@ onMounted(() => {
                 }
             })
         })
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
 
-    axios
+function getSocialData() {
+    return axios
         .get('/socials')
         .then(response => socialData.value = response.data.data)
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+}
+
+onMounted(() => {
+    darkMode.value = document.body.parentNode.classList.contains('dark')
+    mutationObserver.observe(document.body.parentNode, { attributes: true })
+
+    Promise
+        .allSettled([
+            getCurrentUser(),
+            getMenuData(),
+            getSocialData(),
+        ])
+        .then(results => {
+            const errors = results.filter(result => result.status === 'rejected')
+
+            if (errors.length > 0) {
+                toast.add({
+                    severity: 'error',
+                    summary: Lang.get('toast.error.load-data.summary'),
+                    detail: Lang.get('toast.error.load-data.detail'),
+                })
+            }
+        })
 })
 onBeforeUnmount(() => {
     mutationObserver.disconnect()
