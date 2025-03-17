@@ -12,6 +12,7 @@ return [
     */
 
     'change-language' => 'Zmień na angielski',
+    'laravel-telescope' => 'Laravel Telescope',
     'return-to-home-page' => 'Wróć na Stronę Główną',
 
     'documents' => [

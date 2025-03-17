@@ -50,6 +50,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make()
+                    ->label(fn () => Lang::get('admin.laravel-telescope'))
+                    ->url('/telescope')
+                    ->icon('heroicon-o-magnifying-glass')
+                    ->sort(999),
+                NavigationItem::make()
                     ->label(fn () => Lang::get('admin.return-to-home-page'))
                     ->url('/')
                     ->icon('heroicon-c-arrow-uturn-left')

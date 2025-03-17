@@ -12,6 +12,7 @@ return [
     */
 
     'change-language' => 'Change to Polish',
+    'laravel-telescope' => 'Laravel Telescope',
     'return-to-home-page' => 'Return to Home Page',
 
     'documents' => [
