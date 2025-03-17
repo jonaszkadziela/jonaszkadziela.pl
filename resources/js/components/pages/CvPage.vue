@@ -151,6 +151,7 @@ body:has(.cv-width) {
 
 @media print {
     #actions-button,
+    #feedback-button,
     footer,
     nav {
         display: none;

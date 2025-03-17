@@ -6,6 +6,7 @@
                 label: 'md:block hidden',
             }"
             icon="fa-regular fa-comment-dots"
+            id="feedback-button"
             @click="showFeedbackDialog = true"
     />
     <FeedbackDialog v-if="showFeedbackDialog"
