@@ -121,7 +121,7 @@ onMounted(() => {
 </script>
 
 <style>
-body {
+body:has(.cv-width) {
     min-width: 72rem !important;
     max-width: 100% !important;
 }
