@@ -45,6 +45,7 @@ return [
         'blog' => 'Blog',
         'contact' => 'Kontakt',
         'cv' => 'CV',
+        'documents' => 'Dokumenty',
         'error-404' => 'Błąd 404',
         'home' => 'Strona główna',
         'portfolio' => 'Portfolio',

@@ -2,22 +2,36 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Filters\WhereHasInFilter;
+use App\Filters\WhereLikeFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexDocumentRequest;
 use App\Http\Resources\DocumentResource;
 use App\Models\Document;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Pipeline;
 
 class DocumentController extends Controller
 {
     public function index(IndexDocumentRequest $request): AnonymousResourceCollection
     {
-        $documents = Document::with('files')
-            ->when(
-                $request->has('tags'),
-                fn (Builder $query) => $query->whereHas('tags', fn (Builder $query) => $query->whereIn('name', $request->tags), '=', count($request->tags)),
-            )
+        $locale = Lang::getLocale();
+        $query = Document::with('files');
+
+        $documents = Pipeline::send($query)
+            ->through([
+                new WhereLikeFilter($request, [
+                    'title' => 'translations->' . $locale . '->title',
+                ]),
+                new WhereLikeFilter($request, [
+                    'body' => 'translations->' . $locale . '->body',
+                ]),
+                new WhereHasInFilter($request, [
+                    'tags' => 'name',
+                ]),
+            ])
+            ->thenReturn()
             ->get();
 
         return DocumentResource::collection($documents);

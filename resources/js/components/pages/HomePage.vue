@@ -147,56 +147,10 @@
             </p>
         </div>
         <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
-            <Card v-for="achievement in achievementData"
-                  :key="achievement.id"
-                  :pt="{
-                      body: 'p-6',
-                      root: 'border dark:shadow-blue-800/80 duration-300 flex flex-col hover:shadow-xl shadow-none transition-shadow',
-                  }"
-            >
-                <template #header>
-                    <Image :src="achievement.image"
-                           :pt="{
-                               root: 'h-64 w-full',
-                               image: 'border-b object-contain rounded-t-xl w-full',
-                               mask: 'overflow-auto',
-                               previewMask: 'rounded-t-xl',
-                               toolbar: 'z-[101]',
-                           }"
-                           :alt="`Achievement - ${getTranslation(achievement.translations, achievement.title)}`"
-                           preview
-                    >
-                        <template #original="slotProps">
-                            <div class="flex flex-col gap-4 h-max items-center w-min p-4">
-                                <img :src="achievement.image"
-                                     :style="slotProps.style"
-                                     :class="slotProps.class"
-                                     class="max-h-[90vh] z-[100]"
-                                     @click="event => event.stopPropagation()"
-                                >
-                                <Panel v-if="achievement.body"
-                                       :collapsed="true"
-                                       :header="Lang.get('main.description')"
-                                       class="w-full"
-                                       toggleable
-                                       @click="event => event.stopPropagation()"
-                                >
-                                    <p>
-                                        {{ getTranslation(achievement.translations, achievement.body) }}
-                                    </p>
-                                </Panel>
-                            </div>
-                        </template>
-                    </Image>
-                </template>
-                <template #title>
-                    <RouterLink :to="achievement.link">
-                        <h4 class="font-semibold text-3xl">
-                            {{ getTranslation(achievement.translations, achievement.title) }}
-                        </h4>
-                    </RouterLink>
-                </template>
-            </Card>
+            <DocumentCard v-for="achievement in achievementData"
+                          :document="achievement"
+                          :key="achievement.slug"
+            />
         </div>
         <p v-if="achievementData === null"
            class="text-center"
@@ -205,7 +159,7 @@
         </p>
         <div class="mt-8 text-center">
             <RouterLink class="hover:underline underline-offset-8"
-                        to="/cv#achievements"
+                        to="/documents"
             >
                 {{ Lang.get('home.my-achievements.view-all') }}
             </RouterLink>
@@ -214,6 +168,7 @@
 </template>
 
 <script setup>
+import DocumentCard from '../shared/DocumentCard.vue'
 import DOMPurify from 'dompurify'
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
 import PostCard from '../shared/PostCard.vue'
@@ -287,10 +242,7 @@ function getAchievementData() {
     return axios
         .get('/documents', {
             params: {
-                tags: [
-                    'achievement',
-                    'featured',
-                ],
+                tags: ['featured'],
             },
         })
         .then(response => achievementData.value = response.data.data)
