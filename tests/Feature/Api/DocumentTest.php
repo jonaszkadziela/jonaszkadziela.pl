@@ -138,6 +138,7 @@ class DocumentTest extends TestCase
                 'link' => $this->documentWithImage->link,
                 'translations' => $this->documentWithImage->translations,
                 'issuedAt' => $this->documentWithImage->issued_at->diffForHumans() . ' (' . $this->documentWithImage->issued_at->toDateString() . ')',
+                'tags' => [],
                 'image' => $this->documentWithImage->getMainPicture()->getUrl(),
             ],
         ]);

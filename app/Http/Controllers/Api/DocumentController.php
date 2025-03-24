@@ -39,6 +39,8 @@ class DocumentController extends Controller
 
     public function show(Document $document): DocumentResource
     {
+        $document->load(['files', 'tags']);
+
         return DocumentResource::make($document);
     }
 }

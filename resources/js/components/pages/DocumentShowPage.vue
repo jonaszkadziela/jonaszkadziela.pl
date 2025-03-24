@@ -5,9 +5,17 @@
                  class="flex flex-col gap-16 items-center px-4 py-16 relative"
         >
             <div class="max-w-2xl mb-4 mx-auto text-center">
-                <h1 class="font-bold mb-8 sm:text-6xl text-4xl">
+                <h1 class="font-bold mb-10 sm:text-6xl text-4xl">
                     {{ getTranslation(data.translations, data.title) }}
                 </h1>
+                <div class="flex flex-wrap gap-2 justify-center mb-8">
+                    <Tag v-for="(tag, index) in data.tags"
+                         :key="tag.name"
+                         :severity="index === 0 ? 'primary' : 'secondary'"
+                         :value="getTranslation(tag.translations, tag.name)"
+                         rounded
+                    />
+                </div>
                 <p class="dark:text-gray-300 mb-4 text-gray-600 text-lg">
                     {{ getTranslation(data.translations, data.body) }}
                 </p>

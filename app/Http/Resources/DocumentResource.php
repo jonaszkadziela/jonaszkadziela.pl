@@ -19,6 +19,7 @@ class DocumentResource extends JsonResource
             'link' => $this->link,
             'translations' => $this->translations ?? [],
             'issuedAt' => $this->issued_at->diffForHumans() . ' (' . $this->issued_at->toDateString() . ')',
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
             'image' => $this->getMainPicture()?->getUrl(),
         ];
     }
