@@ -12,6 +12,7 @@ return [
     */
 
     'description' => 'Browse my collection of documents, including certificates, diplomas, congratulatory letters, and more. You can easily search for specific documents by title, body or tags',
+    'document' => 'Document',
     'title' => 'Documents',
 
     'buttons' => [

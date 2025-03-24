@@ -12,6 +12,7 @@ return [
     */
 
     'description' => 'Przeglądaj moją kolekcję dokumentów, w tym certyfikaty, dyplomy, listy gratulacyjne i inne. Możesz łatwo wyszukiwać konkretne dokumenty według tytułu, treści lub tagów',
+    'document' => 'Dokument',
     'title' => 'Dokumenty',
 
     'buttons' => [
