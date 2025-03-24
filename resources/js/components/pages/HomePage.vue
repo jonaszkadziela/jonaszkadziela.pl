@@ -146,7 +146,7 @@
                 {{ Lang.get('home.my-achievements.description') }}.
             </p>
         </div>
-        <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
+        <div class="gap-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
             <DocumentCard v-for="document in documentData"
                           :document="document"
                           :key="document.slug"
