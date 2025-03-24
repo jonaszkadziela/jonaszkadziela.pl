@@ -41,6 +41,7 @@ return [
     ],
     'introduction' => [
         'description' => 'From an early age, I have derived immense satisfaction from creative projects and problem-solving. At the age of 12, I created my first computer game, solidifying my ambition to become a world-class programmer. Since then, I have pursued this goal with dedication',
+        'picture' => 'Picture',
         'subtitle' => 'Full-stack Developer',
         'title' => 'Jonasz Kadziela',
     ],

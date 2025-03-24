@@ -41,6 +41,7 @@ return [
     ],
     'introduction' => [
         'description' => 'Od najmłodszych lat czerpałem ogromną satysfakcję z projektów twórczych i rozwiązywania problemów. W wieku 12 lat stworzyłem swoją pierwszą grę komputerową, co utwierdziło mnie w przekonaniu, że chcę zostać światowej klasy programistą. Od tego czasu realizuję ten cel z pełnym zaangażowaniem',
+        'picture' => 'Zdjęcie',
         'subtitle' => 'Programista Full-stack',
         'title' => 'Jonasz Kądziela',
     ],

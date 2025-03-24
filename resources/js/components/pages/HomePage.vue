@@ -27,8 +27,8 @@
                 />
             </div>
         </div>
-        <img :src="FullBodyPicture"
-             alt="Picture"
+        <img :alt="Lang.get('home.introduction.picture')"
+             :src="FullBodyPicture"
              class="md:max-h-[50vh] md:h-auto lg:pt-8 lg:max-h-[85vh] h-64"
         >
         <SectionButton :label="Lang.get('main.buttons.see-more')"
@@ -147,12 +147,12 @@
             </p>
         </div>
         <div class="gap-8 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2">
-            <DocumentCard v-for="achievement in achievementData"
-                          :document="achievement"
-                          :key="achievement.slug"
+            <DocumentCard v-for="document in documentData"
+                          :document="document"
+                          :key="document.slug"
             />
         </div>
-        <p v-if="achievementData === null"
+        <p v-if="documentData === null"
            class="text-center"
         >
             {{ Lang.get('main.loading') }}...
@@ -168,17 +168,14 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+import { useToast } from 'primevue/usetoast'
 import DocumentCard from '../shared/DocumentCard.vue'
 import DOMPurify from 'dompurify'
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
 import PostCard from '../shared/PostCard.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
 import SectionButton from '../shared/SectionButton.vue'
-import { useToast } from 'primevue/usetoast'
-import {
-    onMounted,
-    ref,
-} from 'vue'
 
 defineProps({
     darkMode: Boolean,
@@ -188,8 +185,8 @@ defineProps({
 
 const toast = useToast()
 
-const achievementData = ref(null)
 const blogData = ref(null)
+const documentData = ref(null)
 const projectData = ref(null)
 const expertiseData = [
     {
@@ -238,14 +235,14 @@ function getProjectData() {
         .then(response => projectData.value = response.data.data)
 }
 
-function getAchievementData() {
+function getDocumentData() {
     return axios
         .get('/documents', {
             params: {
                 tags: ['featured'],
             },
         })
-        .then(response => achievementData.value = response.data.data)
+        .then(response => documentData.value = response.data.data)
 }
 
 onMounted(() => {
@@ -253,7 +250,7 @@ onMounted(() => {
         .allSettled([
             getBlogData(),
             getProjectData(),
-            getAchievementData(),
+            getDocumentData(),
         ])
         .then(results => {
             const errors = results.filter(result => result.status === 'rejected')
