@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AppSettingController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\FormController;
+use App\Http\Controllers\Api\GlobalSearchController;
 use App\Http\Controllers\Api\JsonPageController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\PostController;
@@ -21,6 +22,8 @@ Route::get('/documents/{document:slug}', [DocumentController::class, 'show']);
 Route::post('/feedback', [FeedbackController::class, 'store']);
 
 Route::post('/contact', [FormController::class, 'contact']);
+
+Route::get('/search/by-tags', [GlobalSearchController::class, 'searchByTags']);
 
 Route::get('/json-pages/{jsonPage:name}', [JsonPageController::class, 'show']);
 
