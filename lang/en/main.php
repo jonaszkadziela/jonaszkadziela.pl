@@ -50,6 +50,7 @@ return [
         'home' => 'Home',
         'portfolio' => 'Portfolio',
         'privacy' => 'Privacy policy',
+        'search' => 'Search results',
     ],
     'user-menu' => [
         'admin' => 'Admin panel',

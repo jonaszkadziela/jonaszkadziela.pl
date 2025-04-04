@@ -50,6 +50,7 @@ return [
         'home' => 'Strona główna',
         'portfolio' => 'Portfolio',
         'privacy' => 'Polityka prywatności',
+        'search' => 'Wyniki wyszukiwania',
     ],
     'user-menu' => [
         'admin' => 'Panel administracyjny',
