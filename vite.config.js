@@ -31,4 +31,9 @@ export default defineConfig({
             ],
         }),
     ],
+    server: {
+        cors: {
+            origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|jonaszkadziela\.test|127\.0\.0\.1|\[::1\])(?::\d+)?$/,
+        },
+    },
 })
