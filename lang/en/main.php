@@ -41,6 +41,10 @@ return [
     'navbar' => [
         'header' => 'Jonasz Kadziela',
     ],
+    'tags' => [
+        'more' => 'There are more tags',
+        'search' => 'Search based on :tag tag',
+    ],
     'titles' => [
         'blog' => 'Blog',
         'contact' => 'Contact',

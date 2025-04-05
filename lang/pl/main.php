@@ -41,6 +41,10 @@ return [
     'navbar' => [
         'header' => 'Jonasz Kądziela',
     ],
+    'tags' => [
+        'more' => 'Jeszcze więcej tagów',
+        'search' => 'Szukaj na podstawie tagu :tag',
+    ],
     'titles' => [
         'blog' => 'Blog',
         'contact' => 'Kontakt',
