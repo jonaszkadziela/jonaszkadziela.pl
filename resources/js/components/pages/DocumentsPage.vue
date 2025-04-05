@@ -90,6 +90,7 @@
                         <DocumentCard v-for="document in data"
                                       :document="document"
                                       :key="document.slug"
+                                      class="border"
                         />
                         <div v-if="!data[0]"
                              class="font-semibold text-lg"

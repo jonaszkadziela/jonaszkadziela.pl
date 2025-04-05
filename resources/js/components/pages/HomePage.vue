@@ -150,6 +150,7 @@
             <DocumentCard v-for="document in documentData"
                           :document="document"
                           :key="document.slug"
+                          class="border"
             />
         </div>
         <p v-if="documentData === null"
