@@ -40,4 +40,12 @@ router.beforeEach(to => {
     document.title = `${Lang.get(key)} - ${initialTitle}`
 })
 
+router.beforeEach(() => {
+    const navBarButton = document.querySelector('nav [aria-expanded="true"]')
+
+    if (navBarButton) {
+        navBarButton.click()
+    }
+})
+
 export default router
