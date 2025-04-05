@@ -14,14 +14,10 @@
                     <h3 class="dark:text-gray-300 mb-4 text-gray-600 text-lg">
                         {{ Lang.get('search.searched-by-tags') }}:
                     </h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <Tag v-for="tag in data.tags"
-                             :key="tag.name"
-                             :value="getTranslation(tag.translations, tag.name)"
-                             severity="secondary"
-                             rounded
-                        />
-                    </div>
+                    <TagsList :highlight-first="false"
+                              :tags="data.tags"
+                              class="justify-center"
+                    />
                 </div>
                 <p class="dark:text-gray-300 text-gray-600 text-lg">
                     {{ Lang.get('search.description') }}.
@@ -86,6 +82,7 @@ import LoadingScreen from '../shared/LoadingScreen.vue'
 import PostCard from '../shared/PostCard.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
 import SectionButton from '../shared/SectionButton.vue'
+import TagsList from '../shared/TagsList.vue'
 import {
     onMounted,
     ref,

@@ -10,14 +10,9 @@
                     <h1 class="font-bold sm:text-6xl text-4xl text-center">
                         {{ getTranslation(data.translations, data.title) }}
                     </h1>
-                    <div class="flex flex-wrap gap-2 mb-16">
-                        <Tag v-for="(tag, index) in data.tags"
-                             :key="tag.name"
-                             :severity="index === 0 ? 'primary' : 'secondary'"
-                             :value="getTranslation(tag.translations, tag.name)"
-                             rounded
-                        />
-                    </div>
+                    <TagsList :tags="data.tags"
+                              class="mb-16"
+                    />
                 </div>
             </div>
         </section>
@@ -39,6 +34,7 @@
 <script setup>
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import TagsList from '../shared/TagsList.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'

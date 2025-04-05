@@ -36,19 +36,10 @@
             </div>
         </template>
         <template #subtitle>
-            <div class="flex flex-wrap gap-2 mb-4 mt-1">
-                <Tag v-for="(tag, index) in project.tags.slice(0, MAX_TAGS)"
-                     :key="tag.name"
-                     :severity="index === 0 ? 'primary' : 'secondary'"
-                     :value="getTranslation(tag.translations, tag.name)"
-                     rounded
-                />
-                <Tag v-if="project.tags.length > MAX_TAGS"
-                     :value="`+${project.tags.length - MAX_TAGS}`"
-                     severity="secondary"
-                     rounded
-                />
-            </div>
+            <TagsList :limit="8"
+                      :tags="project.tags"
+                      class="mb-4 mt-1"
+            />
         </template>
         <template #content>
             <div v-html="DOMPurify.sanitize(getTranslation(project.translations, project.body))"
@@ -80,10 +71,9 @@
 
 <script setup>
 import DOMPurify from 'dompurify'
+import TagsList from './TagsList.vue'
 
 defineProps({
     project: Object,
 })
-
-const MAX_TAGS = 8
 </script>

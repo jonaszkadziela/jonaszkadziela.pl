@@ -15,14 +15,9 @@
             </h4>
         </template>
         <template #subtitle>
-            <div class="flex flex-wrap gap-2 mb-4 mt-1">
-                <Tag v-for="(tag, index) in post.tags"
-                     :key="tag.name"
-                     :severity="index === 0 ? 'primary' : 'secondary'"
-                     :value="getTranslation(tag.translations, tag.name)"
-                     rounded
-                />
-            </div>
+            <TagsList :tags="post.tags"
+                      class="mb-4 mt-1"
+            />
         </template>
         <template #content>
             <div v-html="DOMPurify.sanitize(getTranslation(post.translations, post.body))"
@@ -44,6 +39,7 @@
 
 <script setup>
 import DOMPurify from 'dompurify'
+import TagsList from './TagsList.vue'
 
 defineProps({
     post: Object,

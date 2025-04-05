@@ -84,17 +84,12 @@
                         {{ Lang.get('portfolio.show.tools-and-technologies.title') }}
                     </h3>
                 </div>
-                <div class="flex flex-wrap gap-4 justify-center">
-                    <Tag v-for="(tag, index) in data.tags"
-                         :key="tag.name"
-                         :severity="index === 0 ? 'primary' : 'secondary'"
-                         :value="getTranslation(tag.translations, tag.name)"
-                         :pt="{
-                             root: 'border px-3 py-1.5'
-                         }"
-                         rounded
-                    />
-                </div>
+                <TagsList :tags="data.tags"
+                          :pt="{
+                              root: 'border px-3 py-1.5'
+                          }"
+                          class="gap-4 justify-center"
+                />
             </div>
         </section>
         <section id="explore-more"
@@ -125,6 +120,7 @@
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import SectionButton from '../shared/SectionButton.vue'
+import TagsList from '../shared/TagsList.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'

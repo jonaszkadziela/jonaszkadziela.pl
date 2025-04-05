@@ -8,14 +8,9 @@
                 <h1 class="font-bold mb-10 sm:text-6xl text-4xl">
                     {{ getTranslation(data.translations, data.title) }}
                 </h1>
-                <div class="flex flex-wrap gap-2 justify-center mb-8">
-                    <Tag v-for="(tag, index) in data.tags"
-                         :key="tag.name"
-                         :severity="index === 0 ? 'primary' : 'secondary'"
-                         :value="getTranslation(tag.translations, tag.name)"
-                         rounded
-                    />
-                </div>
+                <TagsList :tags="data.tags"
+                          class="justify-center mb-8"
+                />
                 <p class="dark:text-gray-300 mb-4 text-gray-600 text-lg">
                     {{ getTranslation(data.translations, data.body) }}
                 </p>
@@ -77,6 +72,7 @@
 <script setup>
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import SectionButton from '../shared/SectionButton.vue'
+import TagsList from '../shared/TagsList.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
