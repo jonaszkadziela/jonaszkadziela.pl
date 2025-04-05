@@ -7,10 +7,26 @@
                 {{ getTranslation(translations, key) }}
             </p>
             <div class="flex flex-wrap gap-2 text-xs">
-                <Chip v-for="value in values"
-                      :key="value"
-                      :label="getTranslation(translations, value)"
-                />
+                <template v-if="section.actsAsTag">
+                    <Chip v-for="value in values"
+                          v-tooltip.top="{
+                              pt: {
+                                  root: 'md:min-w-max',
+                              },
+                              value: Lang.get('main.tags.search', { tag: getTranslation(translations, value) }),
+                          }"
+                          :key="value"
+                          :label="getTranslation(translations, value)"
+                          @click="searchByTags(value)"
+                          class="cursor-pointer dark:hover:brightness-150 hover:brightness-90 transition"
+                    />
+                </template>
+                <template v-else>
+                    <Chip v-for="value in values"
+                          :key="value"
+                          :label="getTranslation(translations, value)"
+                    />
+                </template>
             </div>
         </div>
     </div>
@@ -21,4 +37,8 @@ defineProps({
     section: Object,
     translations: Object,
 })
+
+function searchByTags(tagName) {
+    window.location.assign(`/search/by-tags?tags[]=${encodeURIComponent(tagName)}`)
+}
 </script>
