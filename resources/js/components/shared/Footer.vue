@@ -12,6 +12,12 @@
                        :class="social.icon"
                     ></i>
                 </a>
+                <template v-if="socialData === null">
+                    <Skeleton v-for="index in [...Array(6).keys()]"
+                              :key="index"
+                              size="2.5rem"
+                    />
+                </template>
             </div>
             <div class="flex flex-col gap-4 items-center justify-center mb-12 md:flex-row md:gap-8">
                 <RouterLink v-for="item in menuData"

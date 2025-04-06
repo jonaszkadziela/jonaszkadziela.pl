@@ -28,7 +28,7 @@ const toast = useToast()
 
 const darkMode = ref(false)
 const menuData = ref([])
-const socialData = ref([])
+const socialData = ref(null)
 
 const mutationObserver = new MutationObserver(([ entry ]) => {
     if (entry.attributeName === 'class') {
