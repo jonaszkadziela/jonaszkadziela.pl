@@ -54,11 +54,9 @@
                           :post="post"
                           class="md:w-[calc(50%-16px)]"
                 />
-                <p v-if="blogData === null"
-                   class="text-center"
-                >
-                    {{ Lang.get('main.loading') }}...
-                </p>
+                <PostCardSkeleton v-if="blogData === null"
+                                  class="md:w-[calc(50%-16px)]"
+                />
             </div>
             <div class="mt-8 text-center">
                 <RouterLink class="hover:underline underline-offset-8"
@@ -120,11 +118,11 @@
                              :key="project.slug"
                              :project="project"
                 />
-                <p v-if="projectData === null"
-                   class="text-center"
-                >
-                    {{ Lang.get('main.loading') }}...
-                </p>
+                <template v-if="projectData === null">
+                    <ProjectCardSkeleton v-for="index in [...Array(3).keys()]"
+                                         :key="index"
+                    />
+                </template>
             </div>
             <div class="mt-8 text-center">
                 <RouterLink class="hover:underline underline-offset-8"
@@ -152,12 +150,13 @@
                           :key="document.slug"
                           class="border"
             />
+            <template v-if="documentData === null">
+                <DocumentCardSkeleton v-for="index in [...Array(8).keys()]"
+                                      :key="index"
+                                      class="border"
+                />
+            </template>
         </div>
-        <p v-if="documentData === null"
-           class="text-center"
-        >
-            {{ Lang.get('main.loading') }}...
-        </p>
         <div class="mt-8 text-center">
             <RouterLink class="hover:underline underline-offset-8"
                         to="/documents"
@@ -172,10 +171,13 @@
 import { onMounted, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import DocumentCard from '../shared/DocumentCard.vue'
+import DocumentCardSkeleton from '../skeletons/DocumentCardSkeleton.vue'
 import DOMPurify from 'dompurify'
 import FullBodyPicture from '@/images/pictures/fullbody-picture.png'
 import PostCard from '../shared/PostCard.vue'
+import PostCardSkeleton from '../skeletons/PostCardSkeleton.vue'
 import ProjectCard from '../shared/ProjectCard.vue'
+import ProjectCardSkeleton from '../skeletons/ProjectCardSkeleton.vue'
 import SectionButton from '../shared/SectionButton.vue'
 
 defineProps({
