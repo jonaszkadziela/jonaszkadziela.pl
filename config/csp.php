@@ -23,7 +23,7 @@ return [
      *
      * You can override this setting by calling `reportTo` on your policy.
      */
-    'report_uri' => env('CSP_REPORT_URI', ''),
+    'report_uri' => env('CSP_REPORT_URI', '/api/csp-reports'),
 
     /*
      * Headers will only be added if this setting is set to true.
