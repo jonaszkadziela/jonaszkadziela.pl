@@ -3,11 +3,13 @@
 use App\Http\Middleware\DetermineLanguageFromHeader;
 use App\Http\Middleware\DetermineLanguageFromIp;
 use App\Http\Middleware\SetLanguage;
+use App\Policies\ApiPolicy;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Spatie\Csp\AddCspHeaders;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
+            AddCspHeaders::class . ':' . ApiPolicy::class,
             DetermineLanguageFromHeader::class,
             ThrottleRequests::class . ':api',
         ]);
