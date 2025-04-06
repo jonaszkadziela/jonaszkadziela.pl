@@ -40,6 +40,9 @@ app.use(ConfirmationService)
 app.use(Router)
 app.use(ToastService)
 app.use(PrimeVue, {
+    csp: {
+        nonce: document.querySelector('meta[property=csp-nonce]')?.nonce,
+    },
     theme: {
         options: {
             cssLayer: {

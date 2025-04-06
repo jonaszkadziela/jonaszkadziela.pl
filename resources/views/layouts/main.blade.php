@@ -11,6 +11,7 @@
         <meta name="author" content="Jonasz Kądziela">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="jonaszkadzielapl-hash" content="{{ isset($hash) ? $hash : 'unknown' }}">
+        <meta property="csp-nonce" nonce="{{ csp_nonce() }}">
         <meta property="og:locale" content="{{ App::getLocale() }}">
         <meta property="og:locale:alternate" content="{{ App::getFallbackLocale() }}">
         <meta property="og:site_name" content="{{ config('app.name') }}">

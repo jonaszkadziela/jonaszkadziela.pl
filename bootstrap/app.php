@@ -4,6 +4,7 @@ use App\Http\Middleware\DetermineLanguageFromHeader;
 use App\Http\Middleware\DetermineLanguageFromIp;
 use App\Http\Middleware\SetLanguage;
 use App\Policies\ApiPolicy;
+use App\Policies\WebPolicy;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -29,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->web([
+            AddCspHeaders::class . ':' . WebPolicy::class,
             DetermineLanguageFromIp::class,
             SetLanguage::class,
         ]);
