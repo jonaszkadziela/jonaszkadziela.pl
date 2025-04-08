@@ -3,6 +3,7 @@
 use App\Http\Middleware\DetermineLanguageFromHeader;
 use App\Http\Middleware\DetermineLanguageFromIp;
 use App\Http\Middleware\SetLanguage;
+use App\Http\Middleware\SetSecurityHeaders;
 use App\Policies\ApiPolicy;
 use App\Policies\WebPolicy;
 use Illuminate\Console\Scheduling\Schedule;
@@ -25,12 +26,14 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api([
             AddCspHeaders::class . ':' . ApiPolicy::class,
+            SetSecurityHeaders::class,
             DetermineLanguageFromHeader::class,
             ThrottleRequests::class . ':api',
         ]);
 
         $middleware->web([
             AddCspHeaders::class . ':' . WebPolicy::class,
+            SetSecurityHeaders::class,
             DetermineLanguageFromIp::class,
             SetLanguage::class,
         ]);
