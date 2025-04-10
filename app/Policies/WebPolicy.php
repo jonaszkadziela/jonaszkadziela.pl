@@ -22,6 +22,7 @@ class WebPolicy extends Policy
             ->addDirective(Directive::DEFAULT, Keyword::SELF)
             ->addDirective(Directive::FONT, Keyword::SELF)
             ->addDirective(Directive::FORM_ACTION, Keyword::SELF)
+            ->addDirective(Directive::FRAME_ANCESTORS, Keyword::NONE)
             ->addDirective(Directive::IMG, [
                 Keyword::SELF,
                 'https://ui-avatars.com', // Needed for user avatars
