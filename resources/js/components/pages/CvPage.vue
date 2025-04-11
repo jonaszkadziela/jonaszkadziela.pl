@@ -58,6 +58,7 @@
 import CvSection from '../sections/CvSection.vue'
 import LoadingScreen from '../shared/LoadingScreen.vue'
 import {
+    onBeforeUnmount,
     onMounted,
     ref,
 } from 'vue'
@@ -108,6 +109,8 @@ const actions = ref([
 ])
 
 onMounted(() => {
+    document.querySelector('meta[name="viewport"]')?.setAttribute('content', 'width=1152')
+
     axios
         .get('/json-pages/cv')
         .then(response => data.value = response.data.data)
@@ -117,6 +120,9 @@ onMounted(() => {
             detail: Lang.get('toast.error.load-data.detail'),
         }))
         .finally(() => loading.value = false)
+})
+onBeforeUnmount(() => {
+    document.querySelector('meta[name="viewport"]')?.setAttribute('content', 'width=device-width, initial-scale=1')
 })
 </script>
 
