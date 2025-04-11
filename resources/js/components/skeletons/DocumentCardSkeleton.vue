@@ -2,7 +2,7 @@
     <Card :pt="{
         body: 'gap-0 h-full p-0',
         caption: 'h-full',
-        root: 'dark:shadow-blue-800/80 duration-300 flex flex-col hover:shadow-xl shadow-none transition-shadow',
+        root: 'dark:shadow-blue-800/80 duration-300 flex flex-col hover:shadow-xl transition-shadow',
         title: 'h-full',
     }">
         <template #header>
