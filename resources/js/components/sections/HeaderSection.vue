@@ -5,7 +5,7 @@
              class="border-8 border-white dark:border-gray-300 rounded-full size-64"
         >
         <div class="flex flex-col justify-center w-full">
-            <h1 class="dark:text-gray-300 font-semibold leading-none text-[82px] text-white uppercase">
+            <h1 class="dark:text-gray-300 font-semibold leading-none text-[80px] text-white uppercase">
                 {{ getTranslation(translations, section.title) }}
             </h1>
             <div class="border border-white dark:border-gray-300 my-8"></div>
