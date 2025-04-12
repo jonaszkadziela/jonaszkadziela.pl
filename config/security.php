@@ -16,7 +16,7 @@ return [
     'headers' => [
         'cross_origin_opener_policy' => env('SECURITY_HEADERS_CROSS_ORIGIN_OPENER_POLICY', 'same-origin'),
         'cross_origin_resource_policy' => env('SECURITY_HEADERS_CROSS_ORIGIN_RESOURCE_POLICY', 'same-origin'),
-        'referrer_policy' => env('SECURITY_HEADERS_REFERRER_POLICY', 'no-referrer'),
+        'referrer_policy' => env('SECURITY_HEADERS_REFERRER_POLICY', 'strict-origin-when-cross-origin'),
         'strict_transport_security' => env('SECURITY_HEADERS_STRICT_TRANSPORT_SECURITY', 'max-age=31536000; includeSubDomains'),
         'x_content_type_options' => env('SECURITY_HEADERS_X_CONTENT_TYPE_OPTIONS', 'nosniff'),
         'x_frame_options' => env('SECURITY_HEADERS_X_FRAME_OPTIONS', 'deny'),
