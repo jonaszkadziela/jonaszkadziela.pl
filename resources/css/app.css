@@ -39,6 +39,15 @@ body {
     margin-bottom: 0;
 }
 
+.formatted-html ol {
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.formatted-html ol li {
+    list-style-type: decimal;
+}
+
 .formatted-html ul {
     margin-left: 1.25rem;
     margin-bottom: 1rem;
@@ -52,12 +61,7 @@ body {
     list-style-type: disc;
 }
 
-.formatted-html ol {
-    margin-left: 1.25rem;
-    margin-bottom: 1rem;
-}
-
-.formatted-html ol li {
+.formatted-html ul li ol li {
     list-style-type: decimal;
 }
 
