@@ -19,6 +19,8 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $this->hideSensitiveRequestDetails($isLocal);
 
+        Telescope::avatar(fn (?string $id) => User::find($id)?->getAvatar());
+
         Telescope::filter(
             fn (IncomingEntry $entry) =>
                 config('telescope.filtering_enabled') === false ||
