@@ -120,6 +120,20 @@ class PostTest extends TestCase
         $this->assertSame(10, $this->post->tags()->first()->pivot->order);
     }
 
+    public function test_post_published_scope(): void
+    {
+        $unpublishedPost = Post::factory()->unpublished()->create();
+
+        $foundPublishedPost = Post::published()->find($this->post->id);
+        $foundUnpublishedPost = Post::published()->find($unpublishedPost->id);
+
+        $this->assertNotNull($this->post->published_at);
+        $this->assertSame($this->post->id, $foundPublishedPost->id);
+
+        $this->assertNull($unpublishedPost->published_at);
+        $this->assertNull($foundUnpublishedPost);
+    }
+
     public function test_post_get_main_picture_method(): void
     {
         $file = File::factory()->create();

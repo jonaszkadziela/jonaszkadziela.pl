@@ -24,4 +24,14 @@ class PostFactory extends Factory
             'published_at' => Carbon::now(),
         ];
     }
+
+    /**
+     * Indicate that the post should be unpublished.
+     */
+    public function unpublished(): static
+    {
+        return $this->state(fn () => [
+            'published_at' => null,
+        ]);
+    }
 }

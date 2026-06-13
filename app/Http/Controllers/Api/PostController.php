@@ -19,7 +19,8 @@ class PostController extends Controller
 {
     public function index(IndexPostRequest $request): AnonymousResourceCollection
     {
-        $query = Post::with(['files', 'tags']);
+        $query = Post::with(['files', 'tags'])->published();
+
         $locale = Lang::getLocale();
 
         $posts = Pipeline::send($query)
@@ -32,6 +33,7 @@ class PostController extends Controller
                 ]),
             ])
             ->thenReturn()
+            ->orderByDesc('published_at')
             ->get()
             ->map(function (Post $post) {
                 $post->translations = collect($post->translations)
@@ -52,6 +54,7 @@ class PostController extends Controller
     public function show(string $slugWithId): PostResource
     {
         $post = Post::with(['files', 'tags'])
+            ->published()
             ->where('id', '=', Str::afterLast($slugWithId, '-'))
             ->firstOrFail();
 

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Carbon;
 
 class Post extends Model
 {
@@ -51,6 +53,14 @@ class Post extends Model
         return $this->morphToMany(Tag::class, 'model', 'model_tag')
             ->withPivot('order')
             ->orderByPivot('order');
+    }
+
+    /**
+     * Filter posts that have the published_at attribute lower or equal to Carbon::now().
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('published_at', '<=', Carbon::now());
     }
 
     public function getMainPicture(): ?File

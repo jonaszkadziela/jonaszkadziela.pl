@@ -13,6 +13,7 @@ use Tests\TestCase;
 
 class PostTest extends TestCase
 {
+    private Post $postNotPublished;
     private Post $postWithImage;
     private Post $postWithoutRelations;
     private Post $postWithTag;
@@ -38,9 +39,10 @@ class PostTest extends TestCase
             ],
         ]);
 
-        $this->postWithImage = Post::factory()->create();
-        $this->postWithoutRelations = Post::factory()->create();
-        $this->postWithTag = Post::factory()->create();
+        $this->postNotPublished = Post::factory()->unpublished()->create();
+        $this->postWithImage = Post::factory()->create(['published_at' => Carbon::now()->subHours(1)]);
+        $this->postWithoutRelations = Post::factory()->create(['published_at' => Carbon::now()->subHours(2)]);
+        $this->postWithTag = Post::factory()->create(['published_at' => Carbon::now()->subHours(3)]);
 
         $this->postWithImage->files()->save($this->file, [
             'file_role' => File::MAIN_PICTURE,
@@ -61,7 +63,7 @@ class PostTest extends TestCase
         return $this->getJson('/api/posts/' . $slugWithId);
     }
 
-    public function test_all_posts_can_be_returned(): void
+    public function test_published_posts_can_be_returned(): void
     {
         $response = $this->getPosts();
 
@@ -104,6 +106,9 @@ class PostTest extends TestCase
                     'user' => null,
                 ],
             ],
+        ]);
+        $response->assertJsonMissing([
+            'slug' => $this->postNotPublished->slug,
         ]);
     }
 
@@ -180,9 +185,44 @@ class PostTest extends TestCase
         ]);
     }
 
+    public function test_posts_are_sorted_descending_by_published_at_column(): void
+    {
+        $latestPost = Post::factory()->create(['published_at' => Carbon::now()]);
+
+        $response = $this->getPosts();
+
+        $response->assertOk();
+        $response->assertJson([
+            'data' => [
+                [
+                    'slug' => $latestPost->slug,
+                ],
+                [
+                    'slug' => $this->postWithImage->slug,
+                ],
+                [
+                    'slug' => $this->postWithoutRelations->slug,
+                ],
+                [
+                    'slug' => $this->postWithTag->slug,
+                ],
+            ],
+        ]);
+        $response->assertJsonMissing([
+            'slug' => $this->postNotPublished->slug,
+        ]);
+    }
+
     public function test_error_404_is_returned_when_post_does_not_exist(): void
     {
         $response = $this->getPost('wrong');
+
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
+
+    public function test_error_404_is_returned_when_post_is_not_published(): void
+    {
+        $response = $this->getPost($this->postNotPublished->slug . '-' . $this->postNotPublished->id);
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
