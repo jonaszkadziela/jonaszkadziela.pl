@@ -1,10 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "jonaszkadziela/jonaszkadziela.pl",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "description": "Personal website of Jonasz Kądziela - See my portfolio and get to know me.",
+    "keywords": [
+        "jonasz",
+        "kadziela",
+        "website"
+    ],
+    "license": "proprietary",
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.3",
