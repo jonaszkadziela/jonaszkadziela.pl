@@ -40,6 +40,7 @@ class WebPolicy extends Policy
         if ($this->isTelescopeRequest) {
             $this
                 ->addDirective(Directive::FONT, 'https://fonts.bunny.net')
+                ->addDirective(Directive::IMG, Scheme::DATA)
                 ->addDirective(Directive::STYLE, 'https://fonts.bunny.net')
                 ->addDirective(Directive::SCRIPT, [
                     Keyword::UNSAFE_EVAL,
