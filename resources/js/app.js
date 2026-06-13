@@ -10,9 +10,13 @@ import PrimeVue from 'primevue/config'
 import Router from './router'
 import ToastService from 'primevue/toastservice'
 import Tooltip from 'primevue/tooltip'
-import.meta.glob([
-    '../images/**',
-])
+
+// Import brand images globally to avoid issues with Vite manifest
+import '../images/brand/favicon.png?url'
+import '../images/brand/logo-black.svg?url'
+import '../images/brand/logo-white.svg?url'
+import '../images/brand/og-image.jpg?url'
+import '../images/brand/logo-circle.png?url'
 
 const app = createApp(App)
 
