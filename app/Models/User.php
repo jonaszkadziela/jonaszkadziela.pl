@@ -78,7 +78,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function getAvatar(): string
     {
         /** @var AvatarProvider $provider */
-        $provider = new ($this->getDefaultAvatarProvider());
+        $provider = new ($this->defaultAvatarProvider);
 
         return $provider->get($this);
     }
