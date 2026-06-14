@@ -15,4 +15,4 @@ Route::middleware(AddCspHeaders::class . ':' . ApiPolicy::class)->group(function
 Route::get('/language/{code}', [UserSettingController::class, 'language']);
 Route::get('/files/{file:slug}', [FileController::class, 'show'])->middleware('cache.headers:public;max_age=2628000;etag');
 
-Route::get('{any}', fn () => view('vue'))->where('any', '.*');
+Route::fallback(fn () => view('vue'));
