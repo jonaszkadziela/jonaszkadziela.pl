@@ -2,8 +2,13 @@
 
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
+use BackedEnum;
+use Filament\Actions\AssociateAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DissociateAction;
+use Filament\Actions\DissociateBulkAction;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
@@ -12,7 +17,7 @@ class PostsRelationManager extends RelationManager
 {
     protected static string $relationship = 'posts';
 
-    protected static ?string $icon = 'heroicon-o-document-text';
+    protected static string|BackedEnum|null $icon = 'heroicon-o-document-text';
 
     public function table(Table $table): Table
     {
@@ -22,37 +27,37 @@ class PostsRelationManager extends RelationManager
             ->pluralModelLabel(Lang::get('admin.posts.models'))
             ->recordTitleAttribute('slug')
             ->columns([
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(Lang::get('admin.posts.labels.slug'))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(Lang::get('admin.posts.labels.title'))
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('body')
+                TextColumn::make('body')
                     ->label(Lang::get('admin.posts.labels.body'))
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('published_at')
+                TextColumn::make('published_at')
                     ->label(Lang::get('admin.posts.labels.published_at'))
                     ->dateTime()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.posts.labels.created_at'))
                     ->dateTime()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.posts.labels.updated_at'))
                     ->dateTime()
                     ->toggleable(),
             ])
             ->headerActions([
-                Tables\Actions\AssociateAction::make(),
+                AssociateAction::make(),
             ])
-            ->actions([
-                Tables\Actions\DissociateAction::make(),
+            ->recordActions([
+                DissociateAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DissociateBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DissociateBulkAction::make(),
                 ]),
             ]);
     }

@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\JsonPageResource\Pages;
 
 use App\Filament\Resources\JsonPageResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditJsonPage extends EditRecord
@@ -13,7 +13,7 @@ class EditJsonPage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

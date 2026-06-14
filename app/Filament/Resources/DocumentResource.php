@@ -2,13 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DocumentResource\Pages;
-use App\Filament\Resources\DocumentResource\RelationManagers;
+use App\Filament\Resources\DocumentResource\Pages\CreateDocument;
+use App\Filament\Resources\DocumentResource\Pages\EditDocument;
+use App\Filament\Resources\DocumentResource\Pages\ListDocuments;
+use App\Filament\Resources\DocumentResource\RelationManagers\FilesRelationManager;
+use App\Filament\Resources\DocumentResource\RelationManagers\TagsRelationManager;
 use App\Models\Document;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -16,32 +25,32 @@ class DocumentResource extends Resource
 {
     protected static ?string $model = Document::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-duplicate';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('slug')
+        return $schema
+            ->components([
+                TextInput::make('slug')
                     ->label(Lang::get('admin.documents.labels.slug'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->label(Lang::get('admin.documents.labels.title'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('link')
+                TextInput::make('link')
                     ->label(Lang::get('admin.documents.labels.link'))
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\DateTimePicker::make('issued_at')
+                DateTimePicker::make('issued_at')
                     ->label(Lang::get('admin.documents.labels.issued_at'))
                     ->required(),
-                Forms\Components\Textarea::make('body')
+                Textarea::make('body')
                     ->label(Lang::get('admin.documents.labels.body'))
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('translations')
+                Textarea::make('translations')
                     ->label(Lang::get('admin.documents.labels.translations'))
                     ->formatStateUsing(fn (?Document $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
@@ -55,46 +64,46 @@ class DocumentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(Lang::get('admin.documents.labels.slug'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(Lang::get('admin.documents.labels.title'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('body')
+                TextColumn::make('body')
                     ->label(Lang::get('admin.documents.labels.body'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('link')
+                TextColumn::make('link')
                     ->label(Lang::get('admin.documents.labels.link'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('issued_at')
+                TextColumn::make('issued_at')
                     ->label(Lang::get('admin.documents.labels.issued_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.documents.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.documents.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -102,17 +111,17 @@ class DocumentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FilesRelationManager::class,
-            RelationManagers\TagsRelationManager::class,
+            FilesRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDocuments::route('/'),
-            'create' => Pages\CreateDocument::route('/create'),
-            'edit' => Pages\EditDocument::route('/{record}/edit'),
+            'index' => ListDocuments::route('/'),
+            'create' => CreateDocument::route('/create'),
+            'edit' => EditDocument::route('/{record}/edit'),
         ];
     }
 

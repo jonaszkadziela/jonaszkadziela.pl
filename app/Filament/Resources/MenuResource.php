@@ -2,12 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MenuResource\Pages;
+use App\Filament\Resources\MenuResource\Pages\CreateMenu;
+use App\Filament\Resources\MenuResource\Pages\EditMenu;
+use App\Filament\Resources\MenuResource\Pages\ListMenus;
 use App\Models\Menu;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -15,28 +25,28 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bars-4';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bars-4';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(Lang::get('admin.menus.labels.name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('route')
+                TextInput::make('route')
                     ->label(Lang::get('admin.menus.labels.route'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('translations')
+                Textarea::make('translations')
                     ->label(Lang::get('admin.menus.labels.translations'))
                     ->formatStateUsing(fn (?Menu $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_only_in_footer')
+                Toggle::make('is_only_in_footer')
                     ->label(Lang::get('admin.menus.labels.is_only_in_footer'))
                     ->required(),
             ]);
@@ -46,42 +56,42 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(Lang::get('admin.menus.labels.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('route')
+                TextColumn::make('route')
                     ->label(Lang::get('admin.menus.labels.route'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_only_in_footer')
+                IconColumn::make('is_only_in_footer')
                     ->label(Lang::get('admin.menus.labels.is_only_in_footer'))
                     ->boolean()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.menus.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.menus.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_only_in_footer')
+                TernaryFilter::make('is_only_in_footer')
                     ->label(Lang::get('admin.menus.labels.is_only_in_footer')),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -89,9 +99,9 @@ class MenuResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMenus::route('/'),
-            'create' => Pages\CreateMenu::route('/create'),
-            'edit' => Pages\EditMenu::route('/{record}/edit'),
+            'index' => ListMenus::route('/'),
+            'create' => CreateMenu::route('/create'),
+            'edit' => EditMenu::route('/{record}/edit'),
         ];
     }
 

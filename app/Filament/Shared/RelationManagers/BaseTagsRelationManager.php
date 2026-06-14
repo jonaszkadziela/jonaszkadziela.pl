@@ -2,9 +2,14 @@
 
 namespace App\Filament\Shared\RelationManagers;
 
-use Filament\Forms;
+use BackedEnum;
+use Filament\Actions\AttachAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DetachAction;
+use Filament\Actions\DetachBulkAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
@@ -13,7 +18,7 @@ class BaseTagsRelationManager extends RelationManager
 {
     protected static string $relationship = 'tags';
 
-    protected static ?string $icon = 'heroicon-o-tag';
+    protected static string|BackedEnum|null $icon = 'heroicon-o-tag';
 
     public function table(Table $table): Table
     {
@@ -23,37 +28,37 @@ class BaseTagsRelationManager extends RelationManager
             ->pluralModelLabel(Lang::get('admin.tags.models'))
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(Lang::get('admin.tags.labels.name'))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.tags.labels.created_at'))
                     ->dateTime()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.tags.labels.updated_at'))
                     ->dateTime()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('order')
+                TextColumn::make('order')
                     ->label(Lang::get('admin.tags.labels.order'))
                     ->toggleable(),
             ])
             ->headerActions([
-                Tables\Actions\AttachAction::make()
-                    ->form(fn (Tables\Actions\AttachAction $action) => [
+                AttachAction::make()
+                    ->form(fn (AttachAction $action) => [
                         $action->getRecordSelect(),
-                        Forms\Components\TextInput::make('order')
+                        TextInput::make('order')
                             ->label(Lang::get('admin.tags.labels.order'))
                             ->numeric()
                             ->required(),
                     ]),
             ])
-            ->actions([
-                Tables\Actions\DetachAction::make(),
+            ->recordActions([
+                DetachAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DetachBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DetachBulkAction::make(),
                 ]),
             ]);
     }

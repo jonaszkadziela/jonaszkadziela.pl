@@ -1,0 +1,49 @@
+.dark\:text-gray-400:is(.dark *) {
+    color: #a3a3a3;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.font-normal {
+    font-weight: 400;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-x-6 {
+    column-gap: 1.5rem;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.text-gray-500 {
+    color: #737373;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}

@@ -2,12 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SocialResource\Pages;
+use App\Filament\Resources\SocialResource\Pages\CreateSocial;
+use App\Filament\Resources\SocialResource\Pages\EditSocial;
+use App\Filament\Resources\SocialResource\Pages\ListSocials;
 use App\Models\Social;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\HtmlString;
@@ -16,21 +22,21 @@ class SocialResource extends Resource
 {
     protected static ?string $model = Social::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-link';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-link';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
+        return $schema
+            ->components([
+                TextInput::make('title')
                     ->label(Lang::get('admin.socials.labels.title'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('icon')
+                TextInput::make('icon')
                     ->label(Lang::get('admin.socials.labels.icon'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('link')
+                TextInput::make('link')
                     ->label(Lang::get('admin.socials.labels.link'))
                     ->required()
                     ->url()
@@ -43,17 +49,17 @@ class SocialResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(Lang::get('admin.socials.labels.title'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('link')
+                TextColumn::make('link')
                     ->label(Lang::get('admin.socials.labels.link'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('icon')
+                TextColumn::make('icon')
                     ->label(Lang::get('admin.socials.labels.icon'))
                     ->searchable()
                     ->sortable()
@@ -61,23 +67,23 @@ class SocialResource extends Resource
                         '<div class="gap-2 inline-flex items-center"><i class="' . $state . '"></i>' . $state . '</div>',
                     ))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.socials.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.socials.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -85,9 +91,9 @@ class SocialResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSocials::route('/'),
-            'create' => Pages\CreateSocial::route('/create'),
-            'edit' => Pages\EditSocial::route('/{record}/edit'),
+            'index' => ListSocials::route('/'),
+            'create' => CreateSocial::route('/create'),
+            'edit' => EditSocial::route('/{record}/edit'),
         ];
     }
 

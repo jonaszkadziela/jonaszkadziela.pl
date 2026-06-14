@@ -2,13 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectResource\Pages;
-use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\Pages\CreateProject;
+use App\Filament\Resources\ProjectResource\Pages\EditProject;
+use App\Filament\Resources\ProjectResource\Pages\ListProjects;
+use App\Filament\Resources\ProjectResource\RelationManagers\FilesRelationManager;
+use App\Filament\Resources\ProjectResource\RelationManagers\TagsRelationManager;
 use App\Models\Project;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
@@ -17,43 +30,43 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-briefcase';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
+        return $schema
+            ->components([
+                TextInput::make('title')
                     ->label(Lang::get('admin.projects.labels.title'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->label(Lang::get('admin.projects.labels.slug'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('link')
+                TextInput::make('link')
                     ->label(Lang::get('admin.projects.labels.link'))
                     ->maxLength(255)
                     ->default(null)
                     ->url()
                     ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('started_at')
+                DateTimePicker::make('started_at')
                     ->label(Lang::get('admin.projects.labels.started_at'))
                     ->required(),
-                Forms\Components\DateTimePicker::make('finished_at')
+                DateTimePicker::make('finished_at')
                     ->label(Lang::get('admin.projects.labels.finished_at')),
-                Forms\Components\Textarea::make('body')
+                Textarea::make('body')
                     ->label(Lang::get('admin.projects.labels.body'))
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('translations')
+                Textarea::make('translations')
                     ->label(Lang::get('admin.projects.labels.translations'))
                     ->formatStateUsing(fn (?Project $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_pro_bono')
+                Toggle::make('is_pro_bono')
                     ->label(Lang::get('admin.projects.labels.is_pro_bono'))
                     ->required(),
             ]);
@@ -63,55 +76,55 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(Lang::get('admin.projects.labels.slug'))
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(Lang::get('admin.projects.labels.title'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('body')
+                TextColumn::make('body')
                     ->label(Lang::get('admin.projects.labels.body'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('link')
+                TextColumn::make('link')
                     ->label(Lang::get('admin.projects.labels.link'))
                     ->limit(40)
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\IconColumn::make('is_pro_bono')
+                IconColumn::make('is_pro_bono')
                     ->label(Lang::get('admin.projects.labels.is_pro_bono'))
                     ->sortable()
                     ->boolean()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('started_at')
+                TextColumn::make('started_at')
                     ->label(Lang::get('admin.projects.labels.started_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('finished_at')
+                TextColumn::make('finished_at')
                     ->label(Lang::get('admin.projects.labels.finished_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.projects.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.projects.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_pro_bono')
+                TernaryFilter::make('is_pro_bono')
                     ->label(Lang::get('admin.projects.labels.is_pro_bono')),
-                Tables\Filters\SelectFilter::make('finished_at')
+                SelectFilter::make('finished_at')
                     ->label(Lang::get('admin.projects.labels.finished_at'))
                     ->options([
                         'only_finished' => Lang::get('admin.projects.labels.only_finished'),
@@ -123,12 +136,12 @@ class ProjectResource extends Resource
                         default => $query,
                     }),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -136,17 +149,17 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FilesRelationManager::class,
-            RelationManagers\TagsRelationManager::class,
+            FilesRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProject::route('/create'),
-            'edit' => Pages\EditProject::route('/{record}/edit'),
+            'index' => ListProjects::route('/'),
+            'create' => CreateProject::route('/create'),
+            'edit' => EditProject::route('/{record}/edit'),
         ];
     }
 

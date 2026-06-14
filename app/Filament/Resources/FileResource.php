@@ -2,13 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FileResource\Pages;
+use App\Filament\Resources\FileResource\Pages\CreateFile;
+use App\Filament\Resources\FileResource\Pages\EditFile;
+use App\Filament\Resources\FileResource\Pages\ListFiles;
 use App\Models\File;
-use Filament\Forms;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\BaseFileUpload;
-use Filament\Forms\Form;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
@@ -19,17 +29,17 @@ class FileResource extends Resource
 {
     protected static ?string $model = File::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-photo';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('slug')
+        return $schema
+            ->components([
+                TextInput::make('slug')
                     ->label(Lang::get('admin.files.labels.slug'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('mime_type')
+                Select::make('mime_type')
                     ->label(Lang::get('admin.files.labels.mime_type'))
                     ->options(
                         fn () => collect(Config::get('app.allowed_mime_types', []))
@@ -38,7 +48,7 @@ class FileResource extends Resource
                     )
                     ->in(Config::get('app.allowed_mime_types', []))
                     ->required(),
-                Forms\Components\Select::make('storage_disk')
+                Select::make('storage_disk')
                     ->options(
                         fn () => collect(Config::get('filesystems.disks', []))
                             ->keys()
@@ -48,16 +58,16 @@ class FileResource extends Resource
                     ->required(fn (string $operation) => $operation === 'create')
                     ->disabledOn(['edit', 'view'])
                     ->label(Lang::get('admin.files.labels.storage_disk')),
-                Forms\Components\TextInput::make('storage_path_readonly')
+                TextInput::make('storage_path_readonly')
                     ->label(Lang::get('admin.files.labels.storage_path'))
                     ->placeholder(fn (?File $record) => $record?->storage_path)
                     ->readOnly()
                     ->disabled(),
-                Forms\Components\Tabs::make('upload')
+                Tabs::make('upload')
                     ->tabs([
-                        Forms\Components\Tabs\Tab::make(Lang::get('admin.files.labels.image_upload'))
+                        Tab::make(Lang::get('admin.files.labels.image_upload'))
                             ->schema([
-                                Forms\Components\FileUpload::make('image_upload')
+                                FileUpload::make('image_upload')
                                     ->label(Lang::get('admin.files.labels.image_upload'))
                                     ->statePath('storage_path')
                                     ->image()
@@ -68,9 +78,9 @@ class FileResource extends Resource
                                     ->storeFileNamesIn('storage_path')
                                     ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args())),
                             ]),
-                        Forms\Components\Tabs\Tab::make(Lang::get('admin.files.labels.document_upload'))
+                        Tab::make(Lang::get('admin.files.labels.document_upload'))
                             ->schema([
-                                Forms\Components\FileUpload::make('document_upload')
+                                FileUpload::make('document_upload')
                                     ->label(Lang::get('admin.files.labels.document_upload'))
                                     ->statePath('storage_path')
                                     ->downloadable()
@@ -89,43 +99,43 @@ class FileResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(Lang::get('admin.files.labels.slug'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('storage_disk')
+                TextColumn::make('storage_disk')
                     ->label(Lang::get('admin.files.labels.storage_disk'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('storage_path')
+                TextColumn::make('storage_path')
                     ->label(Lang::get('admin.files.labels.storage_path'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('mime_type')
+                TextColumn::make('mime_type')
                     ->label(Lang::get('admin.files.labels.mime_type'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.files.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.files.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -133,9 +143,9 @@ class FileResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFiles::route('/'),
-            'create' => Pages\CreateFile::route('/create'),
-            'edit' => Pages\EditFile::route('/{record}/edit'),
+            'index' => ListFiles::route('/'),
+            'create' => CreateFile::route('/create'),
+            'edit' => EditFile::route('/{record}/edit'),
         ];
     }
 

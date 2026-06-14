@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\SocialResource\Pages;
 
 use App\Filament\Resources\SocialResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListSocials extends ListRecords
@@ -13,7 +13,7 @@ class ListSocials extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

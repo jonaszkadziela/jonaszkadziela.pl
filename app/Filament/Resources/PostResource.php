@@ -2,13 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\PostResource\Pages\CreatePost;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Filament\Resources\PostResource\Pages\ListPosts;
+use App\Filament\Resources\PostResource\RelationManagers\FilesRelationManager;
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 use App\Models\Post;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
@@ -17,31 +28,31 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Select::make('user_id')
+        return $schema
+            ->components([
+                Select::make('user_id')
                     ->label(Lang::get('admin.posts.labels.user'))
                     ->relationship('user', 'name')
                     ->default(null),
-                Forms\Components\DateTimePicker::make('published_at')
+                DateTimePicker::make('published_at')
                     ->label(Lang::get('admin.posts.labels.published_at')),
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->label(Lang::get('admin.posts.labels.title'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
+                TextInput::make('slug')
                     ->label(Lang::get('admin.posts.labels.slug'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('body')
+                Textarea::make('body')
                     ->label(Lang::get('admin.posts.labels.body'))
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('translations')
+                Textarea::make('translations')
                     ->label(Lang::get('admin.posts.labels.translations'))
                     ->formatStateUsing(fn (?Post $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
@@ -55,42 +66,42 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
+                TextColumn::make('user.name')
                     ->label(Lang::get('admin.posts.labels.user'))
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(Lang::get('admin.posts.labels.slug'))
                     ->sortable()
                     ->searchable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(Lang::get('admin.posts.labels.title'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('body')
+                TextColumn::make('body')
                     ->label(Lang::get('admin.posts.labels.body'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('published_at')
+                TextColumn::make('published_at')
                     ->label(Lang::get('admin.posts.labels.published_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.posts.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.posts.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('published_at')
+                SelectFilter::make('published_at')
                     ->label(Lang::get('admin.posts.labels.published_at'))
                     ->options([
                         'only_published' => Lang::get('admin.posts.labels.only_published'),
@@ -102,12 +113,12 @@ class PostResource extends Resource
                         default => $query,
                     }),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -115,17 +126,17 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FilesRelationManager::class,
-            RelationManagers\TagsRelationManager::class,
+            FilesRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            'index' => ListPosts::route('/'),
+            'create' => CreatePost::route('/create'),
+            'edit' => EditPost::route('/{record}/edit'),
         ];
     }
 

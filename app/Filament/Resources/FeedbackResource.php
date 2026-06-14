@@ -2,12 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FeedbackResource\Pages;
+use App\Filament\Resources\FeedbackResource\Pages\CreateFeedback;
+use App\Filament\Resources\FeedbackResource\Pages\EditFeedback;
+use App\Filament\Resources\FeedbackResource\Pages\ListFeedback;
 use App\Models\Feedback;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -15,23 +23,23 @@ class FeedbackResource extends Resource
 {
     protected static ?string $model = Feedback::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-oval-left-ellipsis';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\Select::make('type')
+        return $schema
+            ->components([
+                Select::make('type')
                     ->label(Lang::get('admin.feedbacks.labels.type'))
                     ->options(collect(Feedback::SUPPORTED_TYPES)->mapWithKeys(fn (string $type) => [$type => Lang::get('admin.feedbacks.types.' . $type)]))
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('body')
+                Textarea::make('body')
                     ->label(Lang::get('admin.feedbacks.labels.body'))
                     ->required()
                     ->autosize()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('data')
+                Textarea::make('data')
                     ->label(Lang::get('admin.feedbacks.labels.data'))
                     ->formatStateUsing(fn (?Feedback $record) => $record ? json_encode($record->data, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
@@ -45,38 +53,38 @@ class FeedbackResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('type')
+                TextColumn::make('type')
                     ->label(Lang::get('admin.feedbacks.labels.type'))
                     ->sortable()
                     ->formatStateUsing(fn (string $state) => Lang::get('admin.feedbacks.types.' . $state))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('body')
+                TextColumn::make('body')
                     ->label(Lang::get('admin.feedbacks.labels.body'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.feedbacks.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.feedbacks.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('type')
+                SelectFilter::make('type')
                     ->label(Lang::get('admin.feedbacks.labels.type'))
                     ->options(collect(Feedback::SUPPORTED_TYPES)->mapWithKeys(fn (string $type) => [$type => Lang::get('admin.feedbacks.types.' . $type)]))
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -84,9 +92,9 @@ class FeedbackResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFeedback::route('/'),
-            'create' => Pages\CreateFeedback::route('/create'),
-            'edit' => Pages\EditFeedback::route('/{record}/edit'),
+            'index' => ListFeedback::route('/'),
+            'create' => CreateFeedback::route('/create'),
+            'edit' => EditFeedback::route('/{record}/edit'),
         ];
     }
 

@@ -2,12 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\JsonPageResource\Pages;
+use App\Filament\Resources\JsonPageResource\Pages\CreateJsonPage;
+use App\Filament\Resources\JsonPageResource\Pages\EditJsonPage;
+use App\Filament\Resources\JsonPageResource\Pages\ListJsonPages;
 use App\Models\JsonPage;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -15,18 +22,18 @@ class JsonPageResource extends Resource
 {
     protected static ?string $model = JsonPage::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-computer-desktop';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
+        return $schema
+            ->components([
+                TextInput::make('name')
                     ->label(Lang::get('admin.json_pages.labels.name'))
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('sections')
+                Textarea::make('sections')
                     ->label(Lang::get('admin.json_pages.labels.sections'))
                     ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->sections, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
@@ -34,7 +41,7 @@ class JsonPageResource extends Resource
                     ->autosize()
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('translations')
+                Textarea::make('translations')
                     ->label(Lang::get('admin.json_pages.labels.translations'))
                     ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
@@ -48,28 +55,28 @@ class JsonPageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(Lang::get('admin.json_pages.labels.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(Lang::get('admin.json_pages.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(Lang::get('admin.json_pages.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -77,9 +84,9 @@ class JsonPageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJsonPages::route('/'),
-            'create' => Pages\CreateJsonPage::route('/create'),
-            'edit' => Pages\EditJsonPage::route('/{record}/edit'),
+            'index' => ListJsonPages::route('/'),
+            'create' => CreateJsonPage::route('/create'),
+            'edit' => EditJsonPage::route('/{record}/edit'),
         ];
     }
 

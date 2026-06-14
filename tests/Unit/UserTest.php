@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel\Concerns\HasAvatars;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -116,7 +118,8 @@ class UserTest extends TestCase
     public function test_user_get_avatar_method(): void
     {
         $avatarUrl = $this->user->getAvatar();
+        $background = Color::convertToHex(FilamentColor::getColor('gray')[950] ?? Color::Gray[950]);
 
-        $this->assertSame('https://ui-avatars.com/api/?name=J+D&color=FFFFFF&background=09090b', $avatarUrl);
+        $this->assertSame('https://ui-avatars.com/api/?name=J+D&format=svg&color=FFFFFF&background=' . urlencode($background), $avatarUrl);
     }
 }
