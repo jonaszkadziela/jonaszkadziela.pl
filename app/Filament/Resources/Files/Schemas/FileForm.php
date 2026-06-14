@@ -14,6 +14,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 class FileForm
 {
@@ -23,8 +24,10 @@ class FileForm
             ->components([
                 TextInput::make('slug')
                     ->label(Lang::get('admin.files.labels.slug'))
+                    ->default(fn () => Str::uuid()->toString())
+                    ->maxLength(255)
                     ->required()
-                    ->maxLength(255),
+                    ->unique(),
                 Select::make('mime_type')
                     ->label(Lang::get('admin.files.labels.mime_type'))
                     ->options(
@@ -55,6 +58,7 @@ class FileForm
                             ->schema([
                                 FileUpload::make('image_upload')
                                     ->label(Lang::get('admin.files.labels.image_upload'))
+                                    ->acceptedFileTypes(Config::get('app.allowed_mime_types', []))
                                     ->disk(fn (Get $get) => $get('storage_disk'))
                                     ->downloadable()
                                     ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args()))
@@ -69,6 +73,7 @@ class FileForm
                             ->schema([
                                 FileUpload::make('document_upload')
                                     ->label(Lang::get('admin.files.labels.document_upload'))
+                                    ->acceptedFileTypes(Config::get('app.allowed_mime_types', []))
                                     ->disk(fn (Get $get) => $get('storage_disk'))
                                     ->downloadable()
                                     ->getUploadedFileUsing(fn (?File $record, BaseFileUpload $component, string $file, string|array|null $storedFileNames) => FileResource::customGetUploadedFileUsing(...func_get_args()))
