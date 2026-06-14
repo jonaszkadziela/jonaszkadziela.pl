@@ -11,6 +11,7 @@ use App\Models\Menu;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -18,7 +19,7 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-bars-4';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars4;
 
     public static function form(Schema $schema): Schema
     {

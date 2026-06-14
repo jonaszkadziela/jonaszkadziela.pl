@@ -9,6 +9,7 @@ use Filament\Actions\DetachAction;
 use Filament\Actions\DetachBulkAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ class BaseTagsRelationManager extends RelationManager
 {
     protected static string $relationship = 'tags';
 
-    protected static string|BackedEnum|null $icon = 'heroicon-o-tag';
+    protected static string|BackedEnum|null $icon = Heroicon::OutlinedTag;
 
     public function table(Table $table): Table
     {

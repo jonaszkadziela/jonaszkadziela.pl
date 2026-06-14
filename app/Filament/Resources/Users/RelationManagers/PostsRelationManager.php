@@ -8,6 +8,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class PostsRelationManager extends RelationManager
 {
     protected static string $relationship = 'posts';
 
-    protected static string|BackedEnum|null $icon = 'heroicon-o-document-text';
+    protected static string|BackedEnum|null $icon =  Heroicon::OutlinedDocumentText;
 
     public function table(Table $table): Table
     {

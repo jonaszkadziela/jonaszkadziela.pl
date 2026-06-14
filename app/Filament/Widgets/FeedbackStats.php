@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Feedback;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Carbon;
@@ -19,13 +20,13 @@ class FeedbackStats extends BaseWidget
                 Feedback::count(),
             )
             ->description(Lang::get('admin.feedbacks.stats.feedback-count-description'))
-            ->icon('heroicon-o-chat-bubble-oval-left-ellipsis'),
+            ->icon(Heroicon::OutlinedChatBubbleOvalLeftEllipsis),
             Stat::make(
                 Lang::get('admin.feedbacks.stats.recent-feedback'),
                 Feedback::whereBetween('created_at', [Carbon::now()->subHours(24), Carbon::now()])->count(),
             )
             ->description(Lang::get('admin.feedbacks.stats.recent-feedback-description'))
-            ->icon('heroicon-o-clock'),
+            ->icon(Heroicon::OutlinedClock),
             Stat::make(
                 Lang::get('admin.feedbacks.stats.breakdown-by-type'),
                 new HtmlString(
@@ -44,7 +45,7 @@ class FeedbackStats extends BaseWidget
                 ),
             )
             ->description(Lang::get('admin.feedbacks.stats.breakdown-by-type-description'))
-            ->icon('heroicon-o-queue-list'),
+            ->icon(Heroicon::OutlinedQueueList),
         ];
     }
 }

@@ -14,6 +14,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentView;
+use Filament\Support\Icons\Heroicon;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -46,18 +47,18 @@ class AdminPanelProvider extends PanelProvider
                 Action::make('change-language')
                     ->label(fn () => Lang::get('admin.change-language'))
                     ->url(fn () => Lang::getLocale() === 'en' ? '/language/pl' : '/language/en')
-                    ->icon('heroicon-s-globe-europe-africa'),
+                    ->icon(Heroicon::GlobeEuropeAfrica),
             ])
             ->navigationItems([
                 NavigationItem::make()
                     ->label(fn () => Lang::get('admin.laravel-telescope'))
                     ->url('/telescope')
-                    ->icon('heroicon-o-magnifying-glass')
+                    ->icon(Heroicon::OutlinedMagnifyingGlass)
                     ->sort(999),
                 NavigationItem::make()
                     ->label(fn () => Lang::get('admin.return-to-home-page'))
                     ->url('/')
-                    ->icon('heroicon-c-arrow-uturn-left')
+                    ->icon(Heroicon::ArrowUturnLeft)
                     ->sort(1000),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

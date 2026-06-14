@@ -12,6 +12,7 @@ use BackedEnum;
 use Filament\Forms\Components\BaseFileUpload;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 use League\Flysystem\UnableToCheckFileExistence;
@@ -21,7 +22,7 @@ class FileResource extends Resource
 {
     protected static ?string $model = File::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-photo';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
     public static function form(Schema $schema): Schema
     {

@@ -11,6 +11,7 @@ use App\Models\Social;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
@@ -18,7 +19,7 @@ class SocialResource extends Resource
 {
     protected static ?string $model = Social::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-link';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLink;
 
     public static function form(Schema $schema): Schema
     {
