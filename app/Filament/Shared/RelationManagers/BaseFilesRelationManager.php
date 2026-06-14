@@ -47,7 +47,7 @@ class BaseFilesRelationManager extends RelationManager
             ])
             ->headerActions([
                 AttachAction::make()
-                    ->form(fn (AttachAction $action) => [
+                    ->schema(fn (AttachAction $action) => [
                         $action->getRecordSelect(),
                         Select::make('file_role')
                             ->label(Lang::get('admin.files.labels.file_role'))

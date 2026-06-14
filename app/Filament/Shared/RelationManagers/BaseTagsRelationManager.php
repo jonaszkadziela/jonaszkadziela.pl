@@ -45,7 +45,7 @@ class BaseTagsRelationManager extends RelationManager
             ])
             ->headerActions([
                 AttachAction::make()
-                    ->form(fn (AttachAction $action) => [
+                    ->schema(fn (AttachAction $action) => [
                         $action->getRecordSelect(),
                         TextInput::make('order')
                             ->label(Lang::get('admin.tags.labels.order'))
