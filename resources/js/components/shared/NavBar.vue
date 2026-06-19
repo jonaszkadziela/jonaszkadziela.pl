@@ -18,7 +18,7 @@
                          'gap-6 md:flex md:mr-2 md:py-2 ml-auto': true,
                          'absolute border-t dark:border-gray-600 left-0 p-4 right-0 top-full': props.mobileActive,
                          'hidden': !props.mobileActive,
-                         'bg-white/90 dark:bg-black/90': props.mobileActive && navBarSticky,
+                         'bg-white/90 dark:bg-black/90 dark:shadow-slate-800 shadow-lg': props.mobileActive && navBarSticky,
                          'dark:bg-black bg-white': props.mobileActive && !navBarSticky,
                      }],
                  }"
