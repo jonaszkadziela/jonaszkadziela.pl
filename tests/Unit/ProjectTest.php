@@ -8,8 +8,12 @@ use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Tests\TestCase;
 
 class ProjectTest extends TestCase
@@ -23,15 +27,17 @@ class ProjectTest extends TestCase
 
         $this->attributes = [
             'slug' => 'sample-project',
-            'title' => 'Sample Project',
-            'body' => 'sample-project-body',
+            'title' => 'title',
+            'body' => 'body',
             'link' => 'https://sample-project.test',
             'translations' => [
                 'en' => [
-                    'sample-project-body' => 'This is a sample project',
+                    'title' => 'Sample Project',
+                    'body' => 'This is a sample project',
                 ],
                 'pl' => [
-                    'sample-project-body' => 'To przykładowy projekt',
+                    'title' => 'Sample Projekt',
+                    'body' => 'To przykładowy projekt',
                 ],
             ],
             'is_pro_bono' => false,
@@ -71,6 +77,11 @@ class ProjectTest extends TestCase
     public function test_project_traits(): void
     {
         $this->assertTrue(in_array(HasFactory::class, class_uses($this->project)));
+    }
+
+    public function test_project_interfaces(): void
+    {
+        $this->assertTrue(in_array(Sitemapable::class, class_implements($this->project)));
     }
 
     public function test_project_parent_classes(): void
@@ -127,5 +138,30 @@ class ProjectTest extends TestCase
             ]);
 
         $this->assertSame($file->id, $this->project->getMainPicture()->id);
+    }
+
+    public function test_project_to_sitemap_tag_method(): void
+    {
+        $file = File::factory()->create();
+
+        DB::table('model_file')
+            ->insert([
+                'model_id' => $this->project->id,
+                'model_type' => Project::class,
+                'file_id' => $file->id,
+                'file_role' => File::MAIN_PICTURE,
+            ]);
+
+        $sitemapTag = $this->project->toSitemapTag();
+
+        $this->assertTrue($sitemapTag instanceof Url);
+        $this->assertSame('/portfolio/' . $this->project->slug, $sitemapTag->url);
+        $this->assertSame(Url::CHANGE_FREQUENCY_MONTHLY, $sitemapTag->changeFrequency);
+        $this->assertSame($this->project->updated_at->toAtomString(), $sitemapTag->lastModificationDate->toAtomString());
+        $this->assertSame(0.5, $sitemapTag->priority);
+
+        $this->assertCount(1, $sitemapTag->images);
+        $this->assertSame($file->getUrl(), $sitemapTag->images[0]->url);
+        $this->assertSame(Arr::get($this->project->translations, Lang::getFallback() . '.title'), $sitemapTag->images[0]->caption);
     }
 }

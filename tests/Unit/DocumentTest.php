@@ -8,8 +8,12 @@ use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Tests\TestCase;
 
 class DocumentTest extends TestCase
@@ -23,15 +27,17 @@ class DocumentTest extends TestCase
 
         $this->attributes = [
             'slug' => 'sample-document',
-            'title' => 'Sample Document',
-            'body' => 'sample-document-body',
+            'title' => 'title',
+            'body' => 'body',
             'link' => '/cv#certifications',
             'translations' => [
                 'en' => [
-                    'sample-document-body' => 'This is a sample document',
+                    'title' => 'Sample Document',
+                    'body' => 'This is a sample document',
                 ],
                 'pl' => [
-                    'sample-document-body' => 'To przykładowy dokument',
+                    'title' => 'Przykładowy Dokument',
+                    'body' => 'To przykładowy dokument',
                 ],
             ],
             'issued_at' => Carbon::parse('2024-11-01 12:00:00'),
@@ -65,6 +71,11 @@ class DocumentTest extends TestCase
     public function test_document_traits(): void
     {
         $this->assertTrue(in_array(HasFactory::class, class_uses($this->document)));
+    }
+
+    public function test_document_interfaces(): void
+    {
+        $this->assertTrue(in_array(Sitemapable::class, class_implements($this->document)));
     }
 
     public function test_document_parent_classes(): void
@@ -121,5 +132,30 @@ class DocumentTest extends TestCase
             ]);
 
         $this->assertSame($file->id, $this->document->getMainPicture()->id);
+    }
+
+    public function test_document_to_sitemap_tag_method(): void
+    {
+        $file = File::factory()->create();
+
+        DB::table('model_file')
+            ->insert([
+                'model_id' => $this->document->id,
+                'model_type' => Document::class,
+                'file_id' => $file->id,
+                'file_role' => File::MAIN_PICTURE,
+            ]);
+
+        $sitemapTag = $this->document->toSitemapTag();
+
+        $this->assertTrue($sitemapTag instanceof Url);
+        $this->assertSame('/documents/' . $this->document->slug, $sitemapTag->url);
+        $this->assertSame(Url::CHANGE_FREQUENCY_MONTHLY, $sitemapTag->changeFrequency);
+        $this->assertSame($this->document->updated_at->toAtomString(), $sitemapTag->lastModificationDate->toAtomString());
+        $this->assertSame(0.5, $sitemapTag->priority);
+
+        $this->assertCount(1, $sitemapTag->images);
+        $this->assertSame($file->getUrl(), $sitemapTag->images[0]->url);
+        $this->assertSame(Arr::get($this->document->translations, Lang::getFallback() . '.title'), $sitemapTag->images[0]->caption);
     }
 }

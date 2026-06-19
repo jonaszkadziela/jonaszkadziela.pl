@@ -10,8 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Tests\TestCase;
 
 class PostTest extends TestCase
@@ -25,14 +29,16 @@ class PostTest extends TestCase
 
         $this->attributes = [
             'slug' => 'sample-post',
-            'title' => 'Sample Post',
-            'body' => 'sample-post-body',
+            'title' => 'title',
+            'body' => 'body',
             'translations' => [
                 'en' => [
-                    'sample-post-body' => 'This is a sample post',
+                    'title' => 'Sample Title',
+                    'body' => 'This is a sample post',
                 ],
                 'pl' => [
-                    'sample-post-body' => 'To przykładowy post',
+                    'title' => 'Przykładowy Tytuł',
+                    'body' => 'To przykładowy post',
                 ],
             ],
             'published_at' => Carbon::parse('2025-02-01 12:00:00'),
@@ -65,6 +71,11 @@ class PostTest extends TestCase
     public function test_post_traits(): void
     {
         $this->assertTrue(in_array(HasFactory::class, class_uses($this->post)));
+    }
+
+    public function test_post_interfaces(): void
+    {
+        $this->assertTrue(in_array(Sitemapable::class, class_implements($this->post)));
     }
 
     public function test_post_parent_classes(): void
@@ -147,5 +158,30 @@ class PostTest extends TestCase
             ]);
 
         $this->assertSame($file->id, $this->post->getMainPicture()->id);
+    }
+
+    public function test_post_to_sitemap_tag_method(): void
+    {
+        $file = File::factory()->create();
+
+        DB::table('model_file')
+            ->insert([
+                'model_id' => $this->post->id,
+                'model_type' => Post::class,
+                'file_id' => $file->id,
+                'file_role' => File::MAIN_PICTURE,
+            ]);
+
+        $sitemapTag = $this->post->toSitemapTag();
+
+        $this->assertTrue($sitemapTag instanceof Url);
+        $this->assertSame('/blog/' . $this->post->slug, $sitemapTag->url);
+        $this->assertSame(Url::CHANGE_FREQUENCY_MONTHLY, $sitemapTag->changeFrequency);
+        $this->assertSame($this->post->updated_at->toAtomString(), $sitemapTag->lastModificationDate->toAtomString());
+        $this->assertSame(0.5, $sitemapTag->priority);
+
+        $this->assertCount(1, $sitemapTag->images);
+        $this->assertSame($file->getUrl(), $sitemapTag->images[0]->url);
+        $this->assertSame(Arr::get($this->post->translations, Lang::getFallback() . '.title'), $sitemapTag->images[0]->caption);
     }
 }

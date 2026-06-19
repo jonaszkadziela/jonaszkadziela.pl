@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withSchedule(function (Schedule $schedule) {
+        $schedule->command('app:generate-sitemap')->daily();
         $schedule->command('telescope:prune --hours=168')->daily();
     })
     ->withMiddleware(function (Middleware $middleware) {

@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Lang;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Document extends Model
+class Document extends Model implements Sitemapable
 {
     use HasFactory;
 
@@ -51,5 +55,24 @@ class Document extends Model
     public function getMainPicture(): ?File
     {
         return $this->files->where('pivot.file_role', '=', File::MAIN_PICTURE)->first();
+    }
+
+    public function toSitemapTag(): Url
+    {
+        $mainPicture = $this->getMainPicture();
+
+        $url = Url::create('/documents/' . $this->slug)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setLastModificationDate($this->updated_at)
+            ->setPriority(0.5);
+
+        if ($mainPicture !== null) {
+            $url->addImage(
+                $mainPicture->getUrl(),
+                Arr::get($this->translations, Lang::getFallback() . '.' . $this->title, $this->title),
+            );
+        }
+
+        return $url;
     }
 }

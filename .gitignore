@@ -18,6 +18,7 @@ yarn-error.log
 /public/games
 /public/hot
 /public/ludum-dare
+/public/sitemap*.xml
 /public/storage
 /storage/*.key
 /vendor
