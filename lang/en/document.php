@@ -27,6 +27,17 @@ return [
         'tags' => 'Tags',
         'title' => 'Title',
     ],
+    'not-found' => [
+        'description-1' => 'We couldn\'t find this document',
+        'description-2' => 'Return to the home page or report an issue if you think it should exist',
+        'title' => 'Document Not Found',
+
+        'buttons' => [
+            'issue-reported' => 'Issue Reported',
+            'report-issue' => 'Report Issue',
+            'return-to-home-page' => 'Return to Home Page',
+        ],
+    ],
     'show' => [
         'related-files' => [
             'title' => 'Related Files',

@@ -27,6 +27,17 @@ return [
         'tags' => 'Tagi',
         'title' => 'Tytuł',
     ],
+    'not-found' => [
+        'description-1' => 'Nie mogliśmy znaleźć tego dokumentu',
+        'description-2' => 'Wróć na stronę główną lub zgłoś problem, jeśli uważasz, że powinien istnieć',
+        'title' => 'Nie Znaleziono Dokumentu',
+
+        'buttons' => [
+            'issue-reported' => 'Zgłoszenie przyjęte',
+            'report-issue' => 'Zgłoś problem',
+            'return-to-home-page' => 'Powrót na stronę główną',
+        ],
+    ],
     'show' => [
         'related-files' => [
             'title' => 'Powiązane Pliki',
