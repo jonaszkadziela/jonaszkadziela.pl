@@ -29,11 +29,23 @@
             </div>
         </section>
     </template>
+    <template v-if="!loading && !data">
+        <NotFoundSection :translations="{
+            description1: Lang.get('blog.not-found.description-1'),
+            description2: Lang.get('blog.not-found.description-2'),
+            issueReported: Lang.get('blog.not-found.buttons.issue-reported'),
+            reportIssue: Lang.get('blog.not-found.buttons.report-issue'),
+            returnToHomePage: Lang.get('blog.not-found.buttons.return-to-home-page'),
+            title: Lang.get('blog.not-found.title'),
+        }"
+        />
+    </template>
 </template>
 
 <script setup>
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import NotFoundSection from '../shared/NotFoundSection.vue'
 import TagsList from '../shared/TagsList.vue'
 import { getTranslation } from '../../translation.js'
 import { useRoute } from 'vue-router'
@@ -65,11 +77,15 @@ onMounted(() => {
 
             document.title = `${getTranslation(data.value.translations, data.value.title)} - ${initialTitle}`
         })
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+        .catch(() => {
+            document.title = `${Lang.get('blog.not-found.title')} - ${initialTitle}`
+
+            toast.add({
+                severity: 'error',
+                summary: Lang.get('toast.error.load-data.summary'),
+                detail: Lang.get('toast.error.load-data.detail'),
+            })
+        })
         .finally(() => loading.value = false)
 })
 </script>

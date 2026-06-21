@@ -27,6 +27,17 @@ return [
         'tags' => 'Tagi',
         'title' => 'Tytuł',
     ],
+    'not-found' => [
+        'description-1' => 'Nie mogliśmy znaleźć tego posta. Może nie został jeszcze opublikowany',
+        'description-2' => 'Wróć na stronę główną lub zgłoś problem, jeśli uważasz, że powinien istnieć',
+        'title' => 'Nie Znaleziono Tego Posta',
+
+        'buttons' => [
+            'issue-reported' => 'Zgłoszenie przyjęte',
+            'report-issue' => 'Zgłoś problem',
+            'return-to-home-page' => 'Powrót na stronę główną',
+        ],
+    ],
     'status' => [
         'adjust-filters' => 'Dostosuj filtry, aby zobaczyć wyniki',
         'no-filter-results' => 'Brak postów pasujących do Twoich filtrów',
