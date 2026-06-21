@@ -41,7 +41,7 @@ class ProjectForm
                     ->columnSpanFull(),
                 Textarea::make('translations')
                     ->label(Lang::get('admin.projects.labels.translations'))
-                    ->formatStateUsing(fn (?Project $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?Project $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()

@@ -21,7 +21,7 @@ class JsonPageForm
                     ->columnSpanFull(),
                 Textarea::make('sections')
                     ->label(Lang::get('admin.json_pages.labels.sections'))
-                    ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->sections, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->sections, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()
@@ -29,7 +29,7 @@ class JsonPageForm
                     ->columnSpanFull(),
                 Textarea::make('translations')
                     ->label(Lang::get('admin.json_pages.labels.translations'))
-                    ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?JsonPage $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()

@@ -25,7 +25,7 @@ class MenuForm
                     ->maxLength(255),
                 Textarea::make('translations')
                     ->label(Lang::get('admin.menus.labels.translations'))
-                    ->formatStateUsing(fn (?Menu $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?Menu $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()

@@ -36,7 +36,7 @@ class DocumentForm
                     ->columnSpanFull(),
                 Textarea::make('translations')
                     ->label(Lang::get('admin.documents.labels.translations'))
-                    ->formatStateUsing(fn (?Document $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?Document $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()

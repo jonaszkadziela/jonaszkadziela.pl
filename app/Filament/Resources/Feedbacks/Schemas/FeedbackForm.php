@@ -26,7 +26,7 @@ class FeedbackForm
                     ->columnSpanFull(),
                 Textarea::make('data')
                     ->label(Lang::get('admin.feedbacks.labels.data'))
-                    ->formatStateUsing(fn (?Feedback $record) => $record ? json_encode($record->data, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?Feedback $record) => $record ? json_encode($record->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()

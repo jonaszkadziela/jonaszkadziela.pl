@@ -21,7 +21,7 @@ class TagForm
                     ->columnSpanFull(),
                 Textarea::make('translations')
                     ->label(Lang::get('admin.tags.labels.translations'))
-                    ->formatStateUsing(fn (?Tag $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT) : '')
+                    ->formatStateUsing(fn (?Tag $record) => $record ? json_encode($record->translations, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '')
                     ->mutateDehydratedStateUsing(fn (?string $state) => json_decode($state ?? '[]', true))
                     ->json()
                     ->autosize()
