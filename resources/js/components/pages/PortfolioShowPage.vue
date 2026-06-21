@@ -114,11 +114,23 @@
             </div>
         </section>
     </template>
+    <template v-if="!loading && !data">
+        <NotFoundSection :translations="{
+            description1: Lang.get('portfolio.show.not-found.description-1'),
+            description2: Lang.get('portfolio.show.not-found.description-2'),
+            issueReported: Lang.get('portfolio.show.not-found.buttons.issue-reported'),
+            reportIssue: Lang.get('portfolio.show.not-found.buttons.report-issue'),
+            returnToHomePage: Lang.get('portfolio.show.not-found.buttons.return-to-home-page'),
+            title: Lang.get('portfolio.show.not-found.title'),
+        }"
+        />
+    </template>
 </template>
 
 <script setup>
 import DOMPurify from 'dompurify'
 import LoadingScreen from '../shared/LoadingScreen.vue'
+import NotFoundSection from '../shared/NotFoundSection.vue'
 import SectionButton from '../shared/SectionButton.vue'
 import TagsList from '../shared/TagsList.vue'
 import { getTranslation } from '../../translation.js'
@@ -164,11 +176,15 @@ onMounted(() => {
 
             document.title = `${getTranslation(data.value.translations, data.value.title)} - ${initialTitle}`
         })
-        .catch(() => toast.add({
-            severity: 'error',
-            summary: Lang.get('toast.error.load-data.summary'),
-            detail: Lang.get('toast.error.load-data.detail'),
-        }))
+        .catch(() => {
+            document.title = `${Lang.get('portfolio.show.not-found.title')} - ${initialTitle}`
+
+            toast.add({
+                severity: 'error',
+                summary: Lang.get('toast.error.load-data.summary'),
+                detail: Lang.get('toast.error.load-data.detail'),
+            })
+        })
         .finally(() => loading.value = false)
 })
 </script>

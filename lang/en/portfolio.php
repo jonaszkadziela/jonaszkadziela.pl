@@ -29,6 +29,17 @@ return [
         'explore-more' => [
             'title' => 'Explore More',
         ],
+        'not-found' => [
+            'description-1' => 'We couldn\'t find this project',
+            'description-2' => 'Return to the home page or report an issue if you think it should exist',
+            'title' => 'Project Not Found',
+
+            'buttons' => [
+                'issue-reported' => 'Issue Reported',
+                'report-issue' => 'Report Issue',
+                'return-to-home-page' => 'Return to Home Page',
+            ],
+        ],
         'statistics' => [
             'finish-date' => 'Finish date',
             'start-date' => 'Start date',
