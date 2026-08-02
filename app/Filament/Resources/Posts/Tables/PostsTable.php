@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
 
-class PostTable
+class PostsTable
 {
     public static function configure(Table $table): Table
     {

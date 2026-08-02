@@ -6,7 +6,7 @@ use App\Filament\Resources\Feedbacks\Pages\CreateFeedback;
 use App\Filament\Resources\Feedbacks\Pages\EditFeedback;
 use App\Filament\Resources\Feedbacks\Pages\ListFeedback;
 use App\Filament\Resources\Feedbacks\Schemas\FeedbackForm;
-use App\Filament\Resources\Feedbacks\Tables\FeedbackTable;
+use App\Filament\Resources\Feedbacks\Tables\FeedbacksTable;
 use App\Models\Feedback;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,7 +28,7 @@ class FeedbackResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return FeedbackTable::configure($table);
+        return FeedbacksTable::configure($table);
     }
 
     public static function getPages(): array

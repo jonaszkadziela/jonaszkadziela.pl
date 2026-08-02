@@ -8,7 +8,7 @@ use App\Filament\Resources\Projects\Pages\ListProjects;
 use App\Filament\Resources\Projects\RelationManagers\FilesRelationManager;
 use App\Filament\Resources\Projects\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\Projects\Schemas\ProjectForm;
-use App\Filament\Resources\Projects\Tables\ProjectTable;
+use App\Filament\Resources\Projects\Tables\ProjectsTable;
 use App\Models\Project;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -30,7 +30,7 @@ class ProjectResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return ProjectTable::configure($table);
+        return ProjectsTable::configure($table);
     }
 
     public static function getRelations(): array

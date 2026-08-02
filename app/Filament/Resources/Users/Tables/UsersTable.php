@@ -1,50 +1,56 @@
 <?php
 
-namespace App\Filament\Resources\Files\Tables;
+namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
 
-class FileTable
+class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('slug')
-                    ->label(Lang::get('admin.files.labels.slug'))
+                TextColumn::make('name')
+                    ->label(Lang::get('admin.users.labels.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('storage_disk')
-                    ->label(Lang::get('admin.files.labels.storage_disk'))
+                TextColumn::make('email')
+                    ->label(Lang::get('admin.users.labels.email'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('storage_path')
-                    ->label(Lang::get('admin.files.labels.storage_path'))
-                    ->searchable()
+                TextColumn::make('email_verified_at')
+                    ->label(Lang::get('admin.users.labels.email_verified_at'))
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('mime_type')
-                    ->label(Lang::get('admin.files.labels.mime_type'))
-                    ->searchable()
+                IconColumn::make('is_admin')
+                    ->label(Lang::get('admin.users.labels.is_admin'))
+                    ->boolean()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('created_at')
-                    ->label(Lang::get('admin.files.labels.created_at'))
+                    ->label(Lang::get('admin.users.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label(Lang::get('admin.files.labels.updated_at'))
+                    ->label(Lang::get('admin.users.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                TernaryFilter::make('is_admin')
+                    ->label(Lang::get('admin.users.labels.is_admin')),
             ])
             ->recordActions([
                 EditAction::make(),

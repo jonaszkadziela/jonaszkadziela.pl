@@ -6,7 +6,7 @@ use App\Filament\Resources\Files\Pages\CreateFile;
 use App\Filament\Resources\Files\Pages\EditFile;
 use App\Filament\Resources\Files\Pages\ListFiles;
 use App\Filament\Resources\Files\Schemas\FileForm;
-use App\Filament\Resources\Files\Tables\FileTable;
+use App\Filament\Resources\Files\Tables\FilesTable;
 use App\Models\File;
 use BackedEnum;
 use Filament\Forms\Components\BaseFileUpload;
@@ -31,7 +31,7 @@ class FileResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return FileTable::configure($table);
+        return FilesTable::configure($table);
     }
 
     public static function getPages(): array

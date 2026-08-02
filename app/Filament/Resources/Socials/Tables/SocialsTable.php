@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Documents\Tables;
+namespace App\Filament\Resources\Socials\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -8,43 +8,39 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\HtmlString;
 
-class DocumentTable
+class SocialsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('slug')
-                    ->label(Lang::get('admin.documents.labels.slug'))
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(),
                 TextColumn::make('title')
-                    ->label(Lang::get('admin.documents.labels.title'))
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('body')
-                    ->label(Lang::get('admin.documents.labels.body'))
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('link')
-                    ->label(Lang::get('admin.documents.labels.link'))
+                    ->label(Lang::get('admin.socials.labels.title'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('issued_at')
-                    ->label(Lang::get('admin.documents.labels.issued_at'))
-                    ->dateTime()
+                TextColumn::make('link')
+                    ->label(Lang::get('admin.socials.labels.link'))
+                    ->searchable()
                     ->sortable()
+                    ->toggleable(),
+                TextColumn::make('icon')
+                    ->label(Lang::get('admin.socials.labels.icon'))
+                    ->searchable()
+                    ->sortable()
+                    ->formatStateUsing(fn (string $state) => new HtmlString(
+                        '<div class="gap-2 inline-flex items-center"><i class="' . $state . '"></i>' . $state . '</div>',
+                    ))
                     ->toggleable(),
                 TextColumn::make('created_at')
-                    ->label(Lang::get('admin.documents.labels.created_at'))
+                    ->label(Lang::get('admin.socials.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label(Lang::get('admin.documents.labels.updated_at'))
+                    ->label(Lang::get('admin.socials.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

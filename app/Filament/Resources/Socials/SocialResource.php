@@ -6,7 +6,7 @@ use App\Filament\Resources\Socials\Pages\CreateSocial;
 use App\Filament\Resources\Socials\Pages\EditSocial;
 use App\Filament\Resources\Socials\Pages\ListSocials;
 use App\Filament\Resources\Socials\Schemas\SocialForm;
-use App\Filament\Resources\Socials\Tables\SocialTable;
+use App\Filament\Resources\Socials\Tables\SocialsTable;
 use App\Models\Social;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,7 +28,7 @@ class SocialResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return SocialTable::configure($table);
+        return SocialsTable::configure($table);
     }
 
     public static function getPages(): array

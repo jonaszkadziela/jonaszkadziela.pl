@@ -8,7 +8,7 @@ use App\Filament\Resources\Documents\Pages\ListDocuments;
 use App\Filament\Resources\Documents\RelationManagers\FilesRelationManager;
 use App\Filament\Resources\Documents\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\Documents\Schemas\DocumentForm;
-use App\Filament\Resources\Documents\Tables\DocumentTable;
+use App\Filament\Resources\Documents\Tables\DocumentsTable;
 use App\Models\Document;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -30,7 +30,7 @@ class DocumentResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return DocumentTable::configure($table);
+        return DocumentsTable::configure($table);
     }
 
     public static function getRelations(): array

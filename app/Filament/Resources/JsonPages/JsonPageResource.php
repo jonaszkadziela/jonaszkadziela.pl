@@ -6,7 +6,7 @@ use App\Filament\Resources\JsonPages\Pages\CreateJsonPage;
 use App\Filament\Resources\JsonPages\Pages\EditJsonPage;
 use App\Filament\Resources\JsonPages\Pages\ListJsonPages;
 use App\Filament\Resources\JsonPages\Schemas\JsonPageForm;
-use App\Filament\Resources\JsonPages\Tables\JsonPageTable;
+use App\Filament\Resources\JsonPages\Tables\JsonPagesTable;
 use App\Models\JsonPage;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,7 +28,7 @@ class JsonPageResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return JsonPageTable::configure($table);
+        return JsonPagesTable::configure($table);
     }
 
     public static function getPages(): array

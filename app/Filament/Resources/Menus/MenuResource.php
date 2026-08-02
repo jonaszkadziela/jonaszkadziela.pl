@@ -6,7 +6,7 @@ use App\Filament\Resources\Menus\Pages\CreateMenu;
 use App\Filament\Resources\Menus\Pages\EditMenu;
 use App\Filament\Resources\Menus\Pages\ListMenus;
 use App\Filament\Resources\Menus\Schemas\MenuForm;
-use App\Filament\Resources\Menus\Tables\MenuTable;
+use App\Filament\Resources\Menus\Tables\MenusTable;
 use App\Models\Menu;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -28,7 +28,7 @@ class MenuResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return MenuTable::configure($table);
+        return MenusTable::configure($table);
     }
 
     public static function getPages(): array

@@ -7,7 +7,7 @@ use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\RelationManagers\PostsRelationManager;
 use App\Filament\Resources\Users\Schemas\UserForm;
-use App\Filament\Resources\Users\Tables\UserTable;
+use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -29,7 +29,7 @@ class UserResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return UserTable::configure($table);
+        return UsersTable::configure($table);
     }
 
     public static function getRelations(): array

@@ -8,7 +8,7 @@ use App\Filament\Resources\Posts\Pages\ListPosts;
 use App\Filament\Resources\Posts\RelationManagers\FilesRelationManager;
 use App\Filament\Resources\Posts\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\Posts\Schemas\PostForm;
-use App\Filament\Resources\Posts\Tables\PostTable;
+use App\Filament\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -30,7 +30,7 @@ class PostResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return PostTable::configure($table);
+        return PostsTable::configure($table);
     }
 
     public static function getRelations(): array

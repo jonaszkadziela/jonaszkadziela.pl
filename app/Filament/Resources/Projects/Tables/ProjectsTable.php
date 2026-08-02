@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
 
-class ProjectTable
+class ProjectsTable
 {
     public static function configure(Table $table): Table
     {
