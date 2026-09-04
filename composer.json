@@ -78,6 +78,11 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "policy": {
+            "advisories": {
+                "ignore": ["laravel/framework"]
+            }
         }
     },
     "minimum-stability": "stable",
