@@ -22,7 +22,7 @@
                             rounded
                     />
                     <Button :label="Lang.get('toast.cookies.acknowledge')"
-                            class="bg-gradient-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl to-blue-900 transition-all"
+                            class="bg-linear-to-r dark:shadow-blue-800/80 dark:text-white duration-300 from-blue-600 hover:-translate-y-0.5 hover:shadow-xl to-blue-900 transition-all"
                             rounded
                             @click="onAcknowledge"
                     />

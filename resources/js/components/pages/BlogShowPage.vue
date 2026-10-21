@@ -5,7 +5,7 @@
                  id="title"
                  class="bg-center bg-contain min-h-80 relative"
         >
-            <div class="absolute bg-gradient-to-t bottom-0 dark:from-zinc-900 dark:via-zinc-900/70 from-white left-0 right-0 to-transparent top-0 via-white/70">
+            <div class="absolute bg-linear-to-t bottom-0 dark:from-zinc-900 dark:via-zinc-900/70 from-white left-0 right-0 to-transparent top-0 via-white/70">
                 <div class="container flex flex-col gap-6 h-full items-center justify-end mx-auto">
                     <h1 class="font-bold sm:text-6xl text-4xl text-center">
                         {{ getTranslation(data.translations, data.title) }}
