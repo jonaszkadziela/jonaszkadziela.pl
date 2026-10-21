@@ -3,6 +3,7 @@ import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 import Components from 'unplugin-vue-components/vite'
 import laravel, { refreshPaths } from 'laravel-vite-plugin'
 import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
@@ -24,6 +25,7 @@ export default defineConfig({
                 'app/Filament/**',
             ],
         }),
+        tailwindcss(),
         vue(),
         Components({
             resolvers: [
